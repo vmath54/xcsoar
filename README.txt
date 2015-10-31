@@ -12,3 +12,5 @@ Contient des scripts et fichiers permettant d'accéder aux cartes VAC pdf depuis 
                               Il utilise en entrée la base WELT2000.txt, disponible a http://www.segelflug.de/vereine/welt2000/download/WELT2000.TXT
 							  
 - getVACfiles.pl : script perl, qui permet de récupérer les cartes VAC de France, depuis le site du SIA
+
+- getBASULMfiles.pl : script perl, qui permet de récupérer les cartes PDD du site baseULM
