@@ -424,7 +424,6 @@ sub rewriteCUPfile
   my $ADs = shift;
   my $REFs = shift;
   
-  
    foreach my $ad (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))  # on lit dans le même ordre que fichier initial
   {
 	my $AD = $$ADs{$ad};
@@ -453,11 +452,12 @@ sub rewriteCUPfile
 	  if ($$AD{frequence} ne $$REF{frequence})
 	  {
 	    #printf "%-6s;%-25s. Frequence : %-6s  : %s\n", $codeRef, $$AD{name}, $$AD{frequence}, $$REF{frequence};
-		$$AD{frequence} = $$REF{frequence};
+		#$$AD{frequence} = $$REF{frequence}; # ATTENTION avant de decommenter : parfois, des sites utilisent une autre frequence que celle de la carte VAC
+		                                     # ex : 123.350 pour LFEX, 122.650 pour LFSV ...
 	  }
 	}
     print "\"$$AD{name}\",$$AD{code},FR,$$AD{lat},$$AD{long},$$AD{elevation},$$AD{nature},$$AD{qfu},$$AD{dimension},$$AD{frequence},\"$$AD{comment}\"\n";
-    #print "\"$$AD{name}\";$$AD{code};FR;$$AD{lat};$$AD{long};$$AD{elevation};$$AD{nature};$$AD{qfu};$$AD{dimension};$$AD{frequence};\"$$AD{comment}\"\n";
+    #print "$$AD{name};$$AD{code};FR;$$AD{lat};$$AD{long};$$AD{elevation};$$AD{nature};$$AD{qfu};$$AD{dimension};$$AD{frequence};$$AD{comment}\n";
   }
 }
 
