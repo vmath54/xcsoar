@@ -1,0 +1,35 @@
+############### Cette doc indique comment générer un fichier de détails de waypoints depuis un fichier .cup ###############
+###########################################################################################################################
+
+Le script genereDetailsFromCUP.pl est utilisé pour cela ; il a besoin du fichier de référence FranceVacEtUlm.cup, qui répertorie tous les terrains VAC (dispos sur site SIA), MIL (militaires) et basULM
+
+On peut exécuter ce script sans parametre pour avoir de l'aide
+
+Le fichier de details généré permettra dans XCSoar de faire le lien avec le fichier pdf du waypoint s'il existe dans les bases SIA, MIL ou baseULM
+Le fichier resultat est cree dans le meme repertoire que le .cup passe en parametre
+
+exemple : genereDetailsFromCUP.pl -file ../dossier1/myFichier.cup
+          dans ce cas, le fichier de details sera ../dossier1/myFichier_details.cup
+                                               ou ../dossier1/myFichier_details_noulm.cup si option --noULM
+
+peut également créer un fichier archive (.zip) avec tous les terrains VAC et/ou MIL (militaires) et/ou baseULM référencés, s'ils sont bien sur stockés dans un ou des dossiers (ou repositories) locaux
+          ce fichier sera ../dossier1/myFichier.zip ou ..../myFichier_noulm.zip
+
+Cet utilitaire peut utiliser deux algos différents pour associer un terrain du fichier .cup avec ceux du fichier de référence :
+ - par défaut, comparaison des coordonnées géographiques du terrain avec ceux du fcihier de référence
+      La variable $toleranceGeog permet d'indiquer la marge d'erreur acceptable
+
+ - si parametre "-searchByCode <x>", où <x> est une valeur numérique :
+           recherche le code OACI ou FFPLUM du terrain dans un des champs du fichier .cup
+           En général, <x> peut avoir la valeur 0, 1 ou 10
+           Si 1, suppose que le champ ne contien que le code ; sinon, le code peut être inclus dans le champ
+
+si exécuté sans parametre, donne de l'aide
+
+parametres acceptés :
+ . -file <fichier> : obligatoire. C'est le fichier .cup à analyser
+ . --zip : facultatif. Si présent, génère un fichier zip contenant les PDF des terrains concernés
+ . --noulm : facultatif. Si présent, ne traite pas les terrains de BASULM
+ . -searchByCode <x> : facultatif. Ne recherche pas la correspondance de terrain avec les coordonnées GPS, mais dans la colonne x du fichier .cup
+        x commence par 0 : 0 est la colonne 1, et ainsi de suite
+

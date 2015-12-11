@@ -1,0 +1,3552 @@
+[LFAB Dieppe St Aubin]
+file=vac/LFAB.pdf
+
+[LFAC Calais Dunkerque]
+file=vac/LFAC.pdf
+
+[LFAD Compiegne Margny]
+file=vac/LFAD.pdf
+
+[LFAE Eu Mers Le Treport]
+file=vac/LFAE.pdf
+
+[LFAF Laon Chambry]
+file=vac/LFAF.pdf
+
+[LFAG Peronne St Quentin]
+file=vac/LFAG.pdf
+
+[LFAI Nangis les Loges]
+file=vac/LFAI.pdf
+
+[LFAJ Argentan]
+file=vac/LFAJ.pdf
+
+[LFAK Dunkerque les Moeres]
+file=vac/LFAK.pdf
+
+[LFAL La Fleche Thoree les Pins]
+file=vac/LFAL.pdf
+
+[LFAM Berck sur Mer]
+file=vac/LFAM.pdf
+
+[LFAO Bagnoles de l'Orne Couterne]
+file=vac/LFAO.pdf
+
+[LFAP Rethel Perthes]
+file=vac/LFAP.pdf
+
+[LFAQ Albert Bray]
+file=vac/LFAQ.pdf
+
+[LFAR Montdidier]
+file=vac/LFAR.pdf
+
+[LFAS Falaise Monts d'Eraines]
+file=vac/LFAS.pdf
+
+[LFAT Le Touquet Cote d'Opale]
+file=vac/LFAT.pdf
+
+[LFAU Vauville]
+file=vac/LFAU.pdf
+
+[LFAV Valenciennes Denain]
+file=vac/LFAV.pdf
+
+[LFAW Villerupt]
+file=vac/LFAW.pdf
+
+[LFAX Mortagne au Perche]
+file=vac/LFAX.pdf
+
+[LFAY Amiens Glisy]
+file=vac/LFAY.pdf
+
+[LFBA Agen La Garenne]
+file=mil/LFBA.pdf
+
+[LFBC Cazaux]
+file=mil/LFBC.pdf
+
+[LFBD Bordeaux Merignac]
+file=vac/LFBD.pdf
+
+[LFBE Bergerac Roumaniere]
+file=vac/LFBE.pdf
+
+[LFBF Toulouse Francazal]
+file=vac/LFBF.pdf
+
+[LFBG Cognac Chateaubernard]
+file=vac/LFBG.pdf
+
+[LFBH La Rochelle Ile de Re]
+file=vac/LFBH.pdf
+
+[LFBI Poitiers Biard]
+file=vac/LFBI.pdf
+
+[LFBJ St Junien]
+file=vac/LFBJ.pdf
+
+[LFBK Montlucon Gueret]
+file=vac/LFBK.pdf
+
+[LFBL Limoges Bellegarde]
+file=vac/LFBL.pdf
+
+[LFBM Mont de Marsan]
+file=mil/LFBM.pdf
+
+[LFBN Niort Marais Poitevin]
+file=vac/LFBN.pdf
+
+[LFBO Toulouse Blagnac]
+file=vac/LFBO.pdf
+
+[LFBP Pau Pyrenees]
+file=vac/LFBP.pdf
+
+[LFBR Muret Lherm]
+file=vac/LFBR.pdf
+
+[LFBS Biscarrosse Parentis]
+file=vac/LFBS.pdf
+
+[LFBT Tarbes Lourdes Pyrenees]
+file=vac/LFBT.pdf
+
+[LFBU Angouleme Brie Champniers]
+file=vac/LFBU.pdf
+
+[LFBX Perigueux Bassillac]
+file=vac/LFBX.pdf
+
+[LFBY Dax Seyresse]
+file=vac/LFBY.pdf
+
+[LFBZ Biarritz Bayonne Anglet]
+file=vac/LFBZ.pdf
+
+[LFCA Chatellerault Targe]
+file=vac/LFCA.pdf
+
+[LFCB Bagneres de Luchon]
+file=vac/LFCB.pdf
+
+[LFCC Cahors Lalbenque]
+file=vac/LFCC.pdf
+
+[LFCD Andernos les Bains]
+file=vac/LFCD.pdf
+
+[LFCE Gueret St Laurent]
+file=vac/LFCE.pdf
+
+[LFCF Figeac Livernon]
+file=vac/LFCF.pdf
+
+[LFCG St Girons Antichan]
+file=vac/LFCG.pdf
+
+[LFCH Arcachon La Teste De Buch]
+file=vac/LFCH.pdf
+
+[LFCI Albi Le Sequestre]
+file=vac/LFCI.pdf
+
+[LFCJ Jonzac Neulles]
+file=vac/LFCJ.pdf
+
+[LFCK Castres Mazamet]
+file=vac/LFCK.pdf
+
+[LFCL Toulouse Lasbordes]
+file=vac/LFCL.pdf
+
+[LFCM Millau Larzac]
+file=vac/LFCM.pdf
+
+[LFCN Nogaro]
+file=vac/LFCN.pdf
+
+[LFCO Oloron Herrere]
+file=vac/LFCO.pdf
+
+[LFCP Pons Avy]
+file=vac/LFCP.pdf
+
+[LFCQ Graulhet Montdragon]
+file=vac/LFCQ.pdf
+
+[LFCR Rodez Aveyron]
+file=vac/LFCR.pdf
+
+[LFCS Bordeaux Leognan Saucats]
+file=vac/LFCS.pdf
+
+[LFCT Thouars]
+file=vac/LFCT.pdf
+
+[LFCU Ussel Thalamy]
+file=vac/LFCU.pdf
+
+[LFCV Villefranche de Rouergue]
+file=vac/LFCV.pdf
+
+[LFCW Villeneuve sur Lot]
+file=vac/LFCW.pdf
+
+[LFCX Castelsarrasin Moissac]
+file=vac/LFCX.pdf
+
+[LFCY Royan Medis]
+file=vac/LFCY.pdf
+
+[LFCZ Mimizan]
+file=vac/LFCZ.pdf
+
+[LFDA Aire sur l'Adour]
+file=vac/LFDA.pdf
+
+[LFDB Montauban]
+file=vac/LFDB.pdf
+
+[LFDC Montendre Marcillac]
+file=vac/LFDC.pdf
+
+[LFDE Egletons]
+file=vac/LFDE.pdf
+
+[LFDF Ste Foy La Grande]
+file=vac/LFDF.pdf
+
+[LFDG Gaillac l'Isle sur Tarn]
+file=vac/LFDG.pdf
+
+[LFDH Auch Gers]
+file=vac/LFDH.pdf
+
+[LFDI Libourne Artigues de Lussac]
+file=vac/LFDI.pdf
+
+[LFDJ Pamiers les Pujols]
+file=vac/LFDJ.pdf
+
+[LFDK Soulac sur Mer]
+file=vac/LFDK.pdf
+
+[LFDL Loudun]
+file=vac/LFDL.pdf
+
+[LFDM Marmande Virazeil]
+file=vac/LFDM.pdf
+
+[LFDN Rochefort Charente Maritime]
+file=vac/LFDN.pdf
+
+[LFDP St Pierre d'Oleron]
+file=vac/LFDP.pdf
+
+[LFDQ Castelnau Magnoac]
+file=vac/LFDQ.pdf
+
+[LFDR La Reole Floudes]
+file=vac/LFDR.pdf
+
+[LFDS Sarlat Domme]
+file=vac/LFDS.pdf
+
+[LFDT Tarbes Laloubere]
+file=vac/LFDT.pdf
+
+[LFDU Lesparre St Laurent Medoc]
+file=vac/LFDU.pdf
+
+[LFDV Couhe Verac]
+file=vac/LFDV.pdf
+
+[LFDW Chauvigny]
+file=vac/LFDW.pdf
+
+[LFDX Fumel Montayral]
+file=vac/LFDX.pdf
+
+[LFDY Bordeaux Yvrac]
+file=vac/LFDY.pdf
+
+[LFEA Belle ile]
+file=vac/LFEA.pdf
+
+[LFEB Dinan Trelivan]
+file=vac/LFEB.pdf
+
+[LFEC Ouessant]
+file=vac/LFEC.pdf
+
+[LFED Pontivy]
+file=vac/LFED.pdf
+
+[LFEF Amboise Dierre]
+file=vac/LFEF.pdf
+
+[LFEG Argenton Sur Creuse]
+file=vac/LFEG.pdf
+
+[LFEH Aubigny sur Nere]
+file=vac/LFEH.pdf
+
+[LFEI Briare Chatillon]
+file=vac/LFEI.pdf
+
+[LFEJ Chateauroux Villers]
+file=vac/LFEJ.pdf
+
+[LFEK Issoudun Le Fay]
+file=vac/LFEK.pdf
+
+[LFEL Le Blanc]
+file=vac/LFEL.pdf
+
+[LFEM Montargis Vimory]
+file=vac/LFEM.pdf
+
+[LFEN Tours Sorigny]
+file=vac/LFEN.pdf
+
+[LFEP Pouilly Maconge]
+file=vac/LFEP.pdf
+
+[LFEQ Quiberon]
+file=vac/LFEQ.pdf
+
+[LFER Redon Bains sur Oust]
+file=vac/LFER.pdf
+
+[LFES Guiscriff Scaer]
+file=vac/LFES.pdf
+
+[LFET Til Chatel]
+file=vac/LFET.pdf
+
+[LFEU Bar Le Duc les Hauts de Chee]
+file=vac/LFEU.pdf
+
+[LFEV Gray St Adrien]
+file=vac/LFEV.pdf
+
+[LFEW Saulieu Liernais]
+file=vac/LFEW.pdf
+
+[LFEX Nancy Azelot]
+file=vac/LFEX.pdf
+
+[LFEY Ile d'Yeu]
+file=vac/LFEY.pdf
+
+[LFEZ Nancy Malzeville]
+file=vac/LFEZ.pdf
+
+[LFFB Buno Bonnevaux]
+file=vac/LFFB.pdf
+
+[LFFC Mantes Cherence]
+file=vac/LFFC.pdf
+
+[LFFD St Andre de l'Eure]
+file=vac/LFFD.pdf
+
+[LFFE Enghien Moisselles]
+file=vac/LFFE.pdf
+
+[LFFG La Ferte Gaucher]
+file=vac/LFFG.pdf
+
+[LFFH Chateau Thierry Belleau]
+file=vac/LFFH.pdf
+
+[LFFI Ancenis]
+file=vac/LFFI.pdf
+
+[LFFJ Joinville Mussey]
+file=vac/LFFJ.pdf
+
+[LFFK Fontenay Le Comte]
+file=vac/LFFK.pdf
+
+[LFFL Bailleau Armenonville]
+file=vac/LFFL.pdf
+
+[LFFN Brienne le Chateau]
+file=vac/LFFN.pdf
+
+[LFFO Beauvoir Fromentine]
+file=vac/LFFO.pdf
+
+[LFFP Pithiviers]
+file=vac/LFFP.pdf
+
+[LFFQ La Ferte Alais]
+file=vac/LFFQ.pdf
+
+[LFFR Bar sur Seine]
+file=vac/LFFR.pdf
+
+[LFFT Neufchateau]
+file=vac/LFFT.pdf
+
+[LFFU Chateauneuf sur Cher]
+file=vac/LFFU.pdf
+
+[LFFV Vierzon Mereau]
+file=vac/LFFV.pdf
+
+[LFFW Montaigu St Georges]
+file=vac/LFFW.pdf
+
+[LFFX Tournus Cuisery]
+file=vac/LFFX.pdf
+
+[LFFY Etrepagny]
+file=vac/LFFY.pdf
+
+[LFFZ Sezanne St Remy]
+file=vac/LFFZ.pdf
+
+[LFGA Colmar Houssen]
+file=vac/LFGA.pdf
+
+[LFGB Mulhouse Habsheim]
+file=vac/LFGB.pdf
+
+[LFGC Strasbourg Neuhof]
+file=vac/LFGC.pdf
+
+[LFGE Avallon]
+file=vac/LFGE.pdf
+
+[LFGF Beaune Challanges]
+file=vac/LFGF.pdf
+
+[LFGG Belfort Chaux]
+file=vac/LFGG.pdf
+
+[LFGH Cosne sur Loire]
+file=vac/LFGH.pdf
+
+[LFGI Dijon Darois]
+file=vac/LFGI.pdf
+
+[LFGJ Dole Tavaux]
+file=vac/LFGJ.pdf
+
+[LFGK Joigny]
+file=vac/LFGK.pdf
+
+[LFGL Lons le Saunier Courlaoux]
+file=vac/LFGL.pdf
+
+[LFGM Montceau les Mines Pouilloux]
+file=vac/LFGM.pdf
+
+[LFGN Paray Le Monial]
+file=vac/LFGN.pdf
+
+[LFGO Pont Sur Yonne]
+file=vac/LFGO.pdf
+
+[LFGP St Florentin Cheu]
+file=vac/LFGP.pdf
+
+[LFGQ Semur en Auxois]
+file=vac/LFGQ.pdf
+
+[LFGR Doncourt les Conflans]
+file=vac/LFGR.pdf
+
+[LFGS Longuyon Villette]
+file=vac/LFGS.pdf
+
+[LFGT Sarrebourg Buhl]
+file=vac/LFGT.pdf
+
+[LFGU Sarreguemines Neunkirch]
+file=vac/LFGU.pdf
+
+[LFGW Verdun Sommedieue]
+file=vac/LFGW.pdf
+
+[LFGX Champagnole Crotenay]
+file=vac/LFGX.pdf
+
+[LFGY St Die Remomeix]
+file=vac/LFGY.pdf
+
+[LFGZ Nuits St Georges]
+file=vac/LFGZ.pdf
+
+[LFHA Issoire Le Broc]
+file=vac/LFHA.pdf
+
+[LFHC Perouges Meximieux]
+file=vac/LFHC.pdf
+
+[LFHD Pierrelatte]
+file=vac/LFHD.pdf
+
+[LFHE Romans St Paul]
+file=vac/LFHE.pdf
+
+[LFHF Ruoms]
+file=vac/LFHF.pdf
+
+[LFHG St Chamond l'Horme]
+file=vac/LFHG.pdf
+
+[LFHH Vienne Reventin]
+file=vac/LFHH.pdf
+
+[LFHI Morestel]
+file=vac/LFHI.pdf
+
+[LFHJ Lyon Corbas]
+file=vac/LFHJ.pdf
+
+[LFHL Langogne Lesperon]
+file=vac/LFHL.pdf
+
+[LFHM Megeve]
+file=vac/LFHM.pdf
+
+[LFHN Bellegarde Vouvray]
+file=vac/LFHN.pdf
+
+[LFHO Aubenas Ardeche Merid]
+file=vac/LFHO.pdf
+
+[LFHP Le Puy Loudes]
+file=vac/LFHP.pdf
+
+[LFHQ St Flour Coltines]
+file=vac/LFHQ.pdf
+
+[LFHR Brioude Beaumont]
+file=vac/LFHR.pdf
+
+[LFHS Bourg Ceyzeriat]
+file=vac/LFHS.pdf
+
+[LFHT Ambert Le Poyet]
+file=vac/LFHT.pdf
+
+[LFHU L'Alpe d'Huez]
+file=vac/LFHU.pdf
+
+[LFHV Villefranche Tarare]
+file=vac/LFHV.pdf
+
+[LFHW Belleville Villie Morgon]
+file=vac/LFHW.pdf
+
+[LFHX Lapalisse Perigny]
+file=vac/LFHX.pdf
+
+[LFHY Moulins Montbeugny]
+file=vac/LFHY.pdf
+
+[LFHZ Sallanches Mont Blanc]
+file=vac/LFHZ.pdf
+
+[LFIB Belves St Pardoux]
+file=vac/LFIB.pdf
+
+[LFID Condom Valence sur Baise]
+file=vac/LFID.pdf
+
+[LFIF St Affrique Belmont]
+file=vac/LFIF.pdf
+
+[LFIG Cassagnes Begonhes]
+file=vac/LFIG.pdf
+
+[LFIH Chalais]
+file=vac/LFIH.pdf
+
+[LFIK Riberac Tourette]
+file=vac/LFIK.pdf
+
+[LFIL Rion Des Landes]
+file=vac/LFIL.pdf
+
+[LFIM St Gaudens Montrejeau]
+file=vac/LFIM.pdf
+
+[LFIP Peyresourde Balestas]
+file=vac/LFIP.pdf
+
+[LFIR Revel Montgey]
+file=vac/LFIR.pdf
+
+[LFIS St Inglevert les 2 caps]
+file=vac/LFIS.pdf
+
+[LFIT Toulouse Bourg St Bernard]
+file=vac/LFIT.pdf
+
+[LFIV Vendays Montalivet]
+file=vac/LFIV.pdf
+
+[LFIX Itxassou]
+file=vac/LFIX.pdf
+
+[LFIY St Jean d'Angely]
+file=vac/LFIY.pdf
+
+[LFJA Chaumont Semoutiers]
+file=vac/LFJA.pdf
+
+[LFJB Mauleon]
+file=vac/LFJB.pdf
+
+[LFJC Clamecy]
+file=vac/LFJC.pdf
+
+[LFJD Corlier]
+file=vac/LFJD.pdf
+
+[LFJE La Motte Chalancon]
+file=vac/LFJE.pdf
+
+[LFJF Aubenasson]
+file=vac/LFJF.pdf
+
+[LFJH Cazeres Palaminy]
+file=vac/LFJH.pdf
+
+[LFJI Marennes]
+file=vac/LFJI.pdf
+
+[LFJL Metz Nancy Lorraine]
+file=vac/LFJL.pdf
+
+[LFJR Angers Marce]
+file=vac/LFJR.pdf
+
+[LFJS Soissons Courmelles]
+file=vac/LFJS.pdf
+
+[LFJT Tours Le Louroux]
+file=vac/LFJT.pdf
+
+[LFJU Lurcy Levis]
+file=vac/LFJU.pdf
+
+[LFJV Lasclaveries]
+file=vac/LFJV.pdf
+
+[LFJY Chambley]
+file=vac/LFJY.pdf
+
+[LFKA Albertville]
+file=vac/LFKA.pdf
+
+[LFKB Bastia Poretta]
+file=vac/LFKB.pdf
+
+[LFKC Calvi Ste Catherine]
+file=vac/LFKC.pdf
+
+[LFKD Sollieres Sardieres]
+file=vac/LFKD.pdf
+
+[LFKE St Jean En Royans]
+file=vac/LFKE.pdf
+
+[LFKF Figari Sud Corse]
+file=vac/LFKF.pdf
+
+[LFKG Ghisonaccia Alzitone]
+file=vac/LFKG.pdf
+
+[LFKH St Jean d'Avelanne]
+file=vac/LFKH.pdf
+
+[LFKJ Ajaccio Napoleon Bonaparte]
+file=vac/LFKJ.pdf
+
+[LFKL Lyon Brindas]
+file=vac/LFKL.pdf
+
+[LFKM St Galmier]
+file=vac/LFKM.pdf
+
+[LFKO Propriano]
+file=vac/LFKO.pdf
+
+[LFKP La Tour Du Pin Cessieu]
+file=vac/LFKP.pdf
+
+[LFKR St Remy De Maurienne]
+file=vac/LFKR.pdf
+
+[LFKS Solenzara]
+file=mil/LFKS.pdf
+
+[LFKT Corte]
+file=vac/LFKT.pdf
+
+[LFKX Meribel Robert Merloz]
+file=vac/LFKX.pdf
+
+[LFKY Belley Peyrieu]
+file=vac/LFKY.pdf
+
+[LFLA Auxerre Branches]
+file=vac/LFLA.pdf
+
+[LFLB Chambery Aix les Bains]
+file=vac/LFLB.pdf
+
+[LFLC Clermont Ferrand Auvergne]
+file=vac/LFLC.pdf
+
+[LFLD Bourges]
+file=vac/LFLD.pdf
+
+[LFLE Chambery Challes les Eaux]
+file=vac/LFLE.pdf
+
+[LFLG Grenoble Le Versoud]
+file=vac/LFLG.pdf
+
+[LFLH Chalon Champforgeuil]
+file=vac/LFLH.pdf
+
+[LFLI Annemasse]
+file=vac/LFLI.pdf
+
+[LFLJ Courchevel]
+file=vac/LFLJ.pdf
+
+[LFLK Oyonnax Arbent]
+file=vac/LFLK.pdf
+
+[LFLL Lyon St Exupery]
+file=vac/LFLL.pdf
+
+[LFLM Macon Charnay]
+file=vac/LFLM.pdf
+
+[LFLN St Yan]
+file=vac/LFLN.pdf
+
+[LFLO Roanne]
+file=vac/LFLO.pdf
+
+[LFLP Annecy Meythet]
+file=vac/LFLP.pdf
+
+[LFLQ Montelimar Ancone]
+file=vac/LFLQ.pdf
+
+[LFLR St Rambert d'Albon]
+file=vac/LFLR.pdf
+
+[LFLS Grenoble Isere]
+file=vac/LFLS.pdf
+
+[LFLT Montlucon Domerat]
+file=vac/LFLT.pdf
+
+[LFLU Valence Chabeuil]
+file=vac/LFLU.pdf
+
+[LFLV Vichy Charmeil]
+file=vac/LFLV.pdf
+
+[LFLW Aurillac]
+file=vac/LFLW.pdf
+
+[LFLX Chateauroux Deols]
+file=vac/LFLX.pdf
+
+[LFLY Lyon Bron]
+file=vac/LFLY.pdf
+
+[LFLZ Feurs Chambeon]
+file=vac/LFLZ.pdf
+
+[LFMA Aix les Milles]
+file=vac/LFMA.pdf
+
+[LFMC Le Luc Le Cannet]
+file=vac/LFMC.pdf
+
+[LFMD Cannes Mandelieu]
+file=vac/LFMD.pdf
+
+[LFME Nimes Courbessac]
+file=vac/LFME.pdf
+
+[LFMF Fayence]
+file=vac/LFMF.pdf
+
+[LFMG Montagne Noire]
+file=vac/LFMG.pdf
+
+[LFMH St Etienne Boutheon]
+file=vac/LFMH.pdf
+
+[LFMI Istres Le Tube]
+file=vac/LFMI.pdf
+
+[LFMK Carcassonne Salvaza]
+file=vac/LFMK.pdf
+
+[LFML Marseille Provence]
+file=vac/LFML.pdf
+
+[LFMN Nice Cote d'Azur]
+file=vac/LFMN.pdf
+
+[LFMO Orange Caritat]
+file=mil/LFMO.pdf
+
+[LFMP Perpignan Rivesaltes]
+file=vac/LFMP.pdf
+
+[LFMQ Le Castellet]
+file=vac/LFMQ.pdf
+
+[LFMR Barcelonnette St Pons]
+file=vac/LFMR.pdf
+
+[LFMS Ales Cevennes]
+file=vac/LFMS.pdf
+
+[LFMT Montpellier Mediterranee]
+file=vac/LFMT.pdf
+
+[LFMU Beziers Vias]
+file=vac/LFMU.pdf
+
+[LFMV Avignon Caumont]
+file=vac/LFMV.pdf
+
+[LFMW Castelnaudary Villeneuve]
+file=vac/LFMW.pdf
+
+[LFMX Chateau Arnoux St Auban]
+file=vac/LFMX.pdf
+
+[LFMY Salon de Provence]
+file=mil/LFMY.pdf
+
+[LFMZ Lezignan Corbieres]
+file=vac/LFMZ.pdf
+
+[LFNA Gap Tallard]
+file=vac/LFNA.pdf
+
+[LFNB Mende Brenoux]
+file=vac/LFNB.pdf
+
+[LFNC Mont Dauphin St Crepin]
+file=vac/LFNC.pdf
+
+[LFNE Salon Eyguieres]
+file=vac/LFNE.pdf
+
+[LFNF Vinon]
+file=vac/LFNF.pdf
+
+[LFNG Montpellier Candillargues]
+file=vac/LFNG.pdf
+
+[LFNH Carpentras]
+file=vac/LFNH.pdf
+
+[LFNJ Aspres sur Buech]
+file=vac/LFNJ.pdf
+
+[LFNL St Martin De Londres]
+file=vac/LFNL.pdf
+
+[LFNN Narbonne]
+file=vac/LFNN.pdf
+
+[LFNO Florac Ste Enimie]
+file=vac/LFNO.pdf
+
+[LFNQ Mont Louis La Quillane]
+file=vac/LFNQ.pdf
+
+[LFNR Berre La Fare]
+file=vac/LFNR.pdf
+
+[LFNS Sisteron Vaumeilh]
+file=vac/LFNS.pdf
+
+[LFNT Avignon Pujaut]
+file=vac/LFNT.pdf
+
+[LFNU Uzes]
+file=vac/LFNU.pdf
+
+[LFNV Valreas Visan]
+file=vac/LFNV.pdf
+
+[LFNW Puivert]
+file=vac/LFNW.pdf
+
+[LFNX Bedarieux La Tour sur Orb]
+file=vac/LFNX.pdf
+
+[LFNZ Le Mazet De Romanin]
+file=vac/LFNZ.pdf
+
+[LFOA Avord]
+file=mil/LFOA.pdf
+
+[LFOB Beauvais Tille]
+file=vac/LFOB.pdf
+
+[LFOC Chateaudun]
+file=vac/LFOC.pdf
+
+[LFOD Saumur St Florent]
+file=vac/LFOD.pdf
+
+[LFOE Evreux Fauville]
+file=mil/LFOE.pdf
+
+[LFOF Alencon Valframbert]
+file=vac/LFOF.pdf
+
+[LFOG Flers St Paul]
+file=vac/LFOG.pdf
+
+[LFOH Le Havre Octeville]
+file=vac/LFOH.pdf
+
+[LFOI Abbeville]
+file=vac/LFOI.pdf
+
+[LFOJ Orleans Bricy]
+file=vac/LFOJ.pdf
+
+[LFOK Chalons Vatry]
+file=vac/LFOK.pdf
+
+[LFOL L'Aigle St Michel]
+file=vac/LFOL.pdf
+
+[LFOM Lessay]
+file=vac/LFOM.pdf
+
+[LFON Dreux Vernouillet]
+file=vac/LFON.pdf
+
+[LFOO les Sables d'Olonne Talmont]
+file=vac/LFOO.pdf
+
+[LFOP Rouen Vallee de Seine]
+file=vac/LFOP.pdf
+
+[LFOQ Blois Le Breuil]
+file=vac/LFOQ.pdf
+
+[LFOR Chartres Metropole]
+file=vac/LFOR.pdf
+
+[LFOS St Valery Vittefleur]
+file=vac/LFOS.pdf
+
+[LFOT Tours Val de Loire]
+file=vac/LFOT.pdf
+
+[LFOU Cholet Le Pontreau]
+file=vac/LFOU.pdf
+
+[LFOV Laval Entrammes]
+file=vac/LFOV.pdf
+
+[LFOW St Quentin Roupy]
+file=vac/LFOW.pdf
+
+[LFOX Etampes Mondesir]
+file=vac/LFOX.pdf
+
+[LFOY Le Havre St Romain]
+file=vac/LFOY.pdf
+
+[LFOZ Orleans St Denis de l'Hotel]
+file=vac/LFOZ.pdf
+
+[LFPA Persan Beaumont]
+file=vac/LFPA.pdf
+
+[LFPB Paris Le Bourget]
+file=vac/LFPB.pdf
+
+[LFPC Creil]
+file=vac/LFPC.pdf
+
+[LFPD Bernay St Martin]
+file=vac/LFPD.pdf
+
+[LFPE Meaux Esbly]
+file=vac/LFPE.pdf
+
+[LFPF Beynes Thiverval]
+file=vac/LFPF.pdf
+
+[LFPG Paris Ch de Gaulle]
+file=vac/LFPG.pdf
+
+[LFPH Chelles Le Pin]
+file=vac/LFPH.pdf
+
+[LFPK Coulommiers Voisins]
+file=vac/LFPK.pdf
+
+[LFPL Lognes Emerainville]
+file=vac/LFPL.pdf
+
+[LFPM Melun Villaroche]
+file=vac/LFPM.pdf
+
+[LFPN Toussus le Noble]
+file=vac/LFPN.pdf
+
+[LFPO Paris Orly]
+file=vac/LFPO.pdf
+
+[LFPP Le Plessis Belleville]
+file=vac/LFPP.pdf
+
+[LFPQ Fontenay Tresigny]
+file=vac/LFPQ.pdf
+
+[LFPT Pontoise Cormeilles]
+file=vac/LFPT.pdf
+
+[LFPU Moret Episy]
+file=vac/LFPU.pdf
+
+[LFPV Villacoublay Velizy]
+file=mil/LFPV.pdf
+
+[LFPX Chavenay Villepreux]
+file=vac/LFPX.pdf
+
+[LFPZ St Cyr l'Ecole]
+file=vac/LFPZ.pdf
+
+[LFQA Reims Prunay]
+file=vac/LFQA.pdf
+
+[LFQB Troyes Barberey]
+file=vac/LFQB.pdf
+
+[LFQC Luneville Croismare]
+file=vac/LFQC.pdf
+
+[LFQD Arras Roclincourt]
+file=vac/LFQD.pdf
+
+[LFQE Etain Rouvres]
+file=mil/LFQE.pdf
+
+[LFQF Autun Bellevue]
+file=vac/LFQF.pdf
+
+[LFQG Nevers Fourchambault]
+file=vac/LFQG.pdf
+
+[LFQH Chatillon sur Seine]
+file=vac/LFQH.pdf
+
+[LFQJ Maubeuge Elesmes]
+file=vac/LFQJ.pdf
+
+[LFQK Chalons Ecury Sur Coole]
+file=vac/LFQK.pdf
+
+[LFQL Lens Benifontaine]
+file=vac/LFQL.pdf
+
+[LFQM Besancon La Veze]
+file=vac/LFQM.pdf
+
+[LFQN St Omer Wizernes]
+file=vac/LFQN.pdf
+
+[LFQO Lille Marcq en Baroeul]
+file=vac/LFQO.pdf
+
+[LFQP Phalsbourg Bourscheid]
+file=mil/LFQP.pdf
+
+[LFQQ Lille Lesquin]
+file=vac/LFQQ.pdf
+
+[LFQS Vitry en Artois]
+file=vac/LFQS.pdf
+
+[LFQT Merville Calonne]
+file=vac/LFQT.pdf
+
+[LFQU Sarre Union]
+file=vac/LFQU.pdf
+
+[LFQV Charleville Mezieres]
+file=vac/LFQV.pdf
+
+[LFQW Vesoul Frotey]
+file=vac/LFQW.pdf
+
+[LFQX Juvancourt]
+file=vac/LFQX.pdf
+
+[LFQY Saverne Steinbourg]
+file=vac/LFQY.pdf
+
+[LFQZ Dieuze Gueblange]
+file=vac/LFQZ.pdf
+
+[LFRB Brest Bretagne]
+file=vac/LFRB.pdf
+
+[LFRC Cherbourg Maupertus]
+file=vac/LFRC.pdf
+
+[LFRD Dinard Pleurtuit St Malo]
+file=vac/LFRD.pdf
+
+[LFRE La Baule Escoublac]
+file=vac/LFRE.pdf
+
+[LFRF Granville Mont St Michel]
+file=vac/LFRF.pdf
+
+[LFRG Deauville Normandie]
+file=vac/LFRG.pdf
+
+[LFRH Lorient Lann Bihoue]
+file=vac/LFRH.pdf
+
+[LFRI La Roche sur Yon Les Ajoncs]
+file=vac/LFRI.pdf
+
+[LFRK Caen Carpiquet]
+file=vac/LFRK.pdf
+
+[LFRM Le Mans Arnage]
+file=vac/LFRM.pdf
+
+[LFRN Rennes St Jacques]
+file=vac/LFRN.pdf
+
+[LFRO Lannion]
+file=vac/LFRO.pdf
+
+[LFRP Ploermel Loyat]
+file=vac/LFRP.pdf
+
+[LFRQ Quimper Pluguffan]
+file=vac/LFRQ.pdf
+
+[LFRS Nantes Atlantique]
+file=vac/LFRS.pdf
+
+[LFRT St Brieuc Armor]
+file=vac/LFRT.pdf
+
+[LFRU Morlaix Ploujean]
+file=vac/LFRU.pdf
+
+[LFRV Vannes Meucon]
+file=vac/LFRV.pdf
+
+[LFRW Avranches Val St Pere]
+file=vac/LFRW.pdf
+
+[LFRZ St Nazaire Montoir]
+file=vac/LFRZ.pdf
+
+[LFSA Besancon Thise]
+file=vac/LFSA.pdf
+
+[LFSB Bale Mulhouse]
+file=vac/LFSB.pdf
+
+[LFSD Dijon Longvic]
+file=vac/LFSD.pdf
+
+[LFSE Epinal Dogneville]
+file=vac/LFSE.pdf
+
+[LFSG Epinal Mirecourt]
+file=vac/LFSG.pdf
+
+[LFSH Haguenau]
+file=vac/LFSH.pdf
+
+[LFSI St Dizier Robinson]
+file=mil/LFSI.pdf
+
+[LFSJ Sedan Douzy]
+file=vac/LFSJ.pdf
+
+[LFSK Vitry le Francois Vauclerc]
+file=vac/LFSK.pdf
+
+[LFSL Brive Souillac]
+file=vac/LFSL.pdf
+
+[LFSM Montbeliard Courcelles]
+file=vac/LFSM.pdf
+
+[LFSN Nancy Essey]
+file=vac/LFSN.pdf
+
+[LFSO Nancy Ochey]
+file=mil/LFSO.pdf
+
+[LFSP Pontarlier]
+file=vac/LFSP.pdf
+
+[LFSS St Sulpice des Landes]
+file=vac/LFSS.pdf
+
+[LFST Strasbourg Entzheim]
+file=vac/LFST.pdf
+
+[LFSU Langres Rolampont]
+file=vac/LFSU.pdf
+
+[LFSV Pont St Vincent]
+file=vac/LFSV.pdf
+
+[LFSW Epernay Plivot]
+file=vac/LFSW.pdf
+
+[LFSX Luxeuil St Sauveur]
+file=mil/LFSX.pdf
+
+[LFTB Marignane Berre]
+file=vac/LFTB.pdf
+
+[LFTF Cuers Pierrefeu]
+file=vac/LFTF.pdf
+
+[LFTH Hyeres Le Palyvestre]
+file=vac/LFTH.pdf
+
+[LFTM Serres La Batie Montsaleon]
+file=vac/LFTM.pdf
+
+[LFTN La Grand Combe]
+file=vac/LFTN.pdf
+
+[LFTP Puimoisson]
+file=vac/LFTP.pdf
+
+[LFTQ Chateaubriant Pouance]
+file=vac/LFTQ.pdf
+
+[LFTW Nimes Garons]
+file=vac/LFTW.pdf
+
+[LFTZ La Mole]
+file=vac/LFTZ.pdf
+
+[LFXA Amberieu]
+file=vac/LFXA.pdf
+
+[LFXB Stes Thenac]
+file=vac/LFXB.pdf
+
+[LFXQ Coetquidan]
+file=mil/LFXQ.pdf
+
+[LFXU les Mureaux]
+file=vac/LFXU.pdf
+
+[LFYG Cambrai Niergnies]
+file=vac/LFYG.pdf
+
+[LFYR Romorantin Pruniers]
+file=vac/LFYR.pdf
+
+[LFYS Ste Leocadie]
+file=vac/LFYS.pdf
+
+[LFYV Yvetot Baons Le Comte]
+file=vac/LFYV.pdf
+
+[LF0121 La Trancliere]
+file=basulm/LF0121.pdf
+
+[LF0125 Lavours]
+file=basulm/LF0125.pdf
+
+[LF0151 Corbonod Seyssel]
+file=basulm/LF0151.pdf
+
+[LF0152 Crottet - Le Bief]
+file=basulm/LF0152.pdf
+
+[LF0153 Izenave]
+file=basulm/LF0153.pdf
+
+[LF0154 Polliat]
+file=basulm/LF0154.pdf
+
+[LF0157 Mionnay]
+file=basulm/LF0157.pdf
+
+[LF0158 Rhone-Lavours]
+file=basulm/LF0158.pdf
+
+[LF0159 Montrevel-en-Bresse]
+file=basulm/LF0159.pdf
+
+[LF0160 Tallissieu]
+file=basulm/LF0160.pdf
+
+[LF0223 Mosloy]
+file=basulm/LF0223.pdf
+
+[LF0225 Ployart]
+file=basulm/LF0225.pdf
+
+[LF0226 Brochot]
+file=basulm/LF0226.pdf
+
+[LF0253 Neuflieux]
+file=basulm/LF0253.pdf
+
+[LF0256 Corbeny]
+file=basulm/LF0256.pdf
+
+[LF0257 Taillefontaine]
+file=basulm/LF0257.pdf
+
+[LF0258 La Flamengrie]
+file=basulm/LF0258.pdf
+
+[LF0259 Base ULM du Val de l'Ailette]
+file=basulm/LF0259.pdf
+
+[LF0324 Veauce]
+file=basulm/LF0324.pdf
+
+[LF0353 St Fargeol Les Fougeres]
+file=basulm/LF0353.pdf
+
+[LF0354 Verneuil en Bourbonnais]
+file=basulm/LF0354.pdf
+
+[LF0355 Banelle]
+file=basulm/LF0355.pdf
+
+[LF0369 La Tuiliere]
+file=basulm/LF0369.pdf
+
+[LF0421 Clamensane les 3 Fontaines]
+file=basulm/LF0421.pdf
+
+[LF0426 Thorame Haute Les Serres]
+file=basulm/LF0426.pdf
+
+[LF0429 Ste Croix sur Verdon]
+file=basulm/LF0429.pdf
+
+[LF0430 Seyne les Alpes]
+file=basulm/LF0430.pdf
+
+[LF0431 La Motte du Caire]
+file=basulm/LF0431.pdf
+
+[LF0434 Thorame Haute Les Serres 2]
+file=basulm/LF0434.pdf
+
+[LF0451 Hippodrome Oraison]
+file=basulm/LF0451.pdf
+
+[LF0452 Segries]
+file=basulm/LF0452.pdf
+
+[LF0453 Cruis - Mas Des Grailles]
+file=basulm/LF0453.pdf
+
+[LF0456 Banon]
+file=basulm/LF0456.pdf
+
+[LF0458 Thorame-Haute Chamatte]
+file=basulm/LF0458.pdf
+
+[LF0459 Thorame-Basse]
+file=basulm/LF0459.pdf
+
+[LF0523 Glacier Lombard]
+file=basulm/LF0523.pdf
+
+[LF0524 Grand Terrus]
+file=basulm/LF0524.pdf
+
+[LF0538 St Etienne en Devoluy]
+file=basulm/LF0538.pdf
+
+[LF0551 Crots]
+file=basulm/LF0551.pdf
+
+[LF0553 Colombe d'Eyguians]
+file=basulm/LF0553.pdf
+
+[LF0621 Isola 2000]
+file=basulm/LF0621.pdf
+
+[LF0651 Juan Les Pins]
+file=basulm/LF0651.pdf
+
+[LF0652 Cipieres Alpes d'Azur ULM]
+file=basulm/LF0652.pdf
+
+[LF0654 Valberg]
+file=basulm/LF0654.pdf
+
+[LF0723 Notre-Dame-des-Neiges-Abbaye]
+file=basulm/LF0723.pdf
+
+[LF0724 Mont Gerbier de Jonc]
+file=basulm/LF0724.pdf
+
+[LF0725 Le Bez]
+file=basulm/LF0725.pdf
+
+[LF0752 St Sauveur de Cruziere]
+file=basulm/LF0752.pdf
+
+[LF0753 Deyras]
+file=basulm/LF0753.pdf
+
+[LF0851 Avaux - Les Bourdons]
+file=basulm/LF0851.pdf
+
+[LF0921 Aleu]
+file=basulm/LF0921.pdf
+
+[LF0922 Artigat - Martin Gu'air]
+file=basulm/LF0922.pdf
+
+[LF0923 Bethmale]
+file=basulm/LF0923.pdf
+
+[LF0924 La Plagne Bouirex]
+file=basulm/LF0924.pdf
+
+[LF0925 Villeneuve du Latou]
+file=basulm/LF0925.pdf
+
+[LF0927 Troye-d'Ariege]
+file=basulm/LF0927.pdf
+
+[LF0928 Ferme de Bonrepos - Regat]
+file=basulm/LF0928.pdf
+
+[LF0951 Sarrat]
+file=basulm/LF0951.pdf
+
+[LF0952 Fabas]
+file=basulm/LF0952.pdf
+
+[LF0953 Ustou]
+file=basulm/LF0953.pdf
+
+[LF0954 Erce]
+file=basulm/LF0954.pdf
+
+[LF1021 Montardoise]
+file=basulm/LF1021.pdf
+
+[LF1022 Ville sur Arce]
+file=basulm/LF1022.pdf
+
+[LF1054 Viapres le petit]
+file=basulm/LF1054.pdf
+
+[LF1055 Romilly]
+file=basulm/LF1055.pdf
+
+[LF1056 Amance]
+file=basulm/LF1056.pdf
+
+[LF1123 Baraigne]
+file=basulm/LF1123.pdf
+
+[LF1125 Nebias]
+file=basulm/LF1125.pdf
+
+[LF1151 Fleury d'Aude]
+file=basulm/LF1151.pdf
+
+[LF1153 Limoux]
+file=basulm/LF1153.pdf
+
+[LF1156 ULM St Couat]
+file=basulm/LF1156.pdf
+
+[LF1157 Queribus 900]
+file=basulm/LF1157.pdf
+
+[LF1158 Beaugaillard]
+file=basulm/LF1158.pdf
+
+[LF1159 Argeliers]
+file=basulm/LF1159.pdf
+
+[LF1222 La Brousse Golinhac]
+file=basulm/LF1222.pdf
+
+[LF1225 Graissac le Faula]
+file=basulm/LF1225.pdf
+
+[LF1226 Therondels Douzalbats]
+file=basulm/LF1226.pdf
+
+[LF1231 Villefranche-de-Panat]
+file=basulm/LF1231.pdf
+
+[LF1232 Ste Croix]
+file=basulm/LF1232.pdf
+
+[LF1233 Sarrans Cantoin]
+file=basulm/LF1233.pdf
+
+[LF1251 Bozouls]
+file=basulm/LF1251.pdf
+
+[LF1254 St Felix de Lunel]
+file=basulm/LF1254.pdf
+
+[LF1255 Barrage de Pareloup]
+file=basulm/LF1255.pdf
+
+[LF1301 Martigues-Henri Fabre]
+file=basulm/LF1301.pdf
+
+[LF1352 Jouques - Bedes]
+file=basulm/LF1352.pdf
+
+[LF1353 La Ciotat]
+file=basulm/LF1353.pdf
+
+[LF1354 Meyrargues]
+file=basulm/LF1354.pdf
+
+[LF1355 Marseille Hydro]
+file=basulm/LF1355.pdf
+
+[LF1422 Bonneville la Louvet]
+file=basulm/LF1422.pdf
+
+[LF1451 Courseulles sur Mer]
+file=basulm/LF1451.pdf
+
+[LF1452 La Boissiere]
+file=basulm/LF1452.pdf
+
+[LF1454 Rouvres]
+file=basulm/LF1454.pdf
+
+[LF1456 OMAHA BEACH]
+file=basulm/LF1456.pdf
+
+[LF1525 Polminhac]
+file=basulm/LF1525.pdf
+
+[LF1552 Le Peuch]
+file=basulm/LF1552.pdf
+
+[LF1553 Le Bruel]
+file=basulm/LF1553.pdf
+
+[LF1625 Pillac]
+file=basulm/LF1625.pdf
+
+[LF1627 St Maurice]
+file=basulm/LF1627.pdf
+
+[LF1628 St Meme les Carrieres]
+file=basulm/LF1628.pdf
+
+[LF1629 St-Coutant]
+file=basulm/LF1629.pdf
+
+[LF1631 Le Luquet]
+file=basulm/LF1631.pdf
+
+[LF1651 Aignes et Puyperoux - Montmore]
+file=basulm/LF1651.pdf
+
+[LF1652 Brettes]
+file=basulm/LF1652.pdf
+
+[LF1653 St Ciers]
+file=basulm/LF1653.pdf
+
+[LF1654 Belzagot]
+file=basulm/LF1654.pdf
+
+[LF1726 Jarnac Champagne]
+file=basulm/LF1726.pdf
+
+[LF1727 Nantille]
+file=basulm/LF1727.pdf
+
+[LF1751 Corme Ecluse]
+file=basulm/LF1751.pdf
+
+[LF1752 Aigrefeuille d'Aunis]
+file=basulm/LF1752.pdf
+
+[LF1753 Le Thou]
+file=basulm/LF1753.pdf
+
+[LF1755 Courcon Eol'Aunis]
+file=basulm/LF1755.pdf
+
+[LF1756 Bourcefranc]
+file=basulm/LF1756.pdf
+
+[LF1757 Arvert]
+file=basulm/LF1757.pdf
+
+[LF1821 Coust - Colombiers]
+file=basulm/LF1821.pdf
+
+[LF1822 Guilly]
+file=basulm/LF1822.pdf
+
+[LF1826 Sury en Vaux]
+file=basulm/LF1826.pdf
+
+[LF1852 Dun sur Auron]
+file=basulm/LF1852.pdf
+
+[LF1853 Ste Thorette]
+file=basulm/LF1853.pdf
+
+[LF1854 St Christophe]
+file=basulm/LF1854.pdf
+
+[LF1856 Jouet sur l'Aubois]
+file=basulm/LF1856.pdf
+
+[LF1921 Eyburie]
+file=basulm/LF1921.pdf
+
+[LF1923 Peyrelevade]
+file=basulm/LF1923.pdf
+
+[LF1926 Lagarde Enval]
+file=basulm/LF1926.pdf
+
+[LF1927 Troches-Pompadour]
+file=basulm/LF1927.pdf
+
+[LF1929 St Cernin de Larche]
+file=basulm/LF1929.pdf
+
+[LF1930 Varieras]
+file=basulm/LF1930.pdf
+
+[LF1951 Les Chanseves]
+file=basulm/LF1951.pdf
+
+[LF1952 Lagleygeolle]
+file=basulm/LF1952.pdf
+
+[LF1953 Perols sur Vezere]
+file=basulm/LF1953.pdf
+
+[LF1954 Savignoux]
+file=basulm/LF1954.pdf
+
+[LF2022 Cargese]
+file=basulm/LF2022.pdf
+
+[LF2023 Aghione Casone]
+file=basulm/LF2023.pdf
+
+[LF2051 Cavallo]
+file=basulm/LF2051.pdf
+
+[LF2121 Auxey-Duresses]
+file=basulm/LF2121.pdf
+
+[LF2122 Chaume et Courchamp]
+file=basulm/LF2122.pdf
+
+[LF2123 Dampierre et Flee]
+file=basulm/LF2123.pdf
+
+[LF2127 Chazan]
+file=basulm/LF2127.pdf
+
+[LF2132 Souhil]
+file=basulm/LF2132.pdf
+
+[LF2134 Recey-Le Mont de Lucey]
+file=basulm/LF2134.pdf
+
+[LF2151 St Jean de Losne]
+file=basulm/LF2151.pdf
+
+[LF2161 Chateau La Chassagne]
+file=basulm/LF2161.pdf
+
+[LF2162 St-Romain]
+file=basulm/LF2162.pdf
+
+[LF2163 Nantoux]
+file=basulm/LF2163.pdf
+
+[LF2164 Blanot]
+file=basulm/LF2164.pdf
+
+[LF2221 Kerfot la Paimpolaise]
+file=basulm/LF2221.pdf
+
+[LF2224 Locarn]
+file=basulm/LF2224.pdf
+
+[LF2321 Evaux]
+file=basulm/LF2321.pdf
+
+[LF2351 Le Pommier]
+file=basulm/LF2351.pdf
+
+[LF2353 Le Pouyollet Lizieres]
+file=basulm/LF2353.pdf
+
+[LF2421 Augignac]
+file=basulm/LF2421.pdf
+
+[LF2422 Beaumont]
+file=basulm/LF2422.pdf
+
+[LF2423 Condat sur Vezere]
+file=basulm/LF2423.pdf
+
+[LF2424 Coursac]
+file=basulm/LF2424.pdf
+
+[LF2426 Eyrignac]
+file=basulm/LF2426.pdf
+
+[LF2428 Javerlhac]
+file=basulm/LF2428.pdf
+
+[LF2430 Lalinde]
+file=basulm/LF2430.pdf
+
+[LF2431 Liorac sur Louyre]
+file=basulm/LF2431.pdf
+
+[LF2432 Pressignac Vicq Rebeyrotte]
+file=basulm/LF2432.pdf
+
+[LF2433 La Rochebeaucourt Argentine]
+file=basulm/LF2433.pdf
+
+[LF2434 St Crepin Carlucet]
+file=basulm/LF2434.pdf
+
+[LF2436 St Julien]
+file=basulm/LF2436.pdf
+
+[LF2437 Le Rigola BOURDEILLES]
+file=basulm/LF2437.pdf
+
+[LF2438 Bas Meygnaud Valeuil]
+file=basulm/LF2438.pdf
+
+[LF2443 Peyrillac]
+file=basulm/LF2443.pdf
+
+[LF2446 Sud-Ouest Aero-Loisirs]
+file=basulm/LF2446.pdf
+
+[LF2449 Hautefaye]
+file=basulm/LF2449.pdf
+
+[LF2452 Sanet Agonac]
+file=basulm/LF2452.pdf
+
+[LF2453 Ferme Milhac-Oie en Perigord]
+file=basulm/LF2453.pdf
+
+[LF2454 Terrasson LE BOS]
+file=basulm/LF2454.pdf
+
+[LF2458 Piste du Tartou]
+file=basulm/LF2458.pdf
+
+[LF2461 Galinat Tamnies les Eyzies]
+file=basulm/LF2461.pdf
+
+[LF2462 Plazac]
+file=basulm/LF2462.pdf
+
+[LF2463 Thenac]
+file=basulm/LF2463.pdf
+
+[LF2465 Le Pas de l'Aze]
+file=basulm/LF2465.pdf
+
+[LF2466 Clissac]
+file=basulm/LF2466.pdf
+
+[LF2521 Lanans]
+file=basulm/LF2521.pdf
+
+[LF2552 Bonnay]
+file=basulm/LF2552.pdf
+
+[LF2553 Club ULM Haut Doubs]
+file=basulm/LF2553.pdf
+
+[LF2554 Arc sous Cicon]
+file=basulm/LF2554.pdf
+
+[LF2555 Athose]
+file=basulm/LF2555.pdf
+
+[LF2621 Faucon]
+file=basulm/LF2621.pdf
+
+[LF2622 Bellegarde en Diois]
+file=basulm/LF2622.pdf
+
+[LF2623 Col de Bacchus]
+file=basulm/LF2623.pdf
+
+[LF2624 L'Escoulin]
+file=basulm/LF2624.pdf
+
+[LF2628 Etoile Rhone]
+file=basulm/LF2628.pdf
+
+[LF2629 Ratieres Les Allandaines]
+file=basulm/LF2629.pdf
+
+[LF2651 Base ulm Anthony Delluc]
+file=basulm/LF2651.pdf
+
+[LF2655 St-Martin]
+file=basulm/LF2655.pdf
+
+[LF2721 St Cyr La Campagne]
+file=basulm/LF2721.pdf
+
+[LF2722 Berville-sur-mer]
+file=basulm/LF2722.pdf
+
+[LF2723 Breuilpont]
+file=basulm/LF2723.pdf
+
+[LF2751 Les Noyers]
+file=basulm/LF2751.pdf
+
+[LF2752 Cesseville Ferme des Moulins]
+file=basulm/LF2752.pdf
+
+[LF2753 Val de Reuil]
+file=basulm/LF2753.pdf
+
+[LF2822 Champrond-Le Petit Bois Landry]
+file=basulm/LF2822.pdf
+
+[LF2823 Loulappe]
+file=basulm/LF2823.pdf
+
+[LF2825 Santilly]
+file=basulm/LF2825.pdf
+
+[LF2827 Fontaine Simon]
+file=basulm/LF2827.pdf
+
+[LF2829 Voves Viabon]
+file=basulm/LF2829.pdf
+
+[LF2830 Ecrosnes]
+file=basulm/LF2830.pdf
+
+[LF2834 Les Ailes d'Eure et Loir]
+file=basulm/LF2834.pdf
+
+[LF2851 Houville La Branche]
+file=basulm/LF2851.pdf
+
+[LF2853 Le Gault St Denis]
+file=basulm/LF2853.pdf
+
+[LF2854 La Saussaye]
+file=basulm/LF2854.pdf
+
+[LF2855 La maison des pionniers]
+file=basulm/LF2855.pdf
+
+[LF2856 Le Buternay]
+file=basulm/LF2856.pdf
+
+[LF2857 Paramoteur Paris Ouest]
+file=basulm/LF2857.pdf
+
+[LF2858 club du Houssay]
+file=basulm/LF2858.pdf
+
+[LF2859 Les Ailes d'Horus]
+file=basulm/LF2859.pdf
+
+[LF2860 Plein Ciel Paramoteur]
+file=basulm/LF2860.pdf
+
+[LF2921 Plouarzel]
+file=basulm/LF2921.pdf
+
+[LF2922 Poullaouen - Le Stancou]
+file=basulm/LF2922.pdf
+
+[LF2923 Querlarn / Plobannalec-Lesconi]
+file=basulm/LF2923.pdf
+
+[LF2925 Le Grand Chene]
+file=basulm/LF2925.pdf
+
+[LF3023 Tornac]
+file=basulm/LF3023.pdf
+
+[LF3025 Remoulins]
+file=basulm/LF3025.pdf
+
+[LF3026 Montcalm]
+file=basulm/LF3026.pdf
+
+[LF3052 St Victor]
+file=basulm/LF3052.pdf
+
+[LF3123 Nailloux]
+file=basulm/LF3123.pdf
+
+[LF3126 Sabonneres]
+file=basulm/LF3126.pdf
+
+[LF3128 Bois de la Pierre]
+file=basulm/LF3128.pdf
+
+[LF3129 Pene de Soulit]
+file=basulm/LF3129.pdf
+
+[LF3130 Uls]
+file=basulm/LF3130.pdf
+
+[LF3131 Cap de Barres]
+file=basulm/LF3131.pdf
+
+[LF3132 Cap de Pouy]
+file=basulm/LF3132.pdf
+
+[LF3133 Honteyde]
+file=basulm/LF3133.pdf
+
+[LF3134 L'Isle en Dodon]
+file=basulm/LF3134.pdf
+
+[LF3135 St Felix Lauragais]
+file=basulm/LF3135.pdf
+
+[LF3136 Gardouch]
+file=basulm/LF3136.pdf
+
+[LF3137 Cier de Riviere]
+file=basulm/LF3137.pdf
+
+[LF3138 Bacaneres]
+file=basulm/LF3138.pdf
+
+[LF3140 Villematier]
+file=basulm/LF3140.pdf
+
+[LF3151 Le Fousseret]
+file=basulm/LF3151.pdf
+
+[LF3153 Balesta Nature]
+file=basulm/LF3153.pdf
+
+[LF3154 Labastide St Sernin]
+file=basulm/LF3154.pdf
+
+[LF3155 Marmouzet]
+file=basulm/LF3155.pdf
+
+[LF3156 Le Tucoulet]
+file=basulm/LF3156.pdf
+
+[LF3157 Le Burgaud]
+file=basulm/LF3157.pdf
+
+[LF3158 Gibel]
+file=basulm/LF3158.pdf
+
+[LF3159 Molas]
+file=basulm/LF3159.pdf
+
+[LF3160 Carbonne]
+file=basulm/LF3160.pdf
+
+[LF3161 St Fereol]
+file=basulm/LF3161.pdf
+
+[LF3221 Bretagne d'Armagnac]
+file=basulm/LF3221.pdf
+
+[LF3225 Biran]
+file=basulm/LF3225.pdf
+
+[LF3226 Berdoues]
+file=basulm/LF3226.pdf
+
+[LF3227 Manent Montane]
+file=basulm/LF3227.pdf
+
+[LF3228 Duffort]
+file=basulm/LF3228.pdf
+
+[LF3230 St Elix Theux]
+file=basulm/LF3230.pdf
+
+[LF3231 Isle de Noe]
+file=basulm/LF3231.pdf
+
+[LF3232 Idrac Respailles]
+file=basulm/LF3232.pdf
+
+[LF3233 Lectoure Marsolan]
+file=basulm/LF3233.pdf
+
+[LF3238 Simorre le-Puntous]
+file=basulm/LF3238.pdf
+
+[LF3251 Maupas]
+file=basulm/LF3251.pdf
+
+[LF3253 St Blancard]
+file=basulm/LF3253.pdf
+
+[LF3254 St Clar]
+file=basulm/LF3254.pdf
+
+[LF3255 Brugnens]
+file=basulm/LF3255.pdf
+
+[LF3256 Goux]
+file=basulm/LF3256.pdf
+
+[LF3257 Montreal-du-Gers]
+file=basulm/LF3257.pdf
+
+[LF3259 Gelard]
+file=basulm/LF3259.pdf
+
+[LF3260 En Lebe]
+file=basulm/LF3260.pdf
+
+[LF3261 Chelan]
+file=basulm/LF3261.pdf
+
+[LF3263 Tournecoupe]
+file=basulm/LF3263.pdf
+
+[LF3264 Bassoues]
+file=basulm/LF3264.pdf
+
+[LF3265 Mauvezin-Monplaisir]
+file=basulm/LF3265.pdf
+
+[LF3266 Jegun a Nauxion]
+file=basulm/LF3266.pdf
+
+[LF3267 Arrouede]
+file=basulm/LF3267.pdf
+
+[LF3268 Gondrin]
+file=basulm/LF3268.pdf
+
+[LF3321 Bazas Cazats]
+file=basulm/LF3321.pdf
+
+[LF3322 St Pierre]
+file=basulm/LF3322.pdf
+
+[LF3323 Ste Foy]
+file=basulm/LF3323.pdf
+
+[LF3324 Cabanac et Villagrains]
+file=basulm/LF3324.pdf
+
+[LF3325 Bordeaux Souge]
+file=basulm/LF3325.pdf
+
+[LF3327 Ste Helene]
+file=basulm/LF3327.pdf
+
+[LF3328 Le Barp]
+file=basulm/LF3328.pdf
+
+[LF3351 Campin]
+file=basulm/LF3351.pdf
+
+[LF3352 Arbis]
+file=basulm/LF3352.pdf
+
+[LF3353 Carcans]
+file=basulm/LF3353.pdf
+
+[LF3354 Cestas]
+file=basulm/LF3354.pdf
+
+[LF3355 ulm air estuaire]
+file=basulm/LF3355.pdf
+
+[LF3356 St-Estephe]
+file=basulm/LF3356.pdf
+
+[LF3422 Limbardier]
+file=basulm/LF3422.pdf
+
+[LF3423 Puisserguier]
+file=basulm/LF3423.pdf
+
+[LF3424 Serignan]
+file=basulm/LF3424.pdf
+
+[LF3425 Mas Nouguier]
+file=basulm/LF3425.pdf
+
+[LF3461 Pignan]
+file=basulm/LF3461.pdf
+
+[LF3462 St Drezery]
+file=basulm/LF3462.pdf
+
+[LF3464 La Raviege]
+file=basulm/LF3464.pdf
+
+[LF3466 ULM LE CROS]
+file=basulm/LF3466.pdf
+
+[LF3467 Les champs blancs]
+file=basulm/LF3467.pdf
+
+[LF3468 Campagne]
+file=basulm/LF3468.pdf
+
+[LF3469 Sete ULM]
+file=basulm/LF3469.pdf
+
+[LF3531 Moulins le Haut Bois]
+file=basulm/LF3531.pdf
+
+[LF3533 Langon]
+file=basulm/LF3533.pdf
+
+[LF3551 Landean]
+file=basulm/LF3551.pdf
+
+[LF3552 Amanlis-Janze]
+file=basulm/LF3552.pdf
+
+[LF3553 Mont St Michel]
+file=basulm/LF3553.pdf
+
+[LF3555 La Dominelais]
+file=basulm/LF3555.pdf
+
+[LF3557 La Baillee sous Champ Fleu]
+file=basulm/LF3557.pdf
+
+[LF3558 Queneleuc]
+file=basulm/LF3558.pdf
+
+[LF3622 St Benoit du Sault]
+file=basulm/LF3622.pdf
+
+[LF3623 Brandes La Perouille]
+file=basulm/LF3623.pdf
+
+[LF3624 Grange Dieu Levroux]
+file=basulm/LF3624.pdf
+
+[LF3625 Vicq-sur-Nahon - Echalier]
+file=basulm/LF3625.pdf
+
+[LF3627 Lourouer St Laurent]
+file=basulm/LF3627.pdf
+
+[LF3628 Prissac]
+file=basulm/LF3628.pdf
+
+[LF3630 Le Pavillon]
+file=basulm/LF3630.pdf
+
+[LF3651 Reuilly]
+file=basulm/LF3651.pdf
+
+[LF3652 Villentrois - Les Mardelles]
+file=basulm/LF3652.pdf
+
+[LF3721 Neuvy le Roi - Beauvais]
+file=basulm/LF3721.pdf
+
+[LF3724 Orbigny - Les Pallis]
+file=basulm/LF3724.pdf
+
+[LF3730 Jacopeau]
+file=basulm/LF3730.pdf
+
+[LF3732 La Palenderie]
+file=basulm/LF3732.pdf
+
+[LF3751 Bournan]
+file=basulm/LF3751.pdf
+
+[LF3752 Loches]
+file=basulm/LF3752.pdf
+
+[LF3753 Channay sur Lathan]
+file=basulm/LF3753.pdf
+
+[LF3754 St Branchs]
+file=basulm/LF3754.pdf
+
+[LF3755 St Hippolyte]
+file=basulm/LF3755.pdf
+
+[LF3759 Morand]
+file=basulm/LF3759.pdf
+
+[LF3760 Ferme de la Braudiere]
+file=basulm/LF3760.pdf
+
+[LF3761 Lemere]
+file=basulm/LF3761.pdf
+
+[LF3763 Brizay]
+file=basulm/LF3763.pdf
+
+[LF3764 La Provenderie]
+file=basulm/LF3764.pdf
+
+[LF3765 Les Bardellieres]
+file=basulm/LF3765.pdf
+
+[LF3767 La Cante]
+file=basulm/LF3767.pdf
+
+[LF3768 Chateau de l'Estang]
+file=basulm/LF3768.pdf
+
+[LF3821 Col de Belledonne]
+file=basulm/LF3821.pdf
+
+[LF3822 Crete de Brouffiers]
+file=basulm/LF3822.pdf
+
+[LF3823 Dome de la Lauze]
+file=basulm/LF3823.pdf
+
+[LF3824 Glacier de la Barbaratre]
+file=basulm/LF3824.pdf
+
+[LF3825 Col de Sarenne]
+file=basulm/LF3825.pdf
+
+[LF3826 Notre Dame de La Salette]
+file=basulm/LF3826.pdf
+
+[LF3828 Mens]
+file=basulm/LF3828.pdf
+
+[LF3832 L'Alpe du Grand Serre]
+file=basulm/LF3832.pdf
+
+[LF3833 Leyrieu]
+file=basulm/LF3833.pdf
+
+[LF3851 Monestier de Clermont Les Verd]
+file=basulm/LF3851.pdf
+
+[LF3852 Frontonas]
+file=basulm/LF3852.pdf
+
+[LF3853 St Vincent de Mercuze]
+file=basulm/LF3853.pdf
+
+[LF3856 Oulles - La Bergerie]
+file=basulm/LF3856.pdf
+
+[LF3857 Lumbin]
+file=basulm/LF3857.pdf
+
+[LF3869 Crachier]
+file=basulm/LF3869.pdf
+
+[LF3870 Grand champ]
+file=basulm/LF3870.pdf
+
+[LF3871 Montaud]
+file=basulm/LF3871.pdf
+
+[LF3872 les Banchets]
+file=basulm/LF3872.pdf
+
+[LF3921 Lombard]
+file=basulm/LF3921.pdf
+
+[LF3922 Balaiseaux]
+file=basulm/LF3922.pdf
+
+[LF3923 St Claude]
+file=basulm/LF3923.pdf
+
+[LF3951 Doucier]
+file=basulm/LF3951.pdf
+
+[LF3953 Boissia]
+file=basulm/LF3953.pdf
+
+[LF3954 Vigearde]
+file=basulm/LF3954.pdf
+
+[LF3956 Arbois-Ulm]
+file=basulm/LF3956.pdf
+
+[LF3957 aero Sermange]
+file=basulm/LF3957.pdf
+
+[LF4051 Amou]
+file=basulm/LF4051.pdf
+
+[LF4052 Latecoere]
+file=basulm/LF4052.pdf
+
+[LF4053 Le Grand Sauques]
+file=basulm/LF4053.pdf
+
+[LF4123 Souesmes]
+file=basulm/LF4123.pdf
+
+[LF4124 Souge]
+file=basulm/LF4124.pdf
+
+[LF4125 Montrichard]
+file=basulm/LF4125.pdf
+
+[LF4128 Fougeres sur Bievre]
+file=basulm/LF4128.pdf
+
+[LF4130 Pontlevoy]
+file=basulm/LF4130.pdf
+
+[LF4131 Vouzon le Rabot]
+file=basulm/LF4131.pdf
+
+[LF4152 Les Chateaux]
+file=basulm/LF4152.pdf
+
+[LF4153 Chauvigny du Perche]
+file=basulm/LF4153.pdf
+
+[LF4155 Chouzy sur Cisse]
+file=basulm/LF4155.pdf
+
+[LF4156 Oucques]
+file=basulm/LF4156.pdf
+
+[LF4157 Selles St Denis]
+file=basulm/LF4157.pdf
+
+[LF4221 Col du Beal]
+file=basulm/LF4221.pdf
+
+[LF4222 La Jasserie]
+file=basulm/LF4222.pdf
+
+[LF4223 Montverdun]
+file=basulm/LF4223.pdf
+
+[LF4224 Precieux]
+file=basulm/LF4224.pdf
+
+[LF4225 Roanne Mably]
+file=basulm/LF4225.pdf
+
+[LF4226 Cret de Montieux]
+file=basulm/LF4226.pdf
+
+[LF4228 Base ULM du Forez]
+file=basulm/LF4228.pdf
+
+[LF4229 Maubeu]
+file=basulm/LF4229.pdf
+
+[LF4321 Mazeyrat]
+file=basulm/LF4321.pdf
+
+[LF4323 Les Vastres]
+file=basulm/LF4323.pdf
+
+[LF4422 Plesse]
+file=basulm/LF4422.pdf
+
+[LF4423 St Brevin les Pins]
+file=basulm/LF4423.pdf
+
+[LF4451 Frossay]
+file=basulm/LF4451.pdf
+
+[LF4452 La Planche]
+file=basulm/LF4452.pdf
+
+[LF4453 Nantes - Heric]
+file=basulm/LF4453.pdf
+
+[LF4454 Le Quilloux]
+file=basulm/LF4454.pdf
+
+[LF4455 La Possardiere]
+file=basulm/LF4455.pdf
+
+[LF4456 les Moisans]
+file=basulm/LF4456.pdf
+
+[LF4524 Ligny]
+file=basulm/LF4524.pdf
+
+[LF4525 La Selle en Hermoy]
+file=basulm/LF4525.pdf
+
+[LF4552 St Benoit sur Loire]
+file=basulm/LF4552.pdf
+
+[LF4553 Beaugency]
+file=basulm/LF4553.pdf
+
+[LF4554 Beaulieu-sur-Loire]
+file=basulm/LF4554.pdf
+
+[LF4555 Mardie]
+file=basulm/LF4555.pdf
+
+[LF4556 Marsainvilliers]
+file=basulm/LF4556.pdf
+
+[LF4557 Villemoutier]
+file=basulm/LF4557.pdf
+
+[LF4558 Cravant les Lilas]
+file=basulm/LF4558.pdf
+
+[LF4559 Egry]
+file=basulm/LF4559.pdf
+
+[LF4560 La Rosetaine]
+file=basulm/LF4560.pdf
+
+[LF4561 LES AVANT-GARDES]
+file=basulm/LF4561.pdf
+
+[LF4562 St Germain]
+file=basulm/LF4562.pdf
+
+[LF4563 Mezieres lez Clery]
+file=basulm/LF4563.pdf
+
+[LF4621 Calviac]
+file=basulm/LF4621.pdf
+
+[LF4623 Lacave Le Frau]
+file=basulm/LF4623.pdf
+
+[LF4624 Loupiac]
+file=basulm/LF4624.pdf
+
+[LF4627 St Medard de Presque]
+file=basulm/LF4627.pdf
+
+[LF4628 Montaigu de Quercy Valprionde]
+file=basulm/LF4628.pdf
+
+[LF4629 Cabrerets]
+file=basulm/LF4629.pdf
+
+[LF4630 Bigues Carlucet]
+file=basulm/LF4630.pdf
+
+[LF4631 Vers]
+file=basulm/LF4631.pdf
+
+[LF4632 Montfaucon]
+file=basulm/LF4632.pdf
+
+[LF4651 Cezac]
+file=basulm/LF4651.pdf
+
+[LF4652 les landes]
+file=basulm/LF4652.pdf
+
+[LF4722 Castillonnes Cavarc]
+file=basulm/LF4722.pdf
+
+[LF4724 Montpezat d'Agenais]
+file=basulm/LF4724.pdf
+
+[LF4725 Sembas]
+file=basulm/LF4725.pdf
+
+[LF4726 Tremons]
+file=basulm/LF4726.pdf
+
+[LF4727 Verteuil d'Agenais]
+file=basulm/LF4727.pdf
+
+[LF4728 Beauville]
+file=basulm/LF4728.pdf
+
+[LF4729 Saumont Gentieu]
+file=basulm/LF4729.pdf
+
+[LF4730 Claude Vayssiere]
+file=basulm/LF4730.pdf
+
+[LF4731 Cazeaux]
+file=basulm/LF4731.pdf
+
+[LF4732 Clairac]
+file=basulm/LF4732.pdf
+
+[LF4733 Lamourache Nord]
+file=basulm/LF4733.pdf
+
+[LF4734 Lannes Serres]
+file=basulm/LF4734.pdf
+
+[LF4735 Lavardac]
+file=basulm/LF4735.pdf
+
+[LF4736 Levignac de Guyenne]
+file=basulm/LF4736.pdf
+
+[LF4737 St Jean de Duras]
+file=basulm/LF4737.pdf
+
+[LF4738 Villeton]
+file=basulm/LF4738.pdf
+
+[LF4751 Fourques]
+file=basulm/LF4751.pdf
+
+[LF4752 Segalas]
+file=basulm/LF4752.pdf
+
+[LF4753 Caudecoste]
+file=basulm/LF4753.pdf
+
+[LF4754 Fauillet]
+file=basulm/LF4754.pdf
+
+[LF4755 Mascar]
+file=basulm/LF4755.pdf
+
+[LF4756 Bouglon]
+file=basulm/LF4756.pdf
+
+[LF4825 Fenestres]
+file=basulm/LF4825.pdf
+
+[LF4861 La Canourgue Conques]
+file=basulm/LF4861.pdf
+
+[LF4862 Ribennes]
+file=basulm/LF4862.pdf
+
+[LF4863 St Martin de Boubeaux]
+file=basulm/LF4863.pdf
+
+[LF4864 Les Bories]
+file=basulm/LF4864.pdf
+
+[LF4923 St Sigismond]
+file=basulm/LF4923.pdf
+
+[LF4925 Soucelles]
+file=basulm/LF4925.pdf
+
+[LF4946 Soulaire]
+file=basulm/LF4946.pdf
+
+[LF4954 St Macaire du bois]
+file=basulm/LF4954.pdf
+
+[LF4955 Valanjou]
+file=basulm/LF4955.pdf
+
+[LF4956 Coutures]
+file=basulm/LF4956.pdf
+
+[LF4957 Jumelles]
+file=basulm/LF4957.pdf
+
+[LF5021 Dragey]
+file=basulm/LF5021.pdf
+
+[LF5022 Portbail]
+file=basulm/LF5022.pdf
+
+[LF5023 La Fourchette]
+file=basulm/LF5023.pdf
+
+[LF5122 Servon Melzicourt]
+file=basulm/LF5122.pdf
+
+[LF5123 Courtisols les Houches]
+file=basulm/LF5123.pdf
+
+[LF5124 Reims Concept ULM]
+file=basulm/LF5124.pdf
+
+[LF5152 Bouzy]
+file=basulm/LF5152.pdf
+
+[LF5154 Lac du Der]
+file=basulm/LF5154.pdf
+
+[LF5155 Champagne Vol Libre]
+file=basulm/LF5155.pdf
+
+[LF5156 Epoye ULM Reims Concept ULM]
+file=basulm/LF5156.pdf
+
+[LF5224 Harricourt la Gonio]
+file=basulm/LF5224.pdf
+
+[LF5225 Laville aux Bois]
+file=basulm/LF5225.pdf
+
+[LF5252 les ailes du der]
+file=basulm/LF5252.pdf
+
+[LF5321 Andouille le Tertre picard]
+file=basulm/LF5321.pdf
+
+[LF5322 La Rogerie]
+file=basulm/LF5322.pdf
+
+[LF5323 La Bazouge de Chemere]
+file=basulm/LF5323.pdf
+
+[LF5324 Beausoleil]
+file=basulm/LF5324.pdf
+
+[LF5325 Courcite]
+file=basulm/LF5325.pdf
+
+[LF5351 Aron-Les Ecottays]
+file=basulm/LF5351.pdf
+
+[LF5352 Mezangers]
+file=basulm/LF5352.pdf
+
+[LF5421 Mont sur Meurthe]
+file=basulm/LF5421.pdf
+
+[LF5422 Villerupt Micheville]
+file=basulm/LF5422.pdf
+
+[LF5423 Herbeviller]
+file=basulm/LF5423.pdf
+
+[LF5451 Hoeville]
+file=basulm/LF5451.pdf
+
+[LF5453 Grand Couronne]
+file=basulm/LF5453.pdf
+
+[LF5454 Laloeuf]
+file=basulm/LF5454.pdf
+
+[LF5521 Cornieville Geville]
+file=basulm/LF5521.pdf
+
+[LF5523 Chassey-Beaupre]
+file=basulm/LF5523.pdf
+
+[LF5524 Beauclair]
+file=basulm/LF5524.pdf
+
+[LF5525 Fains Veel]
+file=basulm/LF5525.pdf
+
+[LF5526 Montmedy-Marville]
+file=basulm/LF5526.pdf
+
+[LF5551 Geville]
+file=basulm/LF5551.pdf
+
+[LF5552 Billy-sous-Mangiennes]
+file=basulm/LF5552.pdf
+
+[LF5553 Mad'In Ulm]
+file=basulm/LF5553.pdf
+
+[LF5653 La Bochet]
+file=basulm/LF5653.pdf
+
+[LF5654 Quily]
+file=basulm/LF5654.pdf
+
+[LF5657 Courant d'ailes]
+file=basulm/LF5657.pdf
+
+[LF5710 Bambi Air Club]
+file=basulm/LF5710.pdf
+
+[LF5722 Fresnes]
+file=basulm/LF5722.pdf
+
+[LF5723 St Avold]
+file=basulm/LF5723.pdf
+
+[LF5726 Bining]
+file=basulm/LF5726.pdf
+
+[LF5728 Falstrof]
+file=basulm/LF5728.pdf
+
+[LF5730 Gros Rederching]
+file=basulm/LF5730.pdf
+
+[LF5751 L'oiseau Blanc-Achen]
+file=basulm/LF5751.pdf
+
+[LF5752 Hargarten aux Mines]
+file=basulm/LF5752.pdf
+
+[LF5753 Remeling]
+file=basulm/LF5753.pdf
+
+[LF5754 Folschviller]
+file=basulm/LF5754.pdf
+
+[LF5755 Zoufftgen]
+file=basulm/LF5755.pdf
+
+[LF5757 Cappel]
+file=basulm/LF5757.pdf
+
+[LF5758 Mosailes]
+file=basulm/LF5758.pdf
+
+[LF5759 Les ailes de Rohrbach]
+file=basulm/LF5759.pdf
+
+[LF5760 CANN' AIR]
+file=basulm/LF5760.pdf
+
+[LF5761 ARC-EN-CIEL PARAMOTEURS]
+file=basulm/LF5761.pdf
+
+[LF5762 Langatte ULM]
+file=basulm/LF5762.pdf
+
+[LF5764 St Georges]
+file=basulm/LF5764.pdf
+
+[LF5825 Ville Langy]
+file=basulm/LF5825.pdf
+
+[LF5826 Champlemy-Varzy]
+file=basulm/LF5826.pdf
+
+[LF5827 Luzy]
+file=basulm/LF5827.pdf
+
+[LF5852 La Collancelle]
+file=basulm/LF5852.pdf
+
+[LF5854 Beard]
+file=basulm/LF5854.pdf
+
+[LF5930 Herlies]
+file=basulm/LF5930.pdf
+
+[LF5952 Buzet]
+file=basulm/LF5952.pdf
+
+[LF6021 Bonneuil en Valois]
+file=basulm/LF6021.pdf
+
+[LF6023 Fretoy le Chateau]
+file=basulm/LF6023.pdf
+
+[LF6025 St Thibault - Menantissard]
+file=basulm/LF6025.pdf
+
+[LF6026 Flavacourt]
+file=basulm/LF6026.pdf
+
+[LF6051 Mouy]
+file=basulm/LF6051.pdf
+
+[LF6121 Necy-Vignats]
+file=basulm/LF6121.pdf
+
+[LF6151 Val Preaux]
+file=basulm/LF6151.pdf
+
+[LF6152 St Germain de la Coudre]
+file=basulm/LF6152.pdf
+
+[LF6153 Le Cerisier]
+file=basulm/LF6153.pdf
+
+[LF6224 Frevent]
+file=basulm/LF6224.pdf
+
+[LF6251 Boulogne sur Mer]
+file=basulm/LF6251.pdf
+
+[LF6252 Verchocq]
+file=basulm/LF6252.pdf
+
+[LF6321 St Priest des Champs]
+file=basulm/LF6321.pdf
+
+[LF6323 La Rochette Sauvagnat]
+file=basulm/LF6323.pdf
+
+[LF6324 Charbonnieres les Vieilles]
+file=basulm/LF6324.pdf
+
+[LF6326 Jayet Gannat]
+file=basulm/LF6326.pdf
+
+[LF6329 Sardon Lachamps]
+file=basulm/LF6329.pdf
+
+[LF6330 St Gal sur Sioule Les Tabarias]
+file=basulm/LF6330.pdf
+
+[LF6352 Grand Prouilhat - Maringues]
+file=basulm/LF6352.pdf
+
+[LF6353 Thinlat-Billom]
+file=basulm/LF6353.pdf
+
+[LF6354 Verneugheol]
+file=basulm/LF6354.pdf
+
+[LF6355 Le Vernet Ste Marguerite]
+file=basulm/LF6355.pdf
+
+[LF6356 ST JULIEN - SANCY]
+file=basulm/LF6356.pdf
+
+[LF6421 Asson]
+file=basulm/LF6421.pdf
+
+[LF6422 Boeil Bezing]
+file=basulm/LF6422.pdf
+
+[LF6424 Came]
+file=basulm/LF6424.pdf
+
+[LF6425 Gurmencon]
+file=basulm/LF6425.pdf
+
+[LF6427 Maslacq]
+file=basulm/LF6427.pdf
+
+[LF6428 Escary Aramits]
+file=basulm/LF6428.pdf
+
+[LF6429 Claracq-Villa les Palmiers]
+file=basulm/LF6429.pdf
+
+[LF6431 Navarrenx]
+file=basulm/LF6431.pdf
+
+[LF6432 Ozenx Montrestrucq]
+file=basulm/LF6432.pdf
+
+[LF6451 Andoins]
+file=basulm/LF6451.pdf
+
+[LF6452 Sames]
+file=basulm/LF6452.pdf
+
+[LF6454 Malaussanne]
+file=basulm/LF6454.pdf
+
+[LF6455 Ponson-Dessus]
+file=basulm/LF6455.pdf
+
+[LF6456 Sevignacq]
+file=basulm/LF6456.pdf
+
+[LF6521 Cabaliros]
+file=basulm/LF6521.pdf
+
+[LF6523 Coumely]
+file=basulm/LF6523.pdf
+
+[LF6524 Ferrere Batmale]
+file=basulm/LF6524.pdf
+
+[LF6525 La Serre d'Aulon]
+file=basulm/LF6525.pdf
+
+[LF6526 Quatre Veziaux]
+file=basulm/LF6526.pdf
+
+[LF6527 Artigues]
+file=basulm/LF6527.pdf
+
+[LF6528 Castillon de la Laquette]
+file=basulm/LF6528.pdf
+
+[LF6529 Hautacam]
+file=basulm/LF6529.pdf
+
+[LF6530 Sadournin]
+file=basulm/LF6530.pdf
+
+[LF6532 Sauveterre]
+file=basulm/LF6532.pdf
+
+[LF6534 Sarriac Bigorre]
+file=basulm/LF6534.pdf
+
+[LF6536 Vallon des Bergons]
+file=basulm/LF6536.pdf
+
+[LF6538 Aneres]
+file=basulm/LF6538.pdf
+
+[LF6539 Labatut-Riviere]
+file=basulm/LF6539.pdf
+
+[LF6540 Larreule]
+file=basulm/LF6540.pdf
+
+[LF6551 Luquet]
+file=basulm/LF6551.pdf
+
+[LF6552 Rabastens de Bigorre]
+file=basulm/LF6552.pdf
+
+[LF6553 Vic-en-Bigorre]
+file=basulm/LF6553.pdf
+
+[LF6554 Fontrailles]
+file=basulm/LF6554.pdf
+
+[LF6555 Plateau de Monhaillat]
+file=basulm/LF6555.pdf
+
+[LF6621 Coste del Palm]
+file=basulm/LF6621.pdf
+
+[LF6622 Col de la Marrano]
+file=basulm/LF6622.pdf
+
+[LF6623 Mont Llaret Pic d'Aude]
+file=basulm/LF6623.pdf
+
+[LF6624 Clos de Legua]
+file=basulm/LF6624.pdf
+
+[LF6625 Hippopotame]
+file=basulm/LF6625.pdf
+
+[LF6626 Mont Llaret Roc d'Aude]
+file=basulm/LF6626.pdf
+
+[LF6627 Plateau de la Calme]
+file=basulm/LF6627.pdf
+
+[LF6628 Perpignan la Salanque]
+file=basulm/LF6628.pdf
+
+[LF6631 Corneilla de la Riviere]
+file=basulm/LF6631.pdf
+
+[LF6632 St Genis]
+file=basulm/LF6632.pdf
+
+[LF6651 Torreilles]
+file=basulm/LF6651.pdf
+
+[LF6652 St Paul de Fenouillet]
+file=basulm/LF6652.pdf
+
+[LF6654 Llupia]
+file=basulm/LF6654.pdf
+
+[LF6655 St Jean Pla de Corts]
+file=basulm/LF6655.pdf
+
+[LF6656 Montescot]
+file=basulm/LF6656.pdf
+
+[LF6658 Llauro]
+file=basulm/LF6658.pdf
+
+[LF6659 La Salanque Latecoere]
+file=basulm/LF6659.pdf
+
+[LF6715 Club ULM Kogenheim]
+file=basulm/LF6715.pdf
+
+[LF6721 Albe - Val de Ville]
+file=basulm/LF6721.pdf
+
+[LF6723 Salmbach]
+file=basulm/LF6723.pdf
+
+[LF6724 Wissembourg]
+file=basulm/LF6724.pdf
+
+[LF6751 Batzendorf]
+file=basulm/LF6751.pdf
+
+[LF6752 Trimbach]
+file=basulm/LF6752.pdf
+
+[LF6754 Envol Ulm Alsace]
+file=basulm/LF6754.pdf
+
+[LF6755 Hanau Airport SCHILLERSDORF]
+file=basulm/LF6755.pdf
+
+[LF6757 Club ULM Les Cigognes d'Epfig]
+file=basulm/LF6757.pdf
+
+[LF6821 Masevaux]
+file=basulm/LF6821.pdf
+
+[LF6822 Vieux Ferrette]
+file=basulm/LF6822.pdf
+
+[LF6851 Valdieu-Lutran]
+file=basulm/LF6851.pdf
+
+[LF6852 Soppe]
+file=basulm/LF6852.pdf
+
+[LF6921 Claveisolles]
+file=basulm/LF6921.pdf
+
+[LF6951 St-Jean d'Ardieres]
+file=basulm/LF6951.pdf
+
+[LF7021 Bucey les Gy]
+file=basulm/LF7021.pdf
+
+[LF7022 Francourt]
+file=basulm/LF7022.pdf
+
+[LF7023 Saulnot]
+file=basulm/LF7023.pdf
+
+[LF7025 Tincey]
+file=basulm/LF7025.pdf
+
+[LF7026 Arc les Gray]
+file=basulm/LF7026.pdf
+
+[LF7027 Lambrey]
+file=basulm/LF7027.pdf
+
+[LF7028 Venisey]
+file=basulm/LF7028.pdf
+
+[LF7029 Senoncourt]
+file=basulm/LF7029.pdf
+
+[LF7030 Bay]
+file=basulm/LF7030.pdf
+
+[LF7031 Jasney]
+file=basulm/LF7031.pdf
+
+[LF7032 La Malachere]
+file=basulm/LF7032.pdf
+
+[LF7033 gevigney]
+file=basulm/LF7033.pdf
+
+[LF7034 Lacs de Bonnal]
+file=basulm/LF7034.pdf
+
+[LF7121 Sagy]
+file=basulm/LF7121.pdf
+
+[LF7124 Le Creusot-Le Gros Chaillot]
+file=basulm/LF7124.pdf
+
+[LF7151 La Clayette]
+file=basulm/LF7151.pdf
+
+[LF7152 Peronne - Moulin Chevraut]
+file=basulm/LF7152.pdf
+
+[LF7153 Brancion]
+file=basulm/LF7153.pdf
+
+[LF7228 Piace]
+file=basulm/LF7228.pdf
+
+[LF7229 Crosmieres]
+file=basulm/LF7229.pdf
+
+[LF7252 Commerveil]
+file=basulm/LF7252.pdf
+
+[LF7253 St-Pierre de Cheville]
+file=basulm/LF7253.pdf
+
+[LF7255 Chateau de Monhoudou]
+file=basulm/LF7255.pdf
+
+[LF7256 St Cosme en Vairais]
+file=basulm/LF7256.pdf
+
+[LF7258 Asse le Riboul]
+file=basulm/LF7258.pdf
+
+[LF7322 Glacier de l'Etendard]
+file=basulm/LF7322.pdf
+
+[LF7324 Glacier de la Grande Motte]
+file=basulm/LF7324.pdf
+
+[LF7325 La Toviere]
+file=basulm/LF7325.pdf
+
+[LF7327 Val Thorens Alti]
+file=basulm/LF7327.pdf
+
+[LF7328 Valmorel]
+file=basulm/LF7328.pdf
+
+[LF7329 Vaugellaz]
+file=basulm/LF7329.pdf
+
+[LF7331 Praz Sauge et Pre Vernay]
+file=basulm/LF7331.pdf
+
+[LF7332 Valloire Bonnenuit]
+file=basulm/LF7332.pdf
+
+[LF7333 Vers le col du Palet]
+file=basulm/LF7333.pdf
+
+[LF7340 Chanaz]
+file=basulm/LF7340.pdf
+
+[LF7351 Yenne]
+file=basulm/LF7351.pdf
+
+[LF7363 Tignes le Palet]
+file=basulm/LF7363.pdf
+
+[LF7421 Col de Cenise]
+file=basulm/LF7421.pdf
+
+[LF7422 Glacier d'Argentiere]
+file=basulm/LF7422.pdf
+
+[LF7423 Glacier de Talefre]
+file=basulm/LF7423.pdf
+
+[LF7424 Glacier du Dome du Gouter]
+file=basulm/LF7424.pdf
+
+[LF7425 Glacier du Tacul]
+file=basulm/LF7425.pdf
+
+[LF7426 Glacier du Tour]
+file=basulm/LF7426.pdf
+
+[LF7427 Morzine Avoriaz]
+file=basulm/LF7427.pdf
+
+[LF7430 St Roch Mayeres]
+file=basulm/LF7430.pdf
+
+[LF7431 Thollon-les-Memises]
+file=basulm/LF7431.pdf
+
+[LF7469 Habere Poche]
+file=basulm/LF7469.pdf
+
+[LF7470 Cervens]
+file=basulm/LF7470.pdf
+
+[LF7621 Lammerville]
+file=basulm/LF7621.pdf
+
+[LF7651 Auzouville-L'Esneval]
+file=basulm/LF7651.pdf
+
+[LF7752 Mondreville]
+file=basulm/LF7752.pdf
+
+[LF7753 Bray sur Seine]
+file=basulm/LF7753.pdf
+
+[LF7754 Orgenoy]
+file=basulm/LF7754.pdf
+
+[LF7757 Aeronel]
+file=basulm/LF7757.pdf
+
+[LF7852 La Fontaine au Berger]
+file=basulm/LF7852.pdf
+
+[LF7853 Buisson Defleuri]
+file=basulm/LF7853.pdf
+
+[LF7854 La Ferme des Pres]
+file=basulm/LF7854.pdf
+
+[LF7921 Gourge Les Grippeaux]
+file=basulm/LF7921.pdf
+
+[LF7922 Chenay]
+file=basulm/LF7922.pdf
+
+[LF7925 St Amand sur Sevre]
+file=basulm/LF7925.pdf
+
+[LF7926 Verrines sous Celles La Jonche]
+file=basulm/LF7926.pdf
+
+[LF7951 Usseau]
+file=basulm/LF7951.pdf
+
+[LF7952 Secondigny]
+file=basulm/LF7952.pdf
+
+[LF7953 Le Grand Moire]
+file=basulm/LF7953.pdf
+
+[LF8021 La Boisselle]
+file=basulm/LF8021.pdf
+
+[LF8022 Jumel]
+file=basulm/LF8022.pdf
+
+[LF8051 Loeuilly]
+file=basulm/LF8051.pdf
+
+[LF8052 Poix de Picardie]
+file=basulm/LF8052.pdf
+
+[LF8053  Marquivillers]
+file=basulm/LF8053.pdf
+
+[LF8123 St Affrique les Montagnes]
+file=basulm/LF8123.pdf
+
+[LF8151 L'Isle sur Tarn - St Martin]
+file=basulm/LF8151.pdf
+
+[LF8153 La Ramiere]
+file=basulm/LF8153.pdf
+
+[LF8154 St Lieux les Lavaur]
+file=basulm/LF8154.pdf
+
+[LF8155 Coufouleux]
+file=basulm/LF8155.pdf
+
+[LF8156 Albi / Castelvert]
+file=basulm/LF8156.pdf
+
+[LF8157 Bouscatel]
+file=basulm/LF8157.pdf
+
+[LF8159 Roquemaure]
+file=basulm/LF8159.pdf
+
+[LF8160 Rivieres]
+file=basulm/LF8160.pdf
+
+[LF8222 Beaumont de Lomagne]
+file=basulm/LF8222.pdf
+
+[LF8223 Bouloc]
+file=basulm/LF8223.pdf
+
+[LF8225 Caussade Septfonds]
+file=basulm/LF8225.pdf
+
+[LF8226 Caylus]
+file=basulm/LF8226.pdf
+
+[LF8228 Montaigu de Quercy Couloussac]
+file=basulm/LF8228.pdf
+
+[LF8233 Pommevic]
+file=basulm/LF8233.pdf
+
+[LF8251 Dunes - Aerodrome Leon Lemarti]
+file=basulm/LF8251.pdf
+
+[LF8252 Maubec - Solomiac]
+file=basulm/LF8252.pdf
+
+[LF8253 Leguille]
+file=basulm/LF8253.pdf
+
+[LF8254 Les Gardios - Negrepelisse]
+file=basulm/LF8254.pdf
+
+[LF8255 Banadets]
+file=basulm/LF8255.pdf
+
+[LF8256 Montbartier]
+file=basulm/LF8256.pdf
+
+[LF8257 Labastide St Pierre]
+file=basulm/LF8257.pdf
+
+[LF8259 Fabas]
+file=basulm/LF8259.pdf
+
+[LF8261 Nadesse]
+file=basulm/LF8261.pdf
+
+[LF8262 BOISSAY Ludovic]
+file=basulm/LF8262.pdf
+
+[LF8324 La Roquebrussanne]
+file=basulm/LF8324.pdf
+
+[LF8325 Club Ulm de Themes]
+file=basulm/LF8325.pdf
+
+[LF8329 Brue-Auriac]
+file=basulm/LF8329.pdf
+
+[LF8352 Frejus]
+file=basulm/LF8352.pdf
+
+[LF8353 Cogolin - Grimaud]
+file=basulm/LF8353.pdf
+
+[LF8355 Pourrieres]
+file=basulm/LF8355.pdf
+
+[LF8356 Basse Maure]
+file=basulm/LF8356.pdf
+
+[LF8357 Pampelonne]
+file=basulm/LF8357.pdf
+
+[LF8358 LES AILES DU SOLEIL]
+file=basulm/LF8358.pdf
+
+[LF8359 Golfe de Frejus]
+file=basulm/LF8359.pdf
+
+[LF8360 les Queyrons]
+file=basulm/LF8360.pdf
+
+[LF8361 Golfe de St Tropez]
+file=basulm/LF8361.pdf
+
+[LF8421 St Martin de Castillon]
+file=basulm/LF8421.pdf
+
+[LF8424 Coustellet]
+file=basulm/LF8424.pdf
+
+[LF8425 Puget sur Durance]
+file=basulm/LF8425.pdf
+
+[LF8451 Orange - Plan de Dieu]
+file=basulm/LF8451.pdf
+
+[LF8521 Talmont Vendee Air Park]
+file=basulm/LF8521.pdf
+
+[LF8522 La Tranche-sur-Mer]
+file=basulm/LF8522.pdf
+
+[LF8523 Atlantic Airpark]
+file=basulm/LF8523.pdf
+
+[LF8524 Le Girouard]
+file=basulm/LF8524.pdf
+
+[LF8528 Lucon]
+file=basulm/LF8528.pdf
+
+[LF8529 St Laurent sur Sevre]
+file=basulm/LF8529.pdf
+
+[LF8551 Breuil-Barret]
+file=basulm/LF8551.pdf
+
+[LF8562 St Philbert de Bouaine]
+file=basulm/LF8562.pdf
+
+[LF8563 Coex La Boissiere]
+file=basulm/LF8563.pdf
+
+[LF8566 Mouchamps]
+file=basulm/LF8566.pdf
+
+[LF8567 la brossette]
+file=basulm/LF8567.pdf
+
+[LF8568 Les Fontenelles]
+file=basulm/LF8568.pdf
+
+[LF8569 La Tranche sur Mer]
+file=basulm/LF8569.pdf
+
+[LF8621 Le Fort d'Aslonnes]
+file=basulm/LF8621.pdf
+
+[LF8622 Buxeuil St Remy sur Creuse]
+file=basulm/LF8622.pdf
+
+[LF8626 St Secondin]
+file=basulm/LF8626.pdf
+
+[LF8627 Archigny Chenevelles]
+file=basulm/LF8627.pdf
+
+[LF8651 Montmorillon]
+file=basulm/LF8651.pdf
+
+[LF8652 Pouancay]
+file=basulm/LF8652.pdf
+
+[LF8653 Availles - Limouzine]
+file=basulm/LF8653.pdf
+
+[LF8654 Brigueil le Chantre]
+file=basulm/LF8654.pdf
+
+[LF8655 Poue]
+file=basulm/LF8655.pdf
+
+[LF8723 Les Salles]
+file=basulm/LF8723.pdf
+
+[LF8724 Lussac]
+file=basulm/LF8724.pdf
+
+[LF8726 BELLAC]
+file=basulm/LF8726.pdf
+
+[LF8752 Libarderie - Blond]
+file=basulm/LF8752.pdf
+
+[LF8753 Gajoubert]
+file=basulm/LF8753.pdf
+
+[LF8754 La Geneytouse]
+file=basulm/LF8754.pdf
+
+[LF8755 Azat le Ris]
+file=basulm/LF8755.pdf
+
+[LF8756 L'AGE]
+file=basulm/LF8756.pdf
+
+[LF8757 Bataillou]
+file=basulm/LF8757.pdf
+
+[LF8758 Berneuil]
+file=basulm/LF8758.pdf
+
+[LF8821 La Tete des Champs]
+file=basulm/LF8821.pdf
+
+[LF8851 Ramonchamp]
+file=basulm/LF8851.pdf
+
+[LF8852 Dropt]
+file=basulm/LF8852.pdf
+
+[LF8922 Courgenay]
+file=basulm/LF8922.pdf
+
+[LF8927 Le Petit Fay]
+file=basulm/LF8927.pdf
+
+[LF8928 Perreux]
+file=basulm/LF8928.pdf
+
+[LF8929 Treigny]
+file=basulm/LF8929.pdf
+
+[LF8951 Cravant - Vincelles]
+file=basulm/LF8951.pdf
+
+[LF8952 Vaufoin]
+file=basulm/LF8952.pdf
+
+[LF8953 Egriselles-le-Bocage]
+file=basulm/LF8953.pdf
+
+[LF8954 Voisines]
+file=basulm/LF8954.pdf
+
+[LF8955 St Fargeau]
+file=basulm/LF8955.pdf
+
+[LF8957 St Martin des Champs]
+file=basulm/LF8957.pdf
+
+[LF8959 L'Aubepine]
+file=basulm/LF8959.pdf
+
+[LF9151 Genevrelle a Maisse]
+file=basulm/LF9151.pdf
+
+[LF9152 Boigny Mereville]
+file=basulm/LF9152.pdf
+
+[LF9551 Avernes]
+file=basulm/LF9551.pdf
+
+[LFKK Montmeilleur]
+file=basulm/LFKK.pdf
+
+[LFSY Cessey Baigneux les Juifs]
+file=basulm/LFSY.pdf
+

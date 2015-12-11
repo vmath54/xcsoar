@@ -1,0 +1,29 @@
+################  Cette doc indique comment mettre à jour le fichier de référence FranceVacEtUlm.cup ######################
+
+
+1) récupération des derniers fichiers VAC, MIL, BASULM
+======================================================
+A l'aide des scripts getVACfiles.pl, getMILfiles.pl et getBASULMfiles.pl
+
+2) récupération de basulm.csv
+-----------------------------
+Manuellement, depuis http://basulm.ffplum.info/ :
+  "Bases" - "Exportations" - "Fichiers CSV, KML et GPX" ; choisir le fichier csv
+  
+Ouvrit basulm.csv dans excel ; supprimer la colonne "Consignes" et les colonnes qui suivent "Radio"
+
+3) génération des fichiers intermédiaires
+-----------------------------------------
+Générer listVACfromPDF.csv et listULMfromCSV.csv à partir des scripts getInfosFromVACfiles.pl et readBasulm.pl
+On peut ajuster la verbosité de ces scripts à l'aide de la variable $verbose
+
+4) génération du fichier FranceVacEtUlm_new.cup
+-----------------------------------------------
+A l'aide du script regenereReferenceCUPfile.pl  (la variable $verbose permet d'ajuster la verbosité de ce script)
+Utilise en lecture FranceVacEtUlm.cup, listVACfromPDF.csv et listULMfromCSV.csv
+
+Si de nouveaux terrains sont créés, il faut modifier manuellement dans FranceVacEtUlm_new.cup :
+  - le département correspondant (dernier champ du fichier)
+  - éventuellement, le nom du terrain (premier champ du fichier)
+  
+Dès que c'est OK, recopier FranceVacEtUlm_new.cup vers FranceVacEtUlm.cup
