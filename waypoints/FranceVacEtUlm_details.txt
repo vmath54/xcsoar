@@ -2413,9 +2413,6 @@ file=basulm/LF4321.pdf
 [LF4323 Les Vastres]
 file=basulm/LF4323.pdf
 
-[LF4422 Plesse]
-file=basulm/LF4422.pdf
-
 [LF4423 St Brevin les Pins]
 file=basulm/LF4423.pdf
 
@@ -2436,6 +2433,9 @@ file=basulm/LF4455.pdf
 
 [LF4456 les Moisans]
 file=basulm/LF4456.pdf
+
+[LF4457 Campbon-La Berthelière]
+file=basulm/LF4457.pdf
 
 [LF4524 Ligny]
 file=basulm/LF4524.pdf
@@ -2797,9 +2797,6 @@ file=basulm/LF5854.pdf
 [LF5930 Herlies]
 file=basulm/LF5930.pdf
 
-[LF5952 Buzet]
-file=basulm/LF5952.pdf
-
 [LF6021 Bonneuil en Valois]
 file=basulm/LF6021.pdf
 
@@ -3133,9 +3130,6 @@ file=basulm/LF7252.pdf
 [LF7253 St-Pierre de Cheville]
 file=basulm/LF7253.pdf
 
-[LF7255 Chateau de Monhoudou]
-file=basulm/LF7255.pdf
-
 [LF7256 St Cosme en Vairais]
 file=basulm/LF7256.pdf
 
@@ -3349,6 +3343,9 @@ file=basulm/LF8261.pdf
 [LF8262 BOISSAY Ludovic]
 file=basulm/LF8262.pdf
 
+[LF8263 Nohic]
+file=basulm/LF8263.pdf
+
 [LF8324 La Roquebrussanne]
 file=basulm/LF8324.pdf
 
@@ -3384,6 +3381,9 @@ file=basulm/LF8360.pdf
 
 [LF8361 Golfe de St Tropez]
 file=basulm/LF8361.pdf
+
+[LF8362 Liberty Duck]
+file=basulm/LF8362.pdf
 
 [LF8421 St Martin de Castillon]
 file=basulm/LF8421.pdf
@@ -3466,9 +3466,6 @@ file=basulm/LF8655.pdf
 [LF8723 Les Salles]
 file=basulm/LF8723.pdf
 
-[LF8724 Lussac]
-file=basulm/LF8724.pdf
-
 [LF8726 BELLAC]
 file=basulm/LF8726.pdf
 
@@ -3540,6 +3537,9 @@ file=basulm/LF9151.pdf
 
 [LF9152 Boigny Mereville]
 file=basulm/LF9152.pdf
+
+[LF9154 le fond du lary blanc]
+file=basulm/LF9154.pdf
 
 [LF9551 Avernes]
 file=basulm/LF9551.pdf

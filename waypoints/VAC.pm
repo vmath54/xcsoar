@@ -20,6 +20,7 @@ our $noADs =
 {
   "LF0221" => { name => "Azur Ulm",             comment => "doublon avec LF0256, Corbeny" },
   "LF0926" => { name => "Cerizols",             comment => "piste reservee ballons" },
+  "LF3733" => { name => "Hippolytaine",			comment => "doublon avec LF3755, St Hippolyte" },
   "LF3952" => { name => "Vauxy - Arbois",       comment => "doublon avec LF3956, Arbois-Ulm" },
   "LF5763" => { name => "Langatte paramoteur",  comment => "meme site que LF5762, Langatte ULM" },
   "LFRJ"   => { name => "LANDIVISIAU",          comment => "Transit VFR" },
