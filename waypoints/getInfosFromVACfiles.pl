@@ -39,6 +39,8 @@ my $tempfile     = "tmp.txt";
 ########################### main #####################################
 {
   my $VACs = {};
+  
+  die "$bin not present" unless (-f $bin);
 
   my $ADRefs = &readRefenceCupFile($ficReference);  # infos de reference
 
