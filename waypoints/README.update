@@ -5,6 +5,10 @@
 ======================================================
 A l'aide des scripts getVACfiles.pl, getMILfiles.pl et getBASULMfiles.pl
 
+ATTENTION : getMILfiles.pl ne fonctionne plus. En fait, son exécution "grille" pour plusieurs jours depuis le serveur dircam.air.defense.gouv.fr l'adresse IP de la machine executant ce script
+   Pour le moment, en attendant inverstigation, recuperer manuellement les fichiers VAC des sites : 
+   LFBA LBFC LFBM LFKS LFMO LFMY LFOA LFOE LFPV LFQE LFQP LFSI LFSO LFSX LFXQ
+
 2) récupération de basulm.csv
 -----------------------------
 Manuellement, depuis http://basulm.ffplum.info/ :
