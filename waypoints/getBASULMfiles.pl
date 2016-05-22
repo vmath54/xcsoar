@@ -6,8 +6,8 @@
 #    - tous les fichiers au format "LFdddd.pdf" ou dddd sont des caracteres numériques
 #    - et, pour les fichiers au format "LFss.pdf" où ss sont des caracteres non numériques
 #        . si $noSIA == 0, tous ces fichiers sont recuperes
-#        . sinon, ne récupère que ceux qui se trouvent dans le repertoire "$dirVAC" et le repertoire "$dirMIL" : ce sont des fichiers issus du site SIA ou des bases militaires
-#                 ca élimine, par exemple, les fichiers comme LFEZ.pdf
+#        . sinon, ne récupère que ceux qui ne se trouvent pas dans le repertoire "$dirVAC" et le repertoire "$dirMIL" : ce sont des fichiers issus du site SIA ou des bases militaires
+#                 ceci élimine, par exemple, les fichiers comme LFEZ.pdf
 #
 
 use LWP::Simple;
@@ -15,7 +15,7 @@ use Data::Dumper;
 
 use strict;
 
-my $dirDownload = "basulm2";    # le répertoire qui va contenir les documents pdf charges
+my $dirDownload = "basulm";    # le répertoire qui va contenir les documents pdf charges
 my $URL = "http://basulm.ffplum.info/PDF/";
 
 my $dirVAC = "./vac";
