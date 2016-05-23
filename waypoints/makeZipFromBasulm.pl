@@ -20,16 +20,16 @@ my $verbose = 0;    # Si 1, indique les fichiers pdf qui ne sont pas references.
 ### a adapter lorsque ca sera mieux defini
 my $regions = 
 {
-  ACAL => { name => "Alsace Champagne Ardenne Lorraine", deps => ["08", "10", "51", "52", "54", "55", "57", "67", "68", "88" ] },
   ALPC  => { name => "Aquitaine Limousin Poitou Charentes", deps => ["16", "17", "19", "23", "24", "33", "40", "47", "64", "79", "86", "87" ] },
   ARA   => { name => "Auvergne Rhone-Alpes", deps => [ "01", "03", "07", "15", "26", "38", "42", "43", "63", "69", "73", "74" ] },
   BFC   => { name => "Bourgogne Franche-Comte", deps => [ "21", "25", "39", "58", "70", "71" ,"89", "90" ] },
   Br    => { name => "Bretagne", deps => [ "22", "29", "35", "56" ] },
   CVL   => { name => "Centre Val de Loire", deps => [ "18", "28", "36", "37", "41", "45" ] },
   Corse => { name => "Corse", deps => [ "20" ] },
+  GE    => { name => "Grand Est", deps => ["08", "10", "51", "52", "54", "55", "57", "67", "68", "88" ] },
+  HdF   => { name => "Hauts de France", deps => [ "02", "59", "60", "62", "80" ] },
   IDF   => { name => "Ile de France", deps => [ "75", "77", "78", "91", "92", "93", "94", "95" ] },
   LRMP  => { name => "Languedoc Roussillon Midi Pyrenees", deps => [ "09", "11", "12", "30", "31", "32", "34", "46", "48", "65", "66", "81", "82" ] },
-  NPCP  => { name => "Nord Pas de Calais Picardie", deps => [ "02", "59", "60", "62", "80" ] },
   Norm  => { name => "Normandie", deps => [ "14", "27", "50", "61", "76" ] },
   PDL   => { name => "Pays de la Loire", deps => [ "44", "49", "53", "72", "85" ] },
   PACA  => { name => "Provence Alpes Cote d'Azur", deps => [ "04", "05", "06", "13", "83", "84" ] },
