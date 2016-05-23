@@ -1942,9 +1942,6 @@ file=basulm/LF3026.pdf
 [LF3052 St Victor]
 file=basulm/LF3052.pdf
 
-[LF3123 Nailloux]
-file=basulm/LF3123.pdf
-
 [LF3126 Sabonneres]
 file=basulm/LF3126.pdf
 
@@ -2013,6 +2010,9 @@ file=basulm/LF3160.pdf
 
 [LF3161 St Fereol]
 file=basulm/LF3161.pdf
+
+[LF3162 Cox]
+file=basulm/LF3162.pdf
 
 [LF3221 Bretagne d'Armagnac]
 file=basulm/LF3221.pdf
@@ -2101,9 +2101,6 @@ file=basulm/LF3323.pdf
 [LF3324 Cabanac et Villagrains]
 file=basulm/LF3324.pdf
 
-[LF3325 Bordeaux Souge]
-file=basulm/LF3325.pdf
-
 [LF3327 Ste Helene]
 file=basulm/LF3327.pdf
 
@@ -2145,9 +2142,6 @@ file=basulm/LF3461.pdf
 
 [LF3462 St Drezery]
 file=basulm/LF3462.pdf
-
-[LF3464 La Raviege]
-file=basulm/LF3464.pdf
 
 [LF3466 ULM LE CROS]
 file=basulm/LF3466.pdf
@@ -2347,9 +2341,6 @@ file=basulm/LF4051.pdf
 [LF4052 Latecoere]
 file=basulm/LF4052.pdf
 
-[LF4053 Le Grand Sauques]
-file=basulm/LF4053.pdf
-
 [LF4123 Souesmes]
 file=basulm/LF4123.pdf
 
@@ -2361,6 +2352,9 @@ file=basulm/LF4125.pdf
 
 [LF4128 Fougeres sur Bievre]
 file=basulm/LF4128.pdf
+
+[LF4129 Cosseneux Vouzon]
+file=basulm/LF4129.pdf
 
 [LF4130 Pontlevoy]
 file=basulm/LF4130.pdf
@@ -2443,9 +2437,6 @@ file=basulm/LF4524.pdf
 [LF4525 La Selle en Hermoy]
 file=basulm/LF4525.pdf
 
-[LF4552 St Benoit sur Loire]
-file=basulm/LF4552.pdf
-
 [LF4553 Beaugency]
 file=basulm/LF4553.pdf
 
@@ -2524,9 +2515,6 @@ file=basulm/LF4725.pdf
 [LF4726 Tremons]
 file=basulm/LF4726.pdf
 
-[LF4727 Verteuil d'Agenais]
-file=basulm/LF4727.pdf
-
 [LF4728 Beauville]
 file=basulm/LF4728.pdf
 
@@ -2535,9 +2523,6 @@ file=basulm/LF4729.pdf
 
 [LF4730 Claude Vayssiere]
 file=basulm/LF4730.pdf
-
-[LF4731 Cazeaux]
-file=basulm/LF4731.pdf
 
 [LF4732 Clairac]
 file=basulm/LF4732.pdf
@@ -2812,9 +2797,6 @@ file=basulm/LF6026.pdf
 [LF6051 Mouy]
 file=basulm/LF6051.pdf
 
-[LF6121 Necy-Vignats]
-file=basulm/LF6121.pdf
-
 [LF6151 Val Preaux]
 file=basulm/LF6151.pdf
 
@@ -2907,6 +2889,9 @@ file=basulm/LF6455.pdf
 
 [LF6456 Sevignacq]
 file=basulm/LF6456.pdf
+
+[LF6457 Saint Pée sur Nivelle]
+file=basulm/LF6457.pdf
 
 [LF6521 Cabaliros]
 file=basulm/LF6521.pdf
@@ -3211,6 +3196,9 @@ file=basulm/LF7621.pdf
 [LF7651 Auzouville-L'Esneval]
 file=basulm/LF7651.pdf
 
+[LF7653 Pavilly]
+file=basulm/LF7653.pdf
+
 [LF7752 Mondreville]
 file=basulm/LF7752.pdf
 
@@ -3385,6 +3373,9 @@ file=basulm/LF8361.pdf
 [LF8362 Liberty Duck]
 file=basulm/LF8362.pdf
 
+[LF8363 La LIMATE]
+file=basulm/LF8363.pdf
+
 [LF8421 St Martin de Castillon]
 file=basulm/LF8421.pdf
 
@@ -3489,6 +3480,9 @@ file=basulm/LF8757.pdf
 
 [LF8758 Berneuil]
 file=basulm/LF8758.pdf
+
+[LF8759 Saint Hilaire]
+file=basulm/LF8759.pdf
 
 [LF8821 La Tete des Champs]
 file=basulm/LF8821.pdf
