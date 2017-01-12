@@ -2,7 +2,7 @@
 file=vac/LFOI.pdf
 
 [Agen La Garenne]
-file=mil/LFBA.pdf
+file=vac/LFBA.pdf
 
 [Aigrefeuille Ul]
 file=basulm/LF1752.pdf
@@ -250,9 +250,6 @@ file=vac/LFGF.pdf
 [Beauvais Tille]
 file=vac/LFOB.pdf
 
-[Beauville Ul ?]
-file=basulm/LF4728.pdf
-
 [BedarieuX]
 file=vac/LFNX.pdf
 
@@ -345,9 +342,6 @@ file=vac/LFCS.pdf
 
 [BordeauX Merigna]
 file=vac/LFBD.pdf
-
-[BordeauX Souge]
-file=basulm/LF3325.pdf
 
 [BordeauX YVrac]
 file=vac/LFDY.pdf
@@ -480,9 +474,6 @@ file=basulm/LF8226.pdf
 
 [CazauX]
 file=mil/LFBC.pdf
-
-[CazeauX Ul ?]
-file=basulm/LF4731.pdf
 
 [Cazeresepalaminy]
 file=vac/LFJH.pdf
@@ -707,7 +698,7 @@ file=basulm/LF3353.pdf
 file=basulm/LF8951.pdf
 
 [Creil]
-file=vac/LFPC.pdf
+file=mil/LFPC.pdf
 
 [Cruis Ul 40M]
 file=basulm/LF0453.pdf
@@ -852,6 +843,9 @@ file=vac/LFCF.pdf
 
 [Fleury De Aude]
 file=basulm/LF1151.pdf
+
+[Fleurac Ul ?]
+file=basulm/LF2467.pdf
 
 [Flers St Paul]
 file=vac/LFOG.pdf
@@ -1399,9 +1393,6 @@ file=basulm/LF6551.pdf
 [Lurcy Levy Prv]
 file=vac/LFJU.pdf
 
-[Lussac Ul ?]
-file=basulm/LF8724.pdf
-
 [LuXEuil St Sauve]
 file=mil/LFSX.pdf
 
@@ -1627,9 +1618,6 @@ file=vac/LFGB.pdf
 [Muret Lherm]
 file=vac/LFBR.pdf
 
-[NaillouX Ul ?]
-file=basulm/LF3123.pdf
-
 [Nancy Essey]
 file=vac/LFSN.pdf
 
@@ -1797,9 +1785,6 @@ file=vac/LFRP.pdf
 
 [Plouarzel Ul ?]
 file=basulm/LF2921.pdf
-
-[Plesse Ul]
-file=basulm/LF4422.pdf
 
 [Poitiers Gld]
 file=vac/LFBI.pdf
@@ -1977,9 +1962,6 @@ file=basulm/LF3327.pdf
 
 [Saint Inglev Ul]
 file=vac/LFIS.pdf
-
-[Saint Jean L Ul]
-file=basulm/LF4627.pdf
 
 [Saint Blancard]
 file=basulm/LF3253.pdf
@@ -2248,6 +2230,9 @@ file=vac/LFNL.pdf
 [St Meme Carricre]
 file=basulm/LF1628.pdf
 
+[St Medard De Pre]
+file=basulm/LF4627.pdf
+
 [St Nazaire]
 file=vac/LFRZ.pdf
 
@@ -2449,9 +2434,6 @@ file=basulm/LF4631.pdf
 [Vers Le Col Ul ?]
 file=basulm/LF7333.pdf
 
-[Verteuil Ul]
-file=basulm/LF4727.pdf
-
 [Vesly Le Noyers]
 file=basulm/LF2751.pdf
 
@@ -2538,6 +2520,9 @@ file=basulm/LF3760.pdf
 
 [Chirac Gare]
 file=basulm/LF4864.pdf
+
+[Escoulin Alti]
+file=basulm/LF2624.pdf
 
 [Lac Ferreol]
 file=basulm/LF3161.pdf

@@ -499,6 +499,7 @@ sub rewriteCUPfile
 
 		$$AD{frequence} = $$REF{frequence} if ($rewriteFrequ);
 	  }
+	  #$$AD{code} = $codeRef;
 	}
     print FIC "\"$$AD{name}\",$$AD{code},FR,$$AD{lat},$$AD{long},$$AD{elevation},$$AD{nature},$$AD{qfu},$$AD{dimension},$$AD{frequence},\"$$AD{comment}\"\n"
 	    if ($type eq "cup");

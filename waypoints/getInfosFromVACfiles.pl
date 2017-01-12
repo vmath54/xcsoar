@@ -1,13 +1,15 @@
 #!/usr/bin/perl
 
 # recuperation des informations relatives aux terrains a partir des fichier VAC pdf telecharges sur le site SIA
+#sauvegarde dans listVACfromPDF.csv
+#
 # utilise xpdf pour decoder les fichiers pdf
 #
 # on utilise egalement le fichier FranceVacEtUlm.cup en entree pour :
 #   - detecter les nouvelles fiches
 #   - ajouter les quelques infos qui pourraient manquer depuis les fichiers PDF
 #        Concerne qfu, dimension et nature pour une dizaine de terra
-#        et la fréquence :vide pour 2 terrains : LFIF et LFAK, et valuee pour 2 autres : LFBC et LFKS
+#        et la fréquence pour LFAK, et LFKS
 #        mettre $verbose a 1 pour controler
 
 use VAC;

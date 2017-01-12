@@ -18,7 +18,7 @@ use Data::Dumper;
 
 use strict;
 
-my $verbose = 1;           # a 1 pour avoir les infos de modifications
+my $verbose = 0;           # a 1 pour avoir les infos de modifications
 my $printNameNotMatch = 0; # a 1 pour avoir les noms qui ne matchent pas
 
 my $ficREF      = "FranceVacEtUlm.cup";  # le fichier de reference. En lecture
@@ -34,13 +34,18 @@ my %natures =
   "dur"    => 5,
 );
 
+my $onlyAD = "";        # Vide normalement. Sinon, ne traite que ce terrain, et on dump la structure
+#my $onlyAD = "LF1457";
+
 {
-  my $REFs = &readRefenceCupFile($ficREF);  # on recupere les infos du fichier CUP de référence
+  my $REFs = &readRefenceCupFile($ficREF, onlyAD => $onlyAD);  # on recupere les infos du fichier CUP de référence
+  print "Lecture fic reference : ", Dumper($REFs) if ($onlyAD ne "");
 	
-  &traiteInfosADs($ficVAC, $REFs);          # prise en compte des infos provenant des terrains SIA ou militaire
-  &traiteInfosADs($ficULM, $REFs);          # prise en compte des infos provenant des terrains BASULM
+  &traiteInfosADs($ficVAC, $REFs, onlyAD => $onlyAD);          # prise en compte des infos provenant des terrains SIA ou militaire
+  &traiteInfosADs($ficULM, $REFs, onlyAD => $onlyAD);          # prise en compte des infos provenant des terrains BASULM
+  print "Lecture fichiers terrains : ", Dumper($REFs) if ($onlyAD ne "");
   
-  &delOldADs($REFs);                        # suppression des fiches qui n'ont pas été renouvelées
+  &delOldADs($REFs);                                           # suppression des fiches qui n'ont pas été renouvelées
   
   my $nbre = scalar (keys %$REFs);
   print "$nbre fiches generees\n";
@@ -70,6 +75,9 @@ sub traiteInfosADs
 {
   my $fic = shift;
   my $REFs = shift;
+  my %args = (@_);
+  
+  my $onlyAD = $args{onlyAD};
   
   my @attrs2compare = ("lat", "long", "elevation", "frequence", "dimension", "cat", "qfu", "comment");
 
@@ -77,6 +85,7 @@ sub traiteInfosADs
   
   foreach my $code (sort keys %$ADs)
   {
+    next if (($onlyAD ne "") && ($code ne $onlyAD));
     my $AD = $$ADs{$code};
 	my $cible = $$AD{cible};
 	my $name = $$AD{name};
@@ -103,11 +112,14 @@ sub traiteInfosADs
 		
 	my $REF = $$REFs{$code};
 	# if ($code eq "LF1255") { print Dumper($REF); print Dumper($AD); exit;}
-	
+		  
 	unless(defined($REF))
 	{
 	  print "WARNING. $code;$cible;$name; est dans le fichier '$cible' mais n'est pas dans le fichier de référence.\n";
-	  print "    Il faudra adapter manuellement les infos dans le fichier généré\n";
+	  print "    Il faudra adapter manuellement les infos dans le fichier généré. Par exemple :\n";
+
+	  my $line = &buildLineReferenceCupFile($AD);
+      print "       $line\n";
 	  
 	  $$REFs{$code} = { found => "new", code => $code, cible => $cible, name => $name, shortName => $$AD{name}, lat => $lat, long => $long, elevation => $elevation, frequence => $frequence, dimension => $$AD{dimension}, nature => $nature, qfu => $$AD{qfu}, comment => $$AD{comment}  };
 	  next;

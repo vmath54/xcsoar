@@ -1,16 +1,21 @@
 package VAC;
 #
+
 # Variables et procedures perl en lien avec la mise a disposition de cartes VAC et baseULM
 #
 
 use vars qw(@ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $VERSION);
 @ISA = ('Exporter');
-@EXPORT = qw( &getPDFsource &getDepartements &readRefenceCupFile &writeRefenceCupFile &readInfosADs &compareNames &convertGPStoCUP &convertCUPtoDec &convertGPStoDec );
+@EXPORT = qw( &getPDFsource &getDepartements &readRefenceCupFile &writeRefenceCupFile &buildLineReferenceCupFile &readInfosADs &compareNames &convertGPStoCUP &convertCUPtoDec &convertGPStoDec &sendHttpRequest &writeBinFile);
 
+use LWP::Simple;
 use Text::Unaccent::PurePerl qw(unac_string);
 use Data::Dumper;
 
 use strict;
+
+
+our $UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0";
 
 # des terrains nomenclatures dans les bases SIA ou BASULM, qu'on ne désire pas traiter
 # reponse de Michel Hirmke, BASULM, pour LF0221 et LF5763 :
@@ -44,14 +49,20 @@ our $noADs =
 #
 # Le 1er parametre peut être un handle de fichier (ex : \*STDIN), ou un nom de fichier 
 #
+#  parametres formels facultatifs :
+#     . onlyAD. Si valué, ne traite que ce terrain
+#
 # retourne un hash indexe par code de terrain
 ####################################################################################################
 
 sub readRefenceCupFile
 {
   my $fic = shift;
-  my %ADs;
+  my %args = (@_);
   
+  my $onlyAD = $args{onlyAD};
+  
+  my %ADs;  
   my $handle;       # handle du fichier a lire
   if (ref $fic)     #le parmaetre passe n'est pas le nom d'un fichier ; c'est donc un handle de fichier
   {
@@ -67,6 +78,7 @@ sub readRefenceCupFile
 	chomp ($line);
 	next if ($line eq "");
 	my ($shortName, $code, $country, $lat, $long, $elevation, $nature, $qfu, $dimension, $frequence, $comment) = split(",", $line);
+	next if (($onlyAD ne "") && ($code ne $onlyAD));
     die "$line\n   ERREUR. Le code terrain n'est pas conforme" if (($code !~ /^LF\S\S$/) && ($code !~ /^LF\d\d\d\d$/));
 	die "$line\n   ERREUR. Le premier champ doit commncer par le code terrain" unless ($shortName =~ s/^\"$code (.*)\"$/\1/);
 	die "$line\n   ERREUR. L'altitude doit se terminer par 'm'" if ($elevation !~ s/m$//);
@@ -148,15 +160,25 @@ sub writeRefenceCupFile
 	  next unless(defined($$cibles{$cible}));
 	  
 	  #if ($code eq "LF1255") { print Dumper($AD); exit;}
-	  my $dimension = $$AD{dimension};
-	  $dimension .= "m" if ($dimension ne "");
-	  my $elevation = $$AD{elevation};
-	  $elevation .= "m" if ($elevation ne "");
-
-	  my $line = "\"$code $$AD{shortName}\",$code,FR,$$AD{lat},$$AD{long},$elevation,$$AD{nature},$$AD{qfu},$dimension,$$AD{frequence},\"$code - $$AD{name} \($$AD{depart}\). $$AD{comment}\"";
+	  my $line = &buildLineReferenceCupFile($AD);
       print $handle "$line\n";
     }
   }
+}
+
+sub buildLineReferenceCupFile
+{
+  my $AD = shift;
+  
+  #print Dumper($AD); exit;
+  my $code = $$AD{code};
+  my $dimension = $$AD{dimension};
+  $dimension .= "m" if ($dimension ne "");
+  my $elevation = $$AD{elevation};
+  $elevation .= "m" if ($elevation ne "");
+
+  my $line = "\"$code $$AD{shortName}\",$code,FR,$$AD{lat},$$AD{long},$elevation,$$AD{nature},$$AD{qfu},$dimension,$$AD{frequence},\"$code - $$AD{name} \($$AD{depart}\). $$AD{comment}\"";
+  return $line;
 }
 
 # lecture du fichier listVACfromPDF.csv (provient du site SIA et des bases militaires) ou listULMfromCSV.csv (provient de basulm, genere depuis readBasulm.pl)
@@ -275,3 +297,66 @@ sub convertGPStoDec
   return  sprintf("%.${precision}f", $newVal);
 }
 
+
+#############################################################################################
+#          generation d'une requete http
+#Cette fonction permet de gerer les cookies et le User-Agent (entre autres)
+# on peut empecher les redirection, avec max_redirect => 0
+# - param1 : l'URL
+# - params formels, facultatifs :
+#     . METHOD : "GET", "POST". defaut = GET
+#     . CONTENT_TYPE : par defaut, "text/html"
+#     . SSL_NO_VERIFY : a 0 par defaut. Si different de 0, pas de verifications SSL_NO_VERIFY
+#     . COOKIES : permet de passer des cookies a la requete
+#############################################################################################
+sub sendHttpRequest
+{
+  my $url = shift;
+  my %args = (METHOD => "GET", CONTENT_TYPE => "text/html", SSL_NO_VERIFY => 0, COOKIES => {}, @_);  
+  
+  my $content = $args{CONTENT};
+  my $cookies = $args{COOKIES};
+  my $contentType = $args{CONTENT_TYPE};
+  my $method = $args{METHOD};
+  my $sslNoVerify = $args{SSL_NO_VERIFY};
+  
+  my $req = new HTTP::Request($method => $url);  
+  $req->content_type($contentType);
+  $req->content($content) if (defined($content));
+  my $browser = new LWP::UserAgent(keep_alive => 0, timeout => 10, max_redirect => 5);
+  $browser->ssl_opts( verify_hostname => 0 ,SSL_verify_mode => 0x00) if ($sslNoVerify);
+  $browser->cookie_jar($cookies);
+  $browser->agent($UserAgent);
+  my $res = $browser->request($req);
+  die "Erreur inconnue lors de l'acces a $url" unless(defined($res));
+  my $content = $res->content();
+  #my $content = $res->decoded_content(raise_error => 1 , default_charset => 'windows-874');
+  chomp($content);
+  my $headers = $res->headers;
+  my $codeHTTP = $res->status_line;
+  unless ($res->is_success)
+  {
+    print "$content\n\n";
+    print "### Erreur http $codeHTTP lors de l'acces a $url ###\n";
+	print Dumper($res);
+    exit 1;
+  }
+  return ($content, $browser->cookie_jar);
+}
+
+
+#############################################################################################
+#          ecriture d'un fichier binaire
+# - param1 : le fichier destinataire
+# - param2 : le contenu
+#############################################################################################
+sub writeBinFile
+{
+  my $fic = shift;
+  my $content = shift;
+  
+	die "unable to write fic |$fic|" unless (open (FIC, ">$fic"));
+	binmode FIC;
+	print FIC $content;
+	close(FIC);
+}

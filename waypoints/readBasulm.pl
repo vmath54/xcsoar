@@ -2,10 +2,11 @@
 
 # lecture du fichier basulm.csv, et generation d'un fichier plus facilement exploitable
 #
-# on a supprime 'a la main", dans excel, la colonne "Consignes" et les colonnes qui suivent "Radio" :
+# on a supprime dans basulm.csv, 'a la main", dans excel, la colonne "Consignes" et les colonnes qui suivent "Radio" :
 #   les colonnes "Consignes" et "Informations complémentaires" contiennent potentiellement des retour chariots, qui gênent la lecture
 #   par effet de bord, les quotes qui bordent les différents champs ont ete supprimes par excel
-
+#
+# génère le fichier listULMfromCSV.csv
 
 use VAC;
 use Text::Unaccent::PurePerl qw(unac_string);
@@ -23,7 +24,6 @@ my $ficReference = "FranceVacEtUlm.cup";  # ce fichier va permettre d'ajouter l'
 
 # des terrains nomenclatures dans les bases SIA ou BASULM, qu'on ne désire pas traiter
 my $noADs = $VAC::noADs;
-
 
 my %natures = (  1 => "eau", 2 => "herbe", 3 => "neige", 5 => "dur" );
 	
@@ -50,6 +50,7 @@ sub readFileBASULM
   my $ADRefs = shift;
     
   my @infosRequired = ("name", "elevation", "lat", "long", "dimension", "nature");
+  #my @infosRequired = ("name", "lat", "long", "dimension", "nature");
   my %ULMs;
     
   die "unable to read fic $fic" unless (open (FIC, "<$fic"));
@@ -64,7 +65,7 @@ sub readFileBASULM
 
 	next if ($code eq "");
 	#next if ($code ne "LF2224");     #pour debug
-	next if ($code =~ /^LF97\d\d$/);      # DOM TOM
+	next if ($code =~ /^LF97\d\d/);      # DOM TOM
 	next if ($obsolete ne "");
 	next if (defined($$noADs{$code}));
 

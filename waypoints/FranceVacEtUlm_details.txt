@@ -65,7 +65,7 @@ file=vac/LFAX.pdf
 file=vac/LFAY.pdf
 
 [LFBA Agen La Garenne]
-file=mil/LFBA.pdf
+file=vac/LFBA.pdf
 
 [LFBC Cazaux]
 file=mil/LFBC.pdf
@@ -992,7 +992,7 @@ file=vac/LFPA.pdf
 file=vac/LFPB.pdf
 
 [LFPC Creil]
-file=vac/LFPC.pdf
+file=mil/LFPC.pdf
 
 [LFPD Bernay St Martin]
 file=vac/LFPD.pdf
@@ -1423,9 +1423,6 @@ file=basulm/LF0654.pdf
 [LF0723 Notre-Dame-des-Neiges-Abbaye]
 file=basulm/LF0723.pdf
 
-[LF0724 Mont Gerbier de Jonc]
-file=basulm/LF0724.pdf
-
 [LF0725 Le Bez]
 file=basulm/LF0725.pdf
 
@@ -1443,9 +1440,6 @@ file=basulm/LF0921.pdf
 
 [LF0922 Artigat - Martin Gu'air]
 file=basulm/LF0922.pdf
-
-[LF0923 Bethmale]
-file=basulm/LF0923.pdf
 
 [LF0924 La Plagne Bouirex]
 file=basulm/LF0924.pdf
@@ -1500,9 +1494,6 @@ file=basulm/LF1153.pdf
 
 [LF1156 ULM St Couat]
 file=basulm/LF1156.pdf
-
-[LF1157 Queribus 900]
-file=basulm/LF1157.pdf
 
 [LF1158 Beaugaillard]
 file=basulm/LF1158.pdf
@@ -1567,6 +1558,9 @@ file=basulm/LF1454.pdf
 [LF1456 OMAHA BEACH]
 file=basulm/LF1456.pdf
 
+[LF1457 ZTN AIR]
+file=basulm/LF1457.pdf
+
 [LF1525 Polminhac]
 file=basulm/LF1525.pdf
 
@@ -1602,6 +1596,9 @@ file=basulm/LF1653.pdf
 
 [LF1654 Belzagot]
 file=basulm/LF1654.pdf
+
+[LF1655 Chenommet]
+file=basulm/LF1655.pdf
 
 [LF1726 Jarnac Champagne]
 file=basulm/LF1726.pdf
@@ -1723,9 +1720,6 @@ file=basulm/LF2164.pdf
 [LF2221 Kerfot la Paimpolaise]
 file=basulm/LF2221.pdf
 
-[LF2224 Locarn]
-file=basulm/LF2224.pdf
-
 [LF2321 Evaux]
 file=basulm/LF2321.pdf
 
@@ -1812,6 +1806,9 @@ file=basulm/LF2465.pdf
 
 [LF2466 Clissac]
 file=basulm/LF2466.pdf
+
+[LF2467 Malbec]
+file=basulm/LF2467.pdf
 
 [LF2521 Lanans]
 file=basulm/LF2521.pdf
@@ -1942,6 +1939,9 @@ file=basulm/LF3026.pdf
 [LF3052 St Victor]
 file=basulm/LF3052.pdf
 
+[LF3053 Le Grand Plantier]
+file=basulm/LF3053.pdf
+
 [LF3126 Sabonneres]
 file=basulm/LF3126.pdf
 
@@ -2014,6 +2014,9 @@ file=basulm/LF3161.pdf
 [LF3162 Cox]
 file=basulm/LF3162.pdf
 
+[LF3163 Girosp]
+file=basulm/LF3163.pdf
+
 [LF3221 Bretagne d'Armagnac]
 file=basulm/LF3221.pdf
 
@@ -2070,9 +2073,6 @@ file=basulm/LF3260.pdf
 
 [LF3261 Chelan]
 file=basulm/LF3261.pdf
-
-[LF3263 Tournecoupe]
-file=basulm/LF3263.pdf
 
 [LF3264 Bassoues]
 file=basulm/LF3264.pdf
@@ -2437,6 +2437,9 @@ file=basulm/LF4524.pdf
 [LF4525 La Selle en Hermoy]
 file=basulm/LF4525.pdf
 
+[LF4552 Saint Benoit sur Loire]
+file=basulm/LF4552.pdf
+
 [LF4553 Beaugency]
 file=basulm/LF4553.pdf
 
@@ -2514,9 +2517,6 @@ file=basulm/LF4725.pdf
 
 [LF4726 Tremons]
 file=basulm/LF4726.pdf
-
-[LF4728 Beauville]
-file=basulm/LF4728.pdf
 
 [LF4729 Saumont Gentieu]
 file=basulm/LF4729.pdf
@@ -2604,9 +2604,6 @@ file=basulm/LF5021.pdf
 
 [LF5022 Portbail]
 file=basulm/LF5022.pdf
-
-[LF5023 La Fourchette]
-file=basulm/LF5023.pdf
 
 [LF5122 Servon Melzicourt]
 file=basulm/LF5122.pdf
@@ -3154,9 +3151,6 @@ file=basulm/LF7340.pdf
 [LF7351 Yenne]
 file=basulm/LF7351.pdf
 
-[LF7363 Tignes le Palet]
-file=basulm/LF7363.pdf
-
 [LF7421 Col de Cenise]
 file=basulm/LF7421.pdf
 
@@ -3198,6 +3192,12 @@ file=basulm/LF7651.pdf
 
 [LF7653 Pavilly]
 file=basulm/LF7653.pdf
+
+[LF7654 Bolleville]
+file=basulm/LF7654.pdf
+
+[LF7655 Le Mont Dole]
+file=basulm/LF7655.pdf
 
 [LF7752 Mondreville]
 file=basulm/LF7752.pdf
@@ -3331,9 +3331,6 @@ file=basulm/LF8261.pdf
 [LF8262 BOISSAY Ludovic]
 file=basulm/LF8262.pdf
 
-[LF8263 Nohic]
-file=basulm/LF8263.pdf
-
 [LF8324 La Roquebrussanne]
 file=basulm/LF8324.pdf
 
@@ -3375,6 +3372,9 @@ file=basulm/LF8362.pdf
 
 [LF8363 La LIMATE]
 file=basulm/LF8363.pdf
+
+[LF8364 Flayosc]
+file=basulm/LF8364.pdf
 
 [LF8421 St Martin de Castillon]
 file=basulm/LF8421.pdf
@@ -3426,6 +3426,9 @@ file=basulm/LF8568.pdf
 
 [LF8569 La Tranche sur Mer]
 file=basulm/LF8569.pdf
+
+[LF8570 Les Ailes de la Moriere]
+file=basulm/LF8570.pdf
 
 [LF8621 Le Fort d'Aslonnes]
 file=basulm/LF8621.pdf
