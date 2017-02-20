@@ -1,0 +1,32 @@
+exemple de trames NMEA émises par condor
+----------------------------------------
+$GPGGA,120023.068,4843.8718,N,00610.7960,E,1,12,10,609.3,M,,,,,0000*0D
+$GPRMC,120023.068,A,4843.8718,N,00610.7960,E,48.54,270.00,,,,*19
+$LXWP0,Y,90.1,609.3,0.00,,,,,,270,000,0.0*7B
+... toutes les secondes
+
+
+$GPGGA,120137.229,4843.9554,N,00610.6468,E,1,12,10,512.5,M,,,,,0000*0E
+$GPRMC,120137.229,A,4843.9554,N,00610.6468,E,39.14,207.08,,,,*1F
+$LXWP0,Y,123.8,512.5,-3.14,,,,,,210,000,0.0*69
+
+
+description trame LXWP0 :
+-------------------------
+0 loger_stored (Y/N)
+1 IAS (kph)    IAS : Indicated Air Speed (vitesse indiquée, avec les erreurs)
+2 baroaltitude (m)
+3 vario (m/s)
+4-8 unknown
+9 heading of plane
+10 windcourse (deg)
+11 windspeed (kph) 
+
+commentaires dans sources XCSoar, Device/Driver/LX/Parser.cpp
+   0 loger_stored (Y/N)
+   1 IAS (kph) ----> Condor uses TAS! True Air Speed : vitesse réelle de l'avion par rapport au vent
+   2 baroaltitude (m)
+   3-8 vario (m/s) (last 6 measurements in last second)
+   9 heading of plane
+  10 windcourse (deg)
+  11 windspeed (kph)
