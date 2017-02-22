@@ -75,6 +75,8 @@ my $proto = "TCP";             # protocole par defaut
   my $startAltitude = $$firstRecordB{alt};
   print "   altitude de depart : $startAltitude" . "m, heure de depart : $$firstRecordB{time}\n";
   
+  my $firstRecordSeconds = IGC::UTC2seconds($$firstRecordB{time});   # le time du 1ere enregistrement de type B, en secondes
+  
   my $recordsB = $igc->getRecords(type => "B");
   
   #my $NMEAs = $igc->computeNMEA(output => $output, time => "NOW", nbsats => 12);
@@ -104,31 +106,32 @@ my $proto = "TCP";             # protocole par defaut
   
   # Maintenant, on deroule les trames NMEA
   if ($startTime ne "")    # on reinitialise l'heure de début
-  {
+  {                        # si valués, startTime et startSeconds donnent l'heure de départ des trames NMEA
     $startTime = $time;
 	$startSeconds = IGC::UTC2seconds($startTime);
   }
   
-  my $lastSeconds = IGC::UTC2seconds($$firstRecordB{time});    # le time de l'enregistrement précédent
+  my $lastElapsedSeconds = $firstRecordSeconds;   # lastElapsedSeconds contient l'elaspedSeconds du record précédent
   my $nbre = 0;
   foreach my $record (@$recordsB)    # tous les records de type B
   {
     $nbre ++;
-    next if ($nbre <= 1);   # on ne rejoue pas le premier enregistrement
+    next if ($nbre <= 1);   # on ne rejoue pas le premier enregistrement : il a été joué lors de l'attente d'une touche pressée
 	
-	my $deltaTime = IGC::UTC2seconds($$record{time}) - $lastSeconds;   # diff en secondes avec l'enreg. précédent
-	$lastSeconds = IGC::UTC2seconds($$record{time});
-	
-	if ($deltaTime > 0)
+	my $elapsedSeconds = IGC::UTC2seconds($$record{time}) - $firstRecordSeconds; # le nombre de secondes entre ce record de type B, et le premier
+	if ($speed > 1)  # on veut accélérer les trames NMEA par rapport aux records de type B
 	{
-	  $deltaTime /= $speed if ($speed > 1);  # on veut accélérer le déroulement
-	  select(undef, undef, undef, $deltaTime);    # equivalent a un sleep, mais accepte les fractions
+	  $elapsedSeconds /= $speed;  # on triche
 	}
+	my $sleep = $elapsedSeconds - $lastElapsedSeconds;   # le temps du sleep
+	$lastElapsedSeconds = $elapsedSeconds;
+	
+	select(undef, undef, undef, $sleep);    # equivalent a un sleep, mais accepte les fractions
+
     my $time = "";
     if ($startTime ne "")   # on ajuste le time de la trame
     {
-	  $seconds += $deltaTime;
-	  $time = IGC::seconds2UTC($seconds);
+	  $time = IGC::seconds2UTC($startSeconds + $elapsedSeconds);   # le time de la trame NMEA a emettre
 	}
 	&sendNMEA($record, $sock, $ip, $port, withGGA => $withGGA, withRMC => $withRMC, time => $time, nbsats => 12);
   }
