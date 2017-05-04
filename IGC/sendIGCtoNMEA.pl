@@ -17,11 +17,17 @@ use strict;
 my $port = "4353";             # le port TCP ou UDP par défaut pour envoi des infos NMEA
 my $proto = "TCP";             # protocole par defaut
 
+my $defaultSats = 12;          # nombre de satellites qu'on indique voir, si info pas recuperee de l'IGC
+
+
 {
   my $speed = 1;
   my $withGGA = 0;
   my $withRMC = 0;
+  my $withLXWPO = 0;
+  my $withPOV = 0;
   my $startTime = "";
+  my $minutes2skip = 0;
   my ($file, $output, $ip, $help); 
   my $ret = GetOptions
      ( 
@@ -31,9 +37,12 @@ my $proto = "TCP";             # protocole par defaut
 	   "proto=s"         => \$proto,
 	   "port=i"          => \$port,
 	   "speed=i"         => \$speed,
+	   "minutes2skip=i"  => \$minutes2skip,
 	   "time=s"          => \$startTime,
 	   "GGA"             => \$withGGA,
 	   "RMC"             => \$withRMC,
+	   "LXWPO"           => \$withLXWPO,
+	   "POV"             => \$withPOV,
 	   "h|help"          => \$help,
      );
   
@@ -50,7 +59,7 @@ my $proto = "TCP";             # protocole par defaut
   die "valeur de 'speed' incorrecte : $speed" if (($speed < 1) || ($speed > 10));
   die "valeur de 'time' incorrecte : $startTime" if (($startTime ne "") && ($startTime ne "NOW") && ($startTime !~ /^\^\d{6}$/));
 
-  if (($withGGA == 0) && ($withRMC == 0))
+  if (($withGGA == 0) && ($withRMC == 0) && ($withPOV == 0) && ($withLXWPO == 0))
   {
     $withGGA = 1;
     $withRMC = 1;
@@ -58,6 +67,9 @@ my $proto = "TCP";             # protocole par defaut
   
   my $igc = new IGC();  
   $igc->read(file => $file);
+  
+  #my $recordsI = $igc->getRecords(type => "B");
+  #print Dumper($recordsI); exit;
   
   my $dateRecord = $igc->getHeaderByKey("DTE");
   
@@ -97,7 +109,7 @@ my $proto = "TCP";             # protocole par defaut
   
   while (! defined(ReadKey(-1)))
   {
-	&sendNMEA($firstRecordB, $sock, $ip, $port, withGGA => $withGGA, withRMC => $withRMC, noprint => 1, time => $time, nbsats => 12);
+	&sendNMEA($firstRecordB, $sock, $ip, $port, withGGA => $withGGA, withRMC => $withRMC, withLXWPO => $withLXWPO, withPOV => $withPOV, noprint => 1, time => $time);
 	sleep(1);
 	$seconds += 1;
 	$time = $startTime eq "" ? "" : IGC::seconds2UTC($seconds);
@@ -112,6 +124,7 @@ my $proto = "TCP";             # protocole par defaut
   }
   
   my $lastElapsedSeconds = $firstRecordSeconds;   # lastElapsedSeconds contient l'elaspedSeconds du record précédent
+  my $lastAlt = 0;                                # altitude du record B précédent
   my $nbre = 0;
   foreach my $record (@$recordsB)    # tous les records de type B
   {
@@ -119,6 +132,11 @@ my $proto = "TCP";             # protocole par defaut
     next if ($nbre <= 1);   # on ne rejoue pas le premier enregistrement : il a été joué lors de l'attente d'une touche pressée
 	
 	my $elapsedSeconds = IGC::UTC2seconds($$record{time}) - $firstRecordSeconds; # le nombre de secondes entre ce record de type B, et le premier
+    next if (($minutes2skip != 0) && ($elapsedSeconds / 60 < $minutes2skip));     # on veut sauter les 1eres minutes de l'enregistrement
+  
+	my $vario = sprintf("%.2f", ($$record{alt} - $lastAlt) / ($elapsedSeconds - $lastElapsedSeconds));   # le vario. On compare avec l'enregistrement B précédent
+	$lastAlt = $$record{alt};
+	
 	if ($speed > 1)  # on veut accélérer les trames NMEA par rapport aux records de type B
 	{
 	  $elapsedSeconds /= $speed;  # on triche
@@ -133,7 +151,8 @@ my $proto = "TCP";             # protocole par defaut
     {
 	  $time = IGC::seconds2UTC($startSeconds + $elapsedSeconds);   # le time de la trame NMEA a emettre
 	}
-	&sendNMEA($record, $sock, $ip, $port, withGGA => $withGGA, withRMC => $withRMC, time => $time, nbsats => 12);
+	&sendNMEA($record, $sock, $ip, $port, withGGA => $withGGA, withRMC => $withRMC, withLXWPO => $withLXWPO, withPOV => $withPOV, time => $time, vario => $vario);
+
   }
 
 }
@@ -147,14 +166,20 @@ sub sendNMEA
   my $port = shift;
   my %args = (@_);
   
-  my $withGGA = $args{withGGA};
-  my $withRMC = $args{withRMC};
+  my $withGGA = $args{withGGA};    # trames GPGGA
+  my $withRMC = $args{withRMC};    # trames GPRMC
+  my $withPOV = $args{withPOV};    # trames openvario
+  my $withLXWPO = $args{withLXWPO};  # trames LXWPO
   my $noprint = $args{noprint};
   
   delete $args{withGGA};
   delete $args{withRMC};
+  delete $args{withPOV};
+  delete $args{withLXWPO};
   delete $args{noprint};
-      
+  
+  my $nbsats = $$record{SIU} > 0 ? $$record{SIU} : $defaultSats;    #nombre de satellites GPS captés
+  $args{nbsats} = $nbsats;
   my $NMEAs = IGC::NMEAfromIGC($record, %args);
 
   if ($withGGA)
@@ -162,11 +187,27 @@ sub sendNMEA
     print "$$NMEAs{GPGGA}\n" unless($noprint);
 	&sendNetwork($sock, $ip, $port, $$NMEAs{GPGGA} . "\n");
   }
+  
   if ($withRMC)
   {
     print "$$NMEAs{GPRMC}\n" unless($noprint);
 	&sendNetwork($sock, $ip, $port, $$NMEAs{GPRMC} . "\n");
   }  
+
+  if ($withLXWPO)
+  {
+    print "$$NMEAs{LXWPO}\n" unless($noprint);
+	&sendNetwork($sock, $ip, $port, $$NMEAs{LXWPO} . "\n");
+  }  
+
+  if ($withPOV)
+  {
+    print "$$NMEAs{POV_E}\n" unless($noprint);
+	&sendNetwork($sock, $ip, $port, $$NMEAs{POV_E} . "\n");
+    print "$$NMEAs{POV_P}\n" unless($noprint);
+	&sendNetwork($sock, $ip, $port, $$NMEAs{POV_P} . "\n");
+  }  
+
 }
 
 # envoi d'un message en TCP ou UDP
@@ -199,11 +240,14 @@ sub syntaxe
   print "  . -proto <TCP|UDP>. facultatif. Le protocole reseau utilise. UDP par defaut\n";
   print "  . -port <port UDP>. facultatif. Le eport UDP pour l'envoi des informations. 4353 par defaut\n";
   print "  . -speed <speed>. facultatif. Valeur entiere de 1 a 10. Permet d'accelerer la simulation. 1 par defaut\n";
-  print "  . -time <time>. facultatif. L'heure de départ des trames envoyees. format : 'HHMMSS', ou 'NOW' pour l'heure courante\n";
+  print "  . -minutes2skip <mn>. facultatif. Le nombre de minutes en debut de fichier qu'on desire court-circuiter\n";
+  print "  . -time <time>. facultatif. L'heure de depart des trames envoyees. format : 'HHMMSS', ou 'NOW' pour l'heure courante\n";
   print "  . --GGA. facultatif. Envoi de trames NMEA GPGGA\n";
   print "  . --RMC. facultatif. Envoi de trames NMEA GPRMC\n";
+  print "  . --LXWPO. facultatif. Envoi de trames NMEA LXWPO \(LXNAV\)\n";
+  print "  . --POV. facultatif. Envoi de trames NMEA POV \(openvario\)\n";
   print "  . --help. facultatif. Affiche cette aide\n\n";
-  print "Si aucune des options '--GGA' et '--RMC' choisie, alors le defaut est d'envoyer les trames GPGGA et GPRMC\n";
+  print "Si aucune des options '--GGA', '--RMC', '--LXWPO', '--POV' choisie, alors le defaut est d'envoyer les trames GPGGA et GPRMC\n";
   
   exit;
 }

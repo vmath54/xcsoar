@@ -20,7 +20,7 @@ package IGC;
 #
 # type I : permet de spécifier le contenua de l'extension du format du record B. Un seul record I, après les records H
 # -------------------------
-# exemple : I023638FXA3940SIU : I,02,36,38,FXA,39,40,SIU
+# exemple : I023638FXA3940SIU : I,02,36,38,FXA,39,40,SIU  (extension pour un flarm ou xcsoar)
 #  02 : 2 extensions
 #  36, 38, FXA : le 1ere extension est le FXA, du 36eme au 38 eme caractere. FXA = Fix Accuracy : Estimated Position Error, en mètres
 #  39,40,SIU : la seconde extention est le SIU, du 39eme au 40eme caractere. SIU = Satellites In Use
@@ -40,14 +40,21 @@ package IGC;
 # c'est celui qui nous intéresse le plus
 # exemple : B1101355206343N00006198WA0058700558  (ce sont les infos minimum du type B. il peut y avoit des infos complémentaires après)
 # B,110135,5206343N,00006198W,A,00587,00558
+# 
+# autre exemple, avec un flarm (précédé d'une trame I023638FXA3940SIU)
+# B 1340114843374N00612901EA003710042100309
+# B 134011 4843374N 00612901E A 00371 00421 003 09
 #
 # B: record type is a basic tracklog record
-# 110135: <time> tracklog entry was recorded at 11:01:35 i.e. just after 11am
-# 5206343N: <lat> i.e. 52 degrees 06.343 minutes North
-# 00006198W: <long> i.e. 000 degrees 06.198 minutes West
+# 134011: <time UTC>. Heure d'été, donc en réalité 15:40:11
+# 4843374N : <lat> : 48° 43.374" Nord
+# 00612901E : <long> : 006° 12.901" Est
 # A: <alt valid flag> confirming this record has a valid altitude value
-# 00587: <altitude from pressure sensor>
-# 00558: <altitude from GPS>
+# 00371 : <altitude from pressure sensor>
+# 00421 : <altitude from GPS>
+#
+# 003 : extension 1 flarm : <FXA> : Fix Accuracy. Erreur de position estimée = 3m
+# 09  : extension 2 flarm : <SIU> : Satellites In Use
 #
 # type F : Satellite constellation
 # --------------------------------
@@ -70,6 +77,10 @@ package IGC;
 use Data::Dumper;
 
 use strict;
+
+my $defaultQNH = 1013.25;   # pression par défaut à 0m
+my $flarmEXT = 0;           #mis a un si le record I est I023638FXA3940SIU
+
 
 my %typeRecords =      # le type de record que l'on traite. read = fonction qui va traiter le read, ...
 (
@@ -270,7 +281,13 @@ sub _read_recordB
   my $alt = $altSensor eq "" ? $altGPS : $altSensor;
   $alt =~ s/^0*//;   # on retire les eventuels chiffres 0
   
-  return {type => "B", time => $time, lat => $lat, long => $long, flag => $flag, altSensor => $altSensor, altGPS => $altGPS, alt => $alt, ext => $ext, lastRecordF => $lastRecordF, raw => $line };
+  my $record =  {type => "B", time => $time, lat => $lat, long => $long, flag => $flag, altSensor => $altSensor, altGPS => $altGPS, alt => $alt, ext => $ext, lastRecordF => $lastRecordF, raw => $line };
+  if ($flarmEXT && ($ext =~ /^(\d\d\d)(\d\d)$/))
+  {
+    $$record{FXA} = $1;  # erreur de position estimée, en m
+	$$record{SIU} = $2;  # nombre de satellites GPS captes
+  }
+  return $record;
 }
 
 # fonction interne, appelee par fonction read. lecture d'un record de type F
@@ -357,6 +374,7 @@ sub _read_recordI
 	$last = $4;
 	push(@extends, {ext => $ext, start => $start, end => $end});
   }
+  $flarmEXT = 1 if ($line eq "I023638FXA3940SIU");  # extension du flarm et de XCSoar : FXA et SIU
   
   return {type => "I", exts => \@extends, raw => $line };
 }
@@ -489,6 +507,25 @@ sub computeNMEA
 # 230394       Date - 23rd of March 1994
 # 003.1,W      Magnetic Variation
 # *6A          The checksum data, always begins with *
+#
+#
+# LXWPO (LXNAV)
+# $LXWP0,Y,222.3,1665.5,1.71,,,,,,239,174,10.1
+#
+# loger_stored (Y/N)
+# IAS (kph) ----> Condor uses TAS!
+# baroaltitude (m)
+# 3-8 vario (m/s) (last 6 measurements in last second)
+# heading of plane
+# windcourse (deg)
+# windspeed (kph)
+#
+# on se limite ici aux infos de baroaltitude et de vario
+#
+# POV : openvario
+# ---------------
+# voir http://www.openvario.org/doku.php?id=projects:series_00:software:nmea
+
 
 sub NMEAfromIGC
 {
@@ -499,16 +536,21 @@ sub NMEAfromIGC
   my $nbsats = $args{nbsats};
   my $hdop = $args{hdop};
   my $time = $args{time};
+  my $vario = $args{vario};
   
   my $ref = ref $record;
   die "NMEAfromIGC. Le parametre doit etre une reference vers un hash" if ($ref ne "HASH");
   die "NMEAfromIGC. Le parametre doit etre un record IGC de type B" if ($$record{type} ne "B");
+  
+  my $retour = {};     # la valeur de retour
   
   my $HHutc = $$record{time} . ".000";
   $$record{lat} =~ /^(\d{4})(\d{3})(\w)/;
   my $latitude = $1 . "." . $2 . "," . $3;
   $$record{long} =~ /^(\d{5})(\d{3})(\w)/;
   my $longitude = $1 . "." . $2 . "," . $3;
+
+  my $pressure = &getPressureFromAlti($$record{alt});     # la pression atmosphérique standard OACI, déduite de l'altitude
   
   if ($fix == 1)   # positionnement de type GPS. On essair de recuperer les infos de satellites
   {
@@ -538,6 +580,7 @@ sub NMEAfromIGC
       #                 date   var. magn.
                         ","  .   ",";
   $RMC .= "*" . &checksumNMEA($RMC);    # on ajoute le checksum a la trame NMEA
+  $$retour{GPRMC} = $RMC;
   
 # ----  trame GGA ------ 
 #                          UTC        Latitude       Longitude       fix           hdop
@@ -546,8 +589,28 @@ sub NMEAfromIGC
                         ",$$record{alt}.0" . ",M" .   ",,"              . ",,";
   
   $GGA .= "*" . &checksumNMEA($GGA);    # on ajoute le checksum a la trame NMEA
+  $$retour{GPGGA} = $GGA;
   
-  return { GPGGA => $GGA, GPRMC => $RMC};
+# --- trame LXWP0 -----
+  #$vario = -10;    # pour essais
+  my $LXWPO = "\$LXWPO,Y,,$$record{alt},$vario,,,,,,,,";
+  #my $LXWPO = "\$LXWPO,Y,0,$$record{alt},$vario,,,,,,0,0,0";
+  $LXWPO .= "*" . &checksumNMEA($LXWPO);    # on ajoute le checksum a la trame
+  $$retour{LXWPO} = $LXWPO;
+  
+  # ---- trame POV -------
+  my $POV_P = "\$POV,P," . $pressure;
+  $POV_P .= "*" . &checksumNMEA($POV_P);    # on ajoute le checksum a la trame POV
+  $$retour{POV_P} = $POV_P;
+  
+  if (defined($vario))
+  {
+    my $POV_E = "\$POV,E," . $vario;
+    $POV_E .= "*" . &checksumNMEA($POV_E);    # on ajoute le checksum a la trame POV
+    $$retour{POV_E} = $POV_E;
+  }
+  
+  return $retour;
 }
 
 
@@ -625,6 +688,23 @@ sub seconds2UTC
   return $time;
 }
 
+# calcul de la pression en atmosphere normalisee OACI a partir de l'altitude
+#
+# voir https://fr.wikipedia.org/wiki/Atmosph%C3%A8re_normalis%C3%A9e
+# 
+# par défaut, calcule avec le QNH 1013 ; sinon, ccelui-ci est passé en paramètre QNH
+#
+sub getPressureFromAlti
+{
+  my $alti = shift;
+  my %args =  @_;
+
+  
+  my $QNH = defined($args{QNH}) ? $args{QNH} : $defaultQNH;   # pression au niveau de la mer
+  
+  my $pressure = $QNH * (((288 - (0.0065 * $alti )) / 288) ** 5.255);
+  return sprintf("%.2f", $pressure);
+}
   
 1;
 __END__
