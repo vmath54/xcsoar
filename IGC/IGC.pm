@@ -509,7 +509,7 @@ sub computeNMEA
 # *6A          The checksum data, always begins with *
 #
 #
-# LXWPO (LXNAV)
+# LXWP0 (LXNAV)
 # $LXWP0,Y,222.3,1665.5,1.71,,,,,,239,174,10.1
 #
 # loger_stored (Y/N)
@@ -593,10 +593,9 @@ sub NMEAfromIGC
   
 # --- trame LXWP0 -----
   #$vario = -10;    # pour essais
-  my $LXWPO = "\$LXWPO,Y,,$$record{alt},$vario,,,,,,,,";
-  #my $LXWPO = "\$LXWPO,Y,0,$$record{alt},$vario,,,,,,0,0,0";
-  $LXWPO .= "*" . &checksumNMEA($LXWPO);    # on ajoute le checksum a la trame
-  $$retour{LXWPO} = $LXWPO;
+  my $LXWP0 = "\$LXWP0,Y,,$$record{alt},$vario,,,,,,,,";
+  $LXWP0 .= "*" . &checksumNMEA($LXWP0);    # on ajoute le checksum a la trame
+  $$retour{LXWP0} = $LXWP0;
   
   # ---- trame POV -------
   my $POV_P = "\$POV,P," . $pressure;

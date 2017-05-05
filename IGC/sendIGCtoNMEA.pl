@@ -24,7 +24,7 @@ my $defaultSats = 12;          # nombre de satellites qu'on indique voir, si inf
   my $speed = 1;
   my $withGGA = 0;
   my $withRMC = 0;
-  my $withLXWPO = 0;
+  my $withLXWP0 = 0;
   my $withPOV = 0;
   my $startTime = "";
   my $minutes2skip = 0;
@@ -41,7 +41,7 @@ my $defaultSats = 12;          # nombre de satellites qu'on indique voir, si inf
 	   "time=s"          => \$startTime,
 	   "GGA"             => \$withGGA,
 	   "RMC"             => \$withRMC,
-	   "LXWPO"           => \$withLXWPO,
+	   "LXWP0"           => \$withLXWP0,
 	   "POV"             => \$withPOV,
 	   "h|help"          => \$help,
      );
@@ -59,7 +59,7 @@ my $defaultSats = 12;          # nombre de satellites qu'on indique voir, si inf
   die "valeur de 'speed' incorrecte : $speed" if (($speed < 1) || ($speed > 10));
   die "valeur de 'time' incorrecte : $startTime" if (($startTime ne "") && ($startTime ne "NOW") && ($startTime !~ /^\^\d{6}$/));
 
-  if (($withGGA == 0) && ($withRMC == 0) && ($withPOV == 0) && ($withLXWPO == 0))
+  if (($withGGA == 0) && ($withRMC == 0) && ($withPOV == 0) && ($withLXWP0 == 0))
   {
     $withGGA = 1;
     $withRMC = 1;
@@ -109,7 +109,7 @@ my $defaultSats = 12;          # nombre de satellites qu'on indique voir, si inf
   
   while (! defined(ReadKey(-1)))
   {
-	&sendNMEA($firstRecordB, $sock, $ip, $port, withGGA => $withGGA, withRMC => $withRMC, withLXWPO => $withLXWPO, withPOV => $withPOV, noprint => 1, time => $time);
+	&sendNMEA($firstRecordB, $sock, $ip, $port, withGGA => $withGGA, withRMC => $withRMC, withLXWP0 => $withLXWP0, withPOV => $withPOV, noprint => 1, time => $time);
 	sleep(1);
 	$seconds += 1;
 	$time = $startTime eq "" ? "" : IGC::seconds2UTC($seconds);
@@ -151,7 +151,7 @@ my $defaultSats = 12;          # nombre de satellites qu'on indique voir, si inf
     {
 	  $time = IGC::seconds2UTC($startSeconds + $elapsedSeconds);   # le time de la trame NMEA a emettre
 	}
-	&sendNMEA($record, $sock, $ip, $port, withGGA => $withGGA, withRMC => $withRMC, withLXWPO => $withLXWPO, withPOV => $withPOV, time => $time, vario => $vario);
+	&sendNMEA($record, $sock, $ip, $port, withGGA => $withGGA, withRMC => $withRMC, withLXWP0 => $withLXWP0, withPOV => $withPOV, time => $time, vario => $vario);
 
   }
 
@@ -169,13 +169,13 @@ sub sendNMEA
   my $withGGA = $args{withGGA};    # trames GPGGA
   my $withRMC = $args{withRMC};    # trames GPRMC
   my $withPOV = $args{withPOV};    # trames openvario
-  my $withLXWPO = $args{withLXWPO};  # trames LXWPO
+  my $withLXWP0 = $args{withLXWP0};  # trames LXWP0
   my $noprint = $args{noprint};
   
   delete $args{withGGA};
   delete $args{withRMC};
   delete $args{withPOV};
-  delete $args{withLXWPO};
+  delete $args{withLXWP0};
   delete $args{noprint};
   
   my $nbsats = $$record{SIU} > 0 ? $$record{SIU} : $defaultSats;    #nombre de satellites GPS captés
@@ -194,10 +194,10 @@ sub sendNMEA
 	&sendNetwork($sock, $ip, $port, $$NMEAs{GPRMC} . "\n");
   }  
 
-  if ($withLXWPO)
+  if ($withLXWP0)
   {
-    print "$$NMEAs{LXWPO}\n" unless($noprint);
-	&sendNetwork($sock, $ip, $port, $$NMEAs{LXWPO} . "\n");
+    print "$$NMEAs{LXWP0}\n" unless($noprint);
+	&sendNetwork($sock, $ip, $port, $$NMEAs{LXWP0} . "\n");
   }  
 
   if ($withPOV)
@@ -244,10 +244,10 @@ sub syntaxe
   print "  . -time <time>. facultatif. L'heure de depart des trames envoyees. format : 'HHMMSS', ou 'NOW' pour l'heure courante\n";
   print "  . --GGA. facultatif. Envoi de trames NMEA GPGGA\n";
   print "  . --RMC. facultatif. Envoi de trames NMEA GPRMC\n";
-  print "  . --LXWPO. facultatif. Envoi de trames NMEA LXWPO \(LXNAV\)\n";
+  print "  . --LXWP0. facultatif. Envoi de trames NMEA LXWP0 \(LXNAV\)\n";
   print "  . --POV. facultatif. Envoi de trames NMEA POV \(openvario\)\n";
   print "  . --help. facultatif. Affiche cette aide\n\n";
-  print "Si aucune des options '--GGA', '--RMC', '--LXWPO', '--POV' choisie, alors le defaut est d'envoyer les trames GPGGA et GPRMC\n";
+  print "Si aucune des options '--GGA', '--RMC', '--LXWP0', '--POV' choisie, alors le defaut est d'envoyer les trames GPGGA et GPRMC\n";
   
   exit;
 }
