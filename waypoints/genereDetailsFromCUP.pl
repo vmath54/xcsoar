@@ -182,6 +182,8 @@ sub traiteCUPfileByCoordsGeog
 	next if ($name eq "");
 	$comment =~ s/^\"//;
 	$comment =~ s/\"$//;
+	$frequence =~ s/^\"//;
+	$frequence =~ s/\"$//;
 	$nbADs++;
 	my $rang = $nbADs;
     
@@ -361,6 +363,8 @@ sub traiteCUPfileByCode
 	next if ($name eq "");
 	$comment =~ s/^\"//;
 	$comment =~ s/\"$//;
+	$frequence =~ s/^\"//;
+	$frequence =~ s/\"$//;
 	$nbADs++;
 	my $rang = $nbADs;
     
