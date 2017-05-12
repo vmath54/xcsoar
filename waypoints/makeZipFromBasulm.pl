@@ -25,7 +25,7 @@ my $regions =
   BFC   => { name => "Bourgogne Franche-Comte", deps => [ "21", "25", "39", "58", "70", "71" ,"89", "90" ] },
   Br    => { name => "Bretagne", deps => [ "22", "29", "35", "56" ] },
   CVL   => { name => "Centre Val de Loire", deps => [ "18", "28", "36", "37", "41", "45" ] },
-  Corse => { name => "Corse", deps => [ "20" ] },
+  Corse => { name => "Corse", deps => [ "20", "2A", "2B" ] },
   GE    => { name => "Grand Est", deps => ["08", "10", "51", "52", "54", "55", "57", "67", "68", "88" ] },
   HdF   => { name => "Hauts de France", deps => [ "02", "59", "60", "62", "80" ] },
   IDF   => { name => "Ile de France", deps => [ "75", "77", "78", "91", "92", "93", "94", "95" ] },

@@ -1810,6 +1810,9 @@ file=basulm/LF2466.pdf
 [LF2467 Malbec]
 file=basulm/LF2467.pdf
 
+[LF2468 Mauzens Miremont]
+file=basulm/LF2468.pdf
+
 [LF2521 Lanans]
 file=basulm/LF2521.pdf
 
@@ -1824,6 +1827,9 @@ file=basulm/LF2554.pdf
 
 [LF2555 Athose]
 file=basulm/LF2555.pdf
+
+[LF2556 Fontaine Clerval]
+file=basulm/LF2556.pdf
 
 [LF2621 Faucon]
 file=basulm/LF2621.pdf
@@ -1926,6 +1932,9 @@ file=basulm/LF2923.pdf
 
 [LF2925 Le Grand Chene]
 file=basulm/LF2925.pdf
+
+[LF2B24 Aliso Rossi]
+file=basulm/LF2B24.pdf
 
 [LF3023 Tornac]
 file=basulm/LF3023.pdf
@@ -2032,6 +2041,9 @@ file=basulm/LF3227.pdf
 [LF3228 Duffort]
 file=basulm/LF3228.pdf
 
+[LF3229 La Boulouze]
+file=basulm/LF3229.pdf
+
 [LF3230 St Elix Theux]
 file=basulm/LF3230.pdf
 
@@ -2112,9 +2124,6 @@ file=basulm/LF3351.pdf
 
 [LF3352 Arbis]
 file=basulm/LF3352.pdf
-
-[LF3353 Carcans]
-file=basulm/LF3353.pdf
 
 [LF3354 Cestas]
 file=basulm/LF3354.pdf
@@ -2472,6 +2481,12 @@ file=basulm/LF4562.pdf
 
 [LF4563 Mezieres lez Clery]
 file=basulm/LF4563.pdf
+
+[LF4564 AIR et ESPACE]
+file=basulm/LF4564.pdf
+
+[LF4565 ULM LA CAVE]
+file=basulm/LF4565.pdf
 
 [LF4621 Calviac]
 file=basulm/LF4621.pdf
@@ -3187,9 +3202,6 @@ file=basulm/LF7470.pdf
 [LF7621 Lammerville]
 file=basulm/LF7621.pdf
 
-[LF7651 Auzouville-L'Esneval]
-file=basulm/LF7651.pdf
-
 [LF7653 Pavilly]
 file=basulm/LF7653.pdf
 
@@ -3429,6 +3441,9 @@ file=basulm/LF8569.pdf
 
 [LF8570 Les Ailes de la Moriere]
 file=basulm/LF8570.pdf
+
+[LF8571 Saint Aubin la Plaine]
+file=basulm/LF8571.pdf
 
 [LF8621 Le Fort d'Aslonnes]
 file=basulm/LF8621.pdf

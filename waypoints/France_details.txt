@@ -148,9 +148,6 @@ file=vac/LFLA.pdf
 [AuXEy Duresses]
 file=basulm/LF2121.pdf
 
-[Auzouville Ul]
-file=basulm/LF7651.pdf
-
 [Availles Limouzi]
 file=basulm/LF8653.pdf
 
@@ -691,9 +688,6 @@ file=vac/LFLJ.pdf
 [Courtisols Ul]
 file=basulm/LF5123.pdf
 
-[Coutin Carcans]
-file=basulm/LF3353.pdf
-
 [Cravant Vince Ul]
 file=basulm/LF8951.pdf
 
@@ -1035,6 +1029,9 @@ file=vac/LFRE.pdf
 
 [La Bregcre Ul]
 file=basulm/LF2446.pdf
+
+[La Boulouze Ul ?]
+file=basulm/LF3229.pdf
 
 [La Boissell Ul]
 file=basulm/LF8021.pdf

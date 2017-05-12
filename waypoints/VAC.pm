@@ -79,14 +79,14 @@ sub readRefenceCupFile
 	next if ($line eq "");
 	my ($shortName, $code, $country, $lat, $long, $elevation, $nature, $qfu, $dimension, $frequence, $comment) = split(",", $line);
 	next if (($onlyAD ne "") && ($code ne $onlyAD));
-    die "$line\n   ERREUR. Le code terrain n'est pas conforme" if (($code !~ /^LF\S\S$/) && ($code !~ /^LF\d\d\d\d$/));
+    die "$line\n   ERREUR. Le code terrain n'est pas conforme" if (($code !~ /^LF\S\S$/) && ($code !~ /^LF\d\d\d\d$/) && ($code !~ /^LF2[AB]\d\d$/));
 	die "$line\n   ERREUR. Le premier champ doit commncer par le code terrain" unless ($shortName =~ s/^\"$code (.*)\"$/\1/);
 	die "$line\n   ERREUR. L'altitude doit se terminer par 'm'" if ($elevation !~ s/m$//);
 	die "$line\n   ERREUR. La dimension doit se terminer par 'm'" if (($dimension ne "") && ($dimension !~ s/m$//));
 	die "$line\n   ERREUR. Le champ 'nature' doit avoir une des valeurs : 1, 2, 3 ou 5" 
 	          if (($nature != 1) && ($nature != 2) && ($nature != 3) && ($nature != 5)); 
 	die "$line\n   ERREUR. Le dernier champ doit commencer par le code terrain" unless ($comment =~ s/^\"$code \- //);
-	die "$line\n   ERREUR. Le dernier champ doit contenir le nom, le departement et un commentaire" unless ($comment =~ s/(.*?) \((\d\d)\)\. (.*)\"$/\3/);
+	die "$line\n   ERREUR. Le dernier champ doit contenir le nom, le departement et un commentaire" if (($comment !~ s/(.*?) \((\d\d)\)\. (.*)\"$/\3/) && ($comment !~ s/(.*?) \((2[AB])\)\. (.*)\"$/\3/));
 	my ($name, $depart) = ($1, $2);
 	$comment =~ /^(.*?) /;
 	my $comment1 = $1;
@@ -308,17 +308,19 @@ sub convertGPStoDec
 #     . CONTENT_TYPE : par defaut, "text/html"
 #     . SSL_NO_VERIFY : a 0 par defaut. Si different de 0, pas de verifications SSL_NO_VERIFY
 #     . COOKIES : permet de passer des cookies a la requete
+#     . DIE : mettre a 0 pour ne pas arreter si erreur
 #############################################################################################
 sub sendHttpRequest
 {
   my $url = shift;
-  my %args = (METHOD => "GET", CONTENT_TYPE => "text/html", SSL_NO_VERIFY => 0, COOKIES => {}, @_);  
+  my %args = (METHOD => "GET", CONTENT_TYPE => "text/html", SSL_NO_VERIFY => 0, COOKIES => {}, DIE => 1, @_);  
   
   my $content = $args{CONTENT};
   my $cookies = $args{COOKIES};
   my $contentType = $args{CONTENT_TYPE};
   my $method = $args{METHOD};
   my $sslNoVerify = $args{SSL_NO_VERIFY};
+  my $dieOnError = $args{DIE};
   
   my $req = new HTTP::Request($method => $url);  
   $req->content_type($contentType);
@@ -336,12 +338,16 @@ sub sendHttpRequest
   my $codeHTTP = $res->status_line;
   unless ($res->is_success)
   {
-    print "$content\n\n";
-    print "### Erreur http $codeHTTP lors de l'acces a $url ###\n";
-	print Dumper($res);
-    exit 1;
+	if ($dieOnError)
+	{
+      print "$content\n\n";
+      print "### Erreur http $codeHTTP lors de l'acces a $url ###\n";
+	  print Dumper($res);
+      exit 1;
+	}
+	return ($codeHTTP, $content, $browser->cookie_jar);
   }
-  return ($content, $browser->cookie_jar);
+  return ($codeHTTP, $content, $browser->cookie_jar);
 }
 
 
