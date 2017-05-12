@@ -36,6 +36,8 @@
 # . -file <fichier> : obligatoire. C'est le fichier .cup à analyser
 # . --zip : facultatif. Si présent, génère un fichier zip contenant les PDF des terrains concernés
 # . --noulm : facultatif. Si présent, ne traite pas les terrains de BASULM
+# . --nofreq : facultatif. Si present, ne modifie pas la frequence des terrains\n";
+# . --nocode : facultatif. Si present, ne modifie pas le code terrain\n";
 # . --genereFileCUP : facultatif. Si présent, regénère un fichier .cup similaire à celui d'origine, avec mise a jour des infos de coordonnées, d'altitude, de fréquence
 # . --genereFileCSV : facultatif. Si présent, regénère un fichier .csv similaire au fichier .cup d'origine, avec mise a jour des infos de coordonnées, d'altitude, de fréquence
 # . -searchByCode <x> : facultatif. Ne recherche pas la correspondance de terrain avec les coordonnées GPS, mais dans la colonne x du fichier .cup
@@ -65,11 +67,10 @@ my %cibles =      # dirPDF donne le repertoire qui contient les PDF, pour la cib
 #   ne pas monter trop haut, sinon beaucoup de faux-positifs. Une valeur de 1 ou 2 semble raisonnable
 my $toleranceGeog = 1;
 
-my $rewriteFrequ = 0;      # si option genereFileCUP ou genereFileCSV. Si valeur 1, alors on écrase la fréquence avec celle du fichier de référence
-                           # ATTENTION. Parfois, des sites utilisent une autre frequence que celle de la carte VAC 
-						   #   ex : 123.350 pour LFEX, 122.650 pour LFSV ...
 my $verboseRewrite1 = 1;   # a 1 pour de l'info si modifications de coordonnées geographiques ou d'altitude si > 2m
 my $verboseRewrite2 = 1;   # a 1 pour de l'info si modification de fréquence
+
+my ($nofreq, $nocode);
 
 {
     my ($file, $searchByCode, $withZip, $noulm, $genereFileCUP, $genereFileCSV, $help);
@@ -79,6 +80,8 @@ my $verboseRewrite2 = 1;   # a 1 pour de l'info si modification de fréquence
        "searchByCode=i"  => \$searchByCode,
 	   "zip"             => \$withZip,
 	   "noulm"           => \$noulm,
+	   "nofreq"          => \$nofreq,
+	   "nocode"          => \$nocode,
 	   "genereFileCUP"   => \$genereFileCUP,
 	   "genereFileCSV"   => \$genereFileCSV,
        "h|help"          => \$help,
@@ -470,12 +473,21 @@ sub rewriteCUPfile
   print FIC "name;code;country;lat;lon;elev;style;rwdir;rwlen;freq;desc\n" if ($type eq "csv");
   
    foreach my $ad (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))  # on lit dans le même ordre que fichier initial
+   #my $ad = "LE FAY";
   {
 	my $AD = $$ADs{$ad};
     if (defined($$AD{codeREF}))   # lié avec un terrain referencé
 	{
 	  my $codeRef = $$AD{codeREF};
 	  my $REF = $$REFs{$codeRef};
+	  #print Dumper($AD), Dumper($REF);
+	  
+	  if ($$AD{code} ne $codeRef)
+	  {
+	    printf "%-6s;%-25s. code : '%s' <- '%s'\n", $codeRef, $$AD{name}, $$AD{code}, $codeRef
+		     if ($verboseRewrite1);
+		$$AD{code} = $codeRef unless ($nocode);
+	  }
 	  
 	  if (($$AD{lat} ne $$REF{lat}) || ($$AD{lat} ne $$REF{lat}))
 	  {
@@ -501,7 +513,7 @@ sub rewriteCUPfile
 	    printf "%-6s;%-25s. Frequence : %-6s  : %s\n", $codeRef, $$AD{name}, $$AD{frequence}, $$REF{frequence}
 		     if ($verboseRewrite2);
 
-		$$AD{frequence} = $$REF{frequence} if ($rewriteFrequ);
+		$$AD{frequence} = $$REF{frequence} unless ($nofreq);
 	  }
 	  #$$AD{code} = $codeRef;
 	}
@@ -521,7 +533,9 @@ sub syntaxe
   print "les parametres sont :\n";
   print "  . -file <fichier>. obligatoire. C'est le fichier .cup a analyser\n";
   print "  . --zip : facultatif. Si present, genere un fichier zip contenant les PDF des terrains concernes\n";
-  print "  . --noulm : facultatif. Si present, netraite pas les terrains de basULM\n";
+  print "  . --noulm : facultatif. Si present, ne traite pas les terrains de basULM\n";
+  print "  . --nofreq : facultatif. Si present, ne modifie pas la frequence des terrains\n";
+  print "  . --nocode : facultatif. Si present, ne modifie pas le code terrain\n";
   print "  . --genereFileCUP : facultatif. Si present, regenere un fichier .cup similaire à celui d'origine, avec mise a jour des infos de coordonnees, d'altitude, de frequence\n"; 
   print "  . --genereFileCSV : facultatif. Si present, regenere un fichier .csv similaire au fichier .cup d'origine, avec mise a jour des infos de coordonnees, d'altitude, de frequence\n";
   print "  . -searchByCode <x> : facultatif. Ne recherche pas la correspondance de terrain avec les coordonnees GPS, mais dans la colonne x du fichier .cup\n";
