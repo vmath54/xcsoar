@@ -1,7 +1,11 @@
 package VAC;
+package VAC;
 #
 
 # Variables et procedures perl en lien avec la mise a disposition de cartes VAC et baseULM
+#
+# site intéressant pour conversions données GPS :
+#     https://www.lecampingsauvage.fr/gps-convertisseur
 #
 
 use vars qw(@ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $VERSION);
