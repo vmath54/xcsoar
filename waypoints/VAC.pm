@@ -6,7 +6,7 @@ package VAC;
 #
 # site intéressant pour conversions données GPS :
 #     https://www.lecampingsauvage.fr/gps-convertisseur
-# et pour générer un fichier kmz : AirspaceConverter
+# et pour générer un fichier kmz : Airspace Converter
 #     http://www.alus.it/AirspaceConverter/
 
 use vars qw(@ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $VERSION);
