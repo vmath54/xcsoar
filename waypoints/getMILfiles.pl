@@ -29,7 +29,7 @@ my $baseURL = "$siteURL/images/stories/Doc/AVUE";  # url de la page de télécharg
 {
   my $ADsia = &getListSIA($dirSIA);   # les AD qu'on a deja charges depuis le site SIA
   
-  my ($page, $cookies) = &sendHttpRequest($pageURL);
+  my ($code, $page, $cookies) = &sendHttpRequest($pageURL);
   die "Impossible de charger la page $pageURL" unless (defined($page));
   #&writeBinFile("page.html", $page);
   #my ($page, $cookies); { local(*INPUT, $/); open (INPUT, "page.html") || die "can't open page.html"; $page = <INPUT>; close INPUT };  # debug, pour lire un fichier html local
@@ -52,7 +52,7 @@ my $baseURL = "$siteURL/images/stories/Doc/AVUE";  # url de la page de télécharg
 	print "$ad.pdf\n";
 	#print "$urlPDF\n"; next;
 
-    my ($pdf, $cookies) = &sendHttpRequest($urlPDF, COOKIES => $cookies);
+    my ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF, COOKIES => $cookies);
 	&writeBinFile("$dirDownload/$ad.pdf", $pdf);
 	
 	sleep 1;

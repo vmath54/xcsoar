@@ -24,7 +24,7 @@ my $printNameNotMatch = 0; # a 1 pour avoir les noms qui ne matchent pas
 my $ficREF      = "FranceVacEtUlm.cup";  # le fichier de reference. En lecture
 my $ficOUT      = "FranceVacEtUlm_new.cup";  # le fichier généré
 my $ficVAC      = "listVACfromPDF.csv";  # issu de getInfosFromVACfiles.pl
-my $ficULM      = "listULMfromCSV.csv";  # issu de readBasulm.pl
+my $ficULM      = "listULMfromAPI.csv";  # issu de basulm
 
 my %natures =
 (
@@ -42,7 +42,7 @@ my $onlyAD = "";        # Vide normalement. Sinon, ne traite que ce terrain, et 
   print "Lecture fic reference : ", Dumper($REFs) if ($onlyAD ne "");
 	
   &traiteInfosADs($ficVAC, $REFs, onlyAD => $onlyAD);          # prise en compte des infos provenant des terrains SIA ou militaire
-  &traiteInfosADs($ficULM, $REFs, onlyAD => $onlyAD);          # prise en compte des infos provenant des terrains BASULM
+  &traiteInfosADs($ficULM, $REFs, noADs => $VAC::noADs, onlyAD => $onlyAD); # prise en compte des infos provenant des terrains BASULM
   print "Lecture fichiers terrains : ", Dumper($REFs) if ($onlyAD ne "");
   
   &delOldADs($REFs);                                           # suppression des fiches qui n'ont pas été renouvelées
@@ -78,6 +78,7 @@ sub traiteInfosADs
   my %args = (@_);
   
   my $onlyAD = $args{onlyAD};
+  my $noADs = $args{noADs};
   
   my @attrs2compare = ("lat", "long", "elevation", "frequence", "dimension", "cat", "qfu", "comment");
 
@@ -86,9 +87,13 @@ sub traiteInfosADs
   foreach my $code (sort keys %$ADs)
   {
     next if (($onlyAD ne "") && ($code ne $onlyAD));
+	next if (defined($noADs) && defined($$noADs{$code}));  # on ne veut pas certains terrains. Voir VAC.pm
+	
+	
     my $AD = $$ADs{$code};
 	my $cible = $$AD{cible};
 	my $name = $$AD{name};
+	
 		
 	my $lat = &convertGPStoCUP($$AD{lat});   $$AD{lat} = $lat;
 	my $long = &convertGPStoCUP($$AD{long}); $$AD{long} = $long;
@@ -127,6 +132,7 @@ sub traiteInfosADs
 	
 	if ($cible ne $$REF{cible})
 	{
+	  next if ($cible eq "basulm");    # on ne prend pas en compte basulm si terrain SIA ou MIL
 	  print "WARNING. $code;$cible;$name; la cible initiale etait $$REF{cible}\n";
 	  $$REF{cible} = $cible;
 	}

@@ -1,5 +1,4 @@
 package VAC;
-package VAC;
 #
 
 # Variables et procedures perl en lien avec la mise a disposition de cartes VAC et baseULM

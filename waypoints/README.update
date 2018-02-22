@@ -1,26 +1,26 @@
 ################  Cette doc indique comment mettre à jour le fichier de référence FranceVacEtUlm.cup ######################
 
+1) récupération des infos BASULM
+--------------------------------
+à l'aide du script getInfosFromApiBasulm.pl, qui passe par l'API REST spécifique BASULM
+Génère le fichier listULMfromAPI.csv qui contient l'ensemble des terrains répertoriés dans BASULM, et les infos associées
+Nécessite une clé API, à demander à l'admin basulm
 
-1) récupération des derniers fichiers VAC, MIL, BASULM
-======================================================
+2) récupération des derniers fichiers VAC, MIL, BASULM
+------------------------------------------------------
 A l'aide des scripts getVACfiles.pl, getMILfiles.pl et getBASULMfiles.pl
+getBASULMfiles.pl va utiliser le fichier listULMfromAPI.csv généré précédemment
 
-2) récupération de basulm.csv
------------------------------
-Manuellement, depuis http://basulm.ffplum.info/ :
-  "Bases" - "Exportations" - "Fichiers CSV, KML et GPX" ; choisir le fichier csv
-  
-Ouvrit basulm.csv dans excel ; supprimer la colonne "Consignes" et les colonnes qui suivent "Radio"
-
-3) génération des fichiers intermédiaires
------------------------------------------
-Générer listVACfromPDF.csv et listULMfromCSV.csv à partir des scripts getInfosFromVACfiles.pl et readBasulm.pl
-On peut ajuster la verbosité de ces scripts à l'aide de la variable $verbose
+3) génération d'un fichier intermédiaire pour les cartes VAC
+------------------------------------------------------------
+Génère listVACfromPDF.csv à partir du script getInfosFromVACfiles.pl
+Analyse au mieux le contenu des cartes VAC en format PDF pour en exploiter les infos
+On peut ajuster la verbosité à l'aide de la variable $verbose
 
 4) génération du fichier FranceVacEtUlm_new.cup
 -----------------------------------------------
 A l'aide du script regenereReferenceCUPfile.pl  (la variable $verbose permet d'ajuster la verbosité de ce script)
-Utilise en lecture FranceVacEtUlm.cup, listVACfromPDF.csv et listULMfromCSV.csv
+Utilise en lecture FranceVacEtUlm.cup, listVACfromPDF.csv et listULMfromAPI.csv
 
 Si de nouveaux terrains sont créés, il faut modifier manuellement dans FranceVacEtUlm_new.cup :
   - le département correspondant (dernier champ du fichier)

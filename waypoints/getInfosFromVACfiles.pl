@@ -58,7 +58,7 @@ my $tempfile     = "tmp.txt";
   foreach my $code (sort keys %$VACs)
   {
     my $VAC = $$VACs{$code};
-    print FICOUT "$$VAC{code};$$VAC{cible};$$VAC{name};$$VAC{frequence};$$VAC{elevation};$$VAC{lat};$$VAC{long};$$VAC{type};$$VAC{qfu};$$VAC{dimension};$$VAC{nature}\n";  
+    print FICOUT "$$VAC{code};$$VAC{cible};$$VAC{name};$$VAC{lat};$$VAC{long};$$VAC{elevation};$$VAC{nature};$$VAC{qfu};$$VAC{dimension};$$VAC{frequence};$$VAC{type}\n";  
   }
 }
 

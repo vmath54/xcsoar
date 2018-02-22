@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# recuperation des cartes BASULM, depuis le site http://basulm.ffplum.info/PDF/
+# recuperation des cartes BASULM, depuis le site http://basulm.ffplum.info/PDF/<terrain>.pdf
 #
 # recupere 
 #    - tous les fichiers au format "LFdddd.pdf" ou dddd sont des caracteres numériques
@@ -9,6 +9,7 @@
 #        . sinon, ne récupère que ceux qui ne se trouvent pas dans le repertoire "$dirVAC" et le repertoire "$dirMIL" : ce sont des fichiers issus du site SIA ou des bases militaires
 #                 ceci élimine, par exemple, les fichiers comme LFEZ.pdf
 #
+# Il faut disposer de la liste des terrains (le dossier n'est plus listable). On l'a à partir du fichier listULMfromAPI.csv, généré depuis le script getInfosFromApiBasulm.pl
 
 use LWP::Simple;
 use Data::Dumper;
@@ -17,16 +18,17 @@ use strict;
 
 my $dirDownload = "basulm";    # le répertoire qui va contenir les documents pdf charges
 my $URL = "http://basulm.ffplum.info/PDF/";
+my $ficULM = "listULMfromAPI.csv";
 
 my $dirVAC = "./vac";
 my $dirMIL = "./mil";     
 my $noSIA = 1;
 
+my $reprise;
+#my $reprise = "LF3358";    # a décommenter et valuer pour une reprise (éviter de recommencer au début)
+
 {
-  my $page = get($URL);
-  die "Impossible de charger la page $URL" unless (defined($page));
-  #print "$page\n"; exit;
-  my $ads = &decodePage($page);   # la liste de tous les PDF
+  my $ads = &getADs($ficULM);     # la liste des codes terrain
   
   my $SIAs = {};  # la liste des fichiers SIA et MIL
   if ($noSIA)
@@ -39,6 +41,9 @@ my $noSIA = 1;
   
   foreach my $ad (@$ads)
   {
+  
+    next if (($reprise ne "") && ($ad lt $reprise));
+  
     if ($noSIA && ($ad =~ /^LF\S\S$/) && defined($$SIAs{$ad}))
 	{
 	  # print "$ad dans basulm et SIA\n";
@@ -79,24 +84,25 @@ sub listFicsSIA
   }
 }
 
-#    ------------ decode la page html qui permet de choisir un terrain --------------------
-# le code html est compose d'un tableau, avec une ligne comme la suivante par terrain :
-# <tr><td valign="top">...</td><td><a href="LF0121.pdf">LF0121.pdf</a></td>...</tr>
-
-sub decodePage
+# recuperation de la liste des codes terrain a partir du fichier listULMfromAPI.csv
+sub getADs
 {
-  my $page = shift;
+  my $fic = shift;
   
-  my @ads = ();     # va contenir le nom du fichier pdf
-  my @lignes = split("\n", $page);
-  foreach my $ligne (@lignes)
+  my @ADs;
+  
+  die "unable to read fic $fic" unless (open (FIC, "<$fic"));
+
+  while (my $line = <FIC>)
   {
-    #print "$ligne\n";
-	next unless ($ligne =~ /<tr>.* href=\"(.*?)\".*<\/tr>/);
-	  my $ad = $1;
-	  $ad =~ s/\.pdf//;
-	  next if (($ad !~ /^LF\d\d\d\d$/) && ($ad !~ /^LF\S\S$/));
-      push(@ads, $ad);
-	}  
-  return \@ads;
+	chomp ($line);
+	next if ($line eq "");
+	
+	my ($code) = split(";", $line);
+	next if ($code eq "");
+	
+	push(@ADs, $code);
+  }
+  close FIC;
+  return \@ADs;
 }

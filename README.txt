@@ -30,8 +30,9 @@ FRA_FULL_HighRes.xcm ou France.cup
                       compare avec les infos de FranceVacEtUlm.csv, et produit un fichier intermédiaire : listVACfromPDF.csv
 					  ATTENTION : utilise le binaire pdftotext.exe (windows) pour analyser le contenu des fichiers pdf
 					  
-- readBasulm.pl     : lecture et analyse du fichier basulm.csv, disponible sur le site basULM (il faut créer un compte)
-                      compare avec les infos de FranceVacEtUlm.csv, et produit un fichier intermédiaire : listULMfromCSV.csv
+- getInfosFromApiBasulm.pl : recupération des infos basULM, sur tous les terrais répertoriés par la FFPLUM
+                      névessite une clé API (un mot de passe d'application), qu'on peut demander à admin.basulm@orange.fr
+					  compare avec les infos de FranceVacEtUlm.csv, et produit un fichier intermédiaire : listULMfromAPI.csv					  
 					  
 - genereDetailsFromCUP.pl : permet de créer un fichier de détails de waypoints a partir d'un fichier .cup
                       ce fichier de détails de waypoints permet de faire le lien entre un terrain, et la carte VAC ou basULM correspondante
@@ -39,7 +40,7 @@ FRA_FULL_HighRes.xcm ou France.cup
 
 - regenereReferenceCUPfile.pl : permet de mettre à jour les infos du fichier de référence FranceVacEtUlm.csv
                       génère le fichier FranceVacEtUlm_new.csv à partir du fichier FranceVacEtUlm.csv, et les éventuelles nouvelles infos
-                      provenant de listVACfromPDF.csv et listULMfromCSV.csv
+                      provenant de listVACfromPDF.csv et listULMfromAPI.csv
 					  Voir README.update pour plus d'infos
 					  
 - France_details.cup et FranceVacEtUlm_details.cup : des fichiers de détail générés avec France.cup et FranceVacEtUlm.cup à l'aide de genereDetailsFromCUP.pl
