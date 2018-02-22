@@ -62,7 +62,11 @@ my $regions =
 	die "$code. pas trouve de departement dans fichier de reference" if ($dep eq "");
 	
 	my $region = $$deps{$dep};
-	die "Pas de region connue pour le code |$code|, departement |$dep|" unless (defined($region));
+	unless (defined($region))
+	{
+	  print "Pas de region connue pour le code |$code|, departement |$dep|\n";
+	  next;
+	}
 	$ficsToArchive{$region}{$code} = {fic => $fic, code => $code };
   }
   
