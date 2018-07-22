@@ -32,3 +32,13 @@ Dès que c'est OK, recopier FranceVacEtUlm_new.cup vers FranceVacEtUlm.cup
 ---------------------------------------------------
   Pour generer un fichier de detail FranceVacEtUlm_details.cup issu du fichier FranceVacEtUlm.cup
     . genereDetailsFromCUP.pl -file FranceVacEtUlm.cup
+
+6) generation des archives .zip des fichiers basulm
+---------------------------------------------------
+  Ces fichiers sont volumineux. On a crée un par région francaise
+    . makeZipFromBasulm.pl
+
+7) generation d'une archive .zip des cartes VAC et mil
+------------------------------------------------------
+  Fait manuellement, à l'aide de 7zip
+  
