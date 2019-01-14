@@ -5,6 +5,8 @@
 à l'aide du script getInfosFromApiBasulm.pl, qui passe par l'API REST spécifique BASULM
 Génère le fichier listULMfromAPI.csv qui contient l'ensemble des terrains répertoriés dans BASULM, et les infos associées
 Nécessite une clé API, à demander à l'admin basulm
+syntaxe : 
+getInfosFromApiBasulm.pl -key xxxxxxxx
 
 2) récupération des derniers fichiers VAC, MIL, BASULM
 ------------------------------------------------------
