@@ -10,8 +10,15 @@
 #                 ceci élimine, par exemple, les fichiers comme LFEZ.pdf
 #
 # Il faut disposer de la liste des terrains (le dossier n'est plus listable). On l'a à partir du fichier listULMfromAPI.csv, généré depuis le script getInfosFromApiBasulm.pl
+#
+# parametres facultatifs de ce script
+#  . -partial <siteULM>. permet de faire une reprise des chargements à partie de ce site
+#                        Utile si incident lors de l'opération, pour ne pas tout reprendre
+#  . --help : facultatif. Affiche cette aide\n\n";  
+
 
 use LWP::Simple;
+use Getopt::Long qw(:config no_ignore_case no_auto_abbrev);
 use Data::Dumper;
 
 use strict;
@@ -24,10 +31,20 @@ my $dirVAC = "./vac";
 my $dirMIL = "./mil";     
 my $noSIA = 1;
 
-my $reprise;
-#my $reprise = "LF3358";    # a décommenter et valuer pour une reprise (éviter de recommencer au début)
 
 {
+  my $partial;              # pour une reprise, à un terrain donné
+  my $help;
+  
+  my $ret = GetOptions
+   ( 
+     "partial=s"       => \$partial,
+	 "h|help"         => \$help,
+   );
+  
+  die "parametre incorrect" unless($ret);
+  &syntaxe() if ($help);
+
   my $ads = &getADs($ficULM);     # la liste des codes terrain
   
   my $SIAs = {};  # la liste des fichiers SIA et MIL
@@ -42,7 +59,8 @@ my $reprise;
   foreach my $ad (@$ads)
   {
   
-    next if (($reprise ne "") && ($ad lt $reprise));
+    next if (($partial ne "") && ($ad lt $partial));
+	# exit if (-ad eq "LF3023"); pour arreter le chargement sur un site donné
   
     if ($noSIA && ($ad =~ /^LF\S\S$/) && defined($$SIAs{$ad}))
 	{
@@ -105,4 +123,20 @@ sub getADs
   }
   close FIC;
   return \@ADs;
+}
+
+sub syntaxe
+{
+  print "getBASULMfiles.pl\n";
+  print "Ce script permet de recuperer les cartes ULM sur le site BASULM\n";
+  print "Il utilise en entree le fichier listULMfromAPI.csv, genere auparavant a l'aide du script getInfosFromApiBasulm.pl\n";
+  print "les parametres facultatifs sont :\n";
+  print "  . -partial <siteULM>. permet de faire une reprise des chargements a partie de ce site\n";
+  print "                        Utile si incident lors de l'operation, pour ne pas tout reprendre\n";
+  print "  . --help : facultatif. Affiche cette aide\n\n";
+  print "Exemple :\n";
+  print "getBASULMfiles.pl -partial \n";
+  print "\n";
+  
+  exit;
 }

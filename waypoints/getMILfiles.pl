@@ -10,6 +10,7 @@
 # on ne recupere pas les cartes qu'on a par ailleurs depuis le site SIA ($dirSIA)
 #
 # A noter qu'il faut présenter au site www.dircam.air.defense.gouv.fr un User-Agent "propre", et gérer les cookies, sous peine de se faire black-lister plusieurs jours
+# Ce script se charge de cela
 #
 
 use VAC;
