@@ -30,6 +30,8 @@ Si de nouveaux terrains sont créés, il faut modifier manuellement dans FranceVac
   
 Dès que c'est OK, recopier FranceVacEtUlm_new.cup vers FranceVacEtUlm.cup
 
+On peut controler la validité, en rejouant à nouveau regenereReferenceCUPfile.pl ; il ne doit plus y avoir d'erreurs
+
 5) generation du fichier FranceVacEtUlm_details.txt
 ---------------------------------------------------
   Pour generer un fichier de detail FranceVacEtUlm_details.cup issu du fichier FranceVacEtUlm.cup
