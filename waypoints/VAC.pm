@@ -83,14 +83,18 @@ sub readRefenceCupFile
 	next if ($line eq "");
 	my ($shortName, $code, $country, $lat, $long, $elevation, $nature, $qfu, $dimension, $frequence, $comment) = split(",", $line);
 	next if (($onlyAD ne "") && ($code ne $onlyAD));
-    die "$line\n   ERREUR. Le code terrain n'est pas conforme" if (($code !~ /^LF\S\S$/) && ($code !~ /^LF\d\d\d\d$/) && ($code !~ /^LF2[AB]\d\d$/));
+	$code =~ s/\"//sg;   # on elimine les quotes du code terrain
+    die "$line\n   ERREUR. Le code terrain n'est pas conforme" if (($code !~ /^LF\S\S$/) && ($code !~ /^LF\d\d\d\d$/) &&
+	               ($code !~ /^LF2[AB]\d\d$/) && ($code !~ /^LF97\d\d\d$/));
 	die "$line\n   ERREUR. Le premier champ doit commncer par le code terrain" unless ($shortName =~ s/^\"$code (.*)\"$/\1/);
 	die "$line\n   ERREUR. L'altitude doit se terminer par 'm'" if ($elevation !~ s/m$//);
 	die "$line\n   ERREUR. La dimension doit se terminer par 'm'" if (($dimension ne "") && ($dimension !~ s/m$//));
 	die "$line\n   ERREUR. Le champ 'nature' doit avoir une des valeurs : 1, 2, 3 ou 5" 
 	          if (($nature != 1) && ($nature != 2) && ($nature != 3) && ($nature != 5)); 
 	die "$line\n   ERREUR. Le dernier champ doit commencer par le code terrain" unless ($comment =~ s/^\"$code \- //);
-	die "$line\n   ERREUR. Le dernier champ doit contenir le nom, le departement et un commentaire" if (($comment !~ s/(.*?) \((\d\d)\)\. (.*)\"$/\3/) && ($comment !~ s/(.*?) \((2[AB])\)\. (.*)\"$/\3/));
+	die "$line\n   ERREUR. Le dernier champ doit contenir le nom, le departement et un commentaire" 
+	  if (($comment !~ s/(.*?) \((\d\d)\)\. (.*)\"$/\3/) && ($comment !~ s/(.*?) \((2[AB])\)\. (.*)\"$/\3/) &&
+	      ($comment !~ s/(.*?) \((97\d)\)\. (.*)\"$/\3/));
 	my ($name, $depart) = ($1, $2);
 	$comment =~ /^(.*?) /;
 	my $comment1 = $1;
@@ -103,7 +107,7 @@ sub readRefenceCupFile
 	my $dim = $dimension eq "" ? "" : $dimension . "m";
    
     #on reconstitue la ligne, et on compare
-    my $newLine = "\"$code $shortName\",$code,FR,$lat,$long,${elevation}m,$nature,$qfu,$dim,$frequence,\"$code - $name \($depart\). $comment\"";
+    my $newLine = "\"$code $shortName\",\"$code\",FR,$lat,$long,${elevation}m,$nature,$qfu,$dim,$frequence,\"$code - $name \($depart\). $comment\"";
 	die "$line\n$newLine\n    ERREUR. La ligne reconstituée n'est pas identique a a ligne initiale" if ($line ne $newLine);
     #print "$newLine\n";
 	
@@ -181,7 +185,7 @@ sub buildLineReferenceCupFile
   my $elevation = $$AD{elevation};
   $elevation .= "m" if ($elevation ne "");
 
-  my $line = "\"$code $$AD{shortName}\",$code,FR,$$AD{lat},$$AD{long},$elevation,$$AD{nature},$$AD{qfu},$dimension,$$AD{frequence},\"$code - $$AD{name} \($$AD{depart}\). $$AD{comment}\"";
+  my $line = "\"$code $$AD{shortName}\",\"$code\",FR,$$AD{lat},$$AD{long},$elevation,$$AD{nature},$$AD{qfu},$dimension,$$AD{frequence},\"$code - $$AD{name} \($$AD{depart}\). $$AD{comment}\"";
   return $line;
 }
 
@@ -197,7 +201,7 @@ sub readInfosADs
   {
     chomp ($line);
  	next if ($line eq "");
-	my ($code, $cible, $name, $frequence, $elevation, $lat, $long, $comment, $qfu, $dimension, $nature) = split(";", $line);
+	my ($code, $cible, $name, $lat, $long, $elevation, $nature, $qfu, $dimension, $frequence, $comment) = split(";", $line);
 	$ADs{$code} = { code => $code, cible => $cible, name => $name, frequence => $frequence, elevation => $elevation, lat => $lat, long => $long, comment => $comment, qfu => $qfu, dimension => $dimension, nature => $nature };
 	#if ($code eq "LFEZ") {print Dumper($ADs{$code}) ; exit;}
   }
@@ -247,11 +251,23 @@ sub convertGPStoCUP
   
   my ($degre, $mn, $sec) = split(" ", $val);
   return undef unless (defined($sec));
-    
+  
+  if ($sec == 60)
+  {
+    $sec = 0;
+	$mn++;
+  }
+
+  if ($mn == 60)
+  {
+    $mn = 0;
+	$degre++;
+  }
+  
   my $milliemes = sprintf("%.3f", $sec / 60);
   $milliemes =~ s/^0\.//;
-  
-  return "$degre$mn.$milliemes$final";
+    
+  return sprintf("%02s%02s.%03s%s", $degre, $mn, $milliemes, $final);
 }
 
 # converti des donnes GPS provenant de France.cup - format degre - minute - milliemes de minute (ex : 4845.967N)

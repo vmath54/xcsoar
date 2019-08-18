@@ -97,7 +97,7 @@ sub traiteInfosADs
 		
 	my $lat = &convertGPStoCUP($$AD{lat});   $$AD{lat} = $lat;
 	my $long = &convertGPStoCUP($$AD{long}); $$AD{long} = $long;
-	die "$code;$cible;$name; Probleme dans latitude ou longitude" if (($lat eq "") || ($long eq ""));
+	die "$code;$cible;$name;$$AD{lat};$$AD{long}; Probleme dans latitude ou longitude" if (($lat eq "") || ($long eq ""));
 	
 	my $frequence = $$AD{frequence} eq "" ? undef : sprintf("%.3f", $$AD{frequence});
 	$$AD{frequence} = $frequence;

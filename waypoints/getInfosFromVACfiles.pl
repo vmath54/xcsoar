@@ -281,7 +281,18 @@ sub getInfosFromOneVACfile
   {
     $frequence = $$infos{AFIS};
   }
-  elsif ((defined($$ADRef{frequence})) && ($$ADRef{frequence} ne ""))
+  
+  if (defined($frequence))
+  {
+    $frequence =~ s/\.$//;    # il y a parfois un point final en trop
+	if (($frequence < 117) || ($frequence >= 138))
+	{
+	  print "$code. Frequence |$frequence| n'a pas une valeur correcte. On rejette\n" if ($verbose);
+	  undef $frequence;
+	}
+  }
+  
+  if ((!defined($frequence)) && (defined($$ADRef{frequence})) && ($$ADRef{frequence} ne ""))
   {
 	$frequence = $$ADRef{frequence};
 	print "$code. Frequence |$frequence| recuperee du fichier de reference\n" if ($verbose);
@@ -292,7 +303,6 @@ sub getInfosFromOneVACfile
   }
   if (defined($frequence))
   {
-    $frequence =~ s/\.$//;    # il y a parfois un point finale en trop
     $$infos{frequence} = $frequence;
   }
   
