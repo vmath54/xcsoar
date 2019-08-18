@@ -32,6 +32,7 @@ our $noADs =
   "LF3733" => { name => "Hippolytaine",			comment => "doublon avec LF3755, St Hippolyte" },
   "LF3952" => { name => "Vauxy - Arbois",       comment => "doublon avec LF3956, Arbois-Ulm" },
   "LF5763" => { name => "Langatte paramoteur",  comment => "meme site que LF5762, Langatte ULM" },
+  "LF8569" => { name => "Les Guifettes",        comment => "doublon avec LF8528, Lucon" },
   "LFRJ"   => { name => "LANDIVISIAU",          comment => "Transit VFR" },
   "LFRL"   => { name => "LANVEOC POULMIC",      comment => "Transit VFR" },
   "LFTL"   => { name => "Cannes Quai du large", comment => "helistation" },
@@ -246,8 +247,13 @@ sub convertGPStoCUP
 {
   my $val = shift;
   
-  my $final = "";
+  my $final;
   $final = $1 if ($val =~ s/ ?([NSEW])$//);
+  
+  unless (defined($final))  # parfois, le format est "S 21 05 50" au lieu de "21 05 50 S" ....
+  {
+    $final = $1 if ($val =~ s/^([NSEW]) //);
+  }
   
   my ($degre, $mn, $sec) = split(" ", $val);
   return undef unless (defined($sec));
