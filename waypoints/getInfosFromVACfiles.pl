@@ -75,7 +75,7 @@ sub getInfosFromVACfiles
   unlink $tempfile;
 
   foreach my $fic (@fics)
-  #my $fic = 'mil/LFSX.pdf';
+  #my $fic = 'vac/LFEZ.pdf';
   {
     my ($rep,$code) = $fic =~ /(.+[\/\\])([^\/\\]+)$/; 
 	$code =~ s/\.pdf$//i;
@@ -86,7 +86,7 @@ sub getInfosFromVACfiles
 	system($cmd);
 	die "commande echouee" if ($? == -1);
 	my $infos = &getInfosFromOneVACfile($code, $VACs, $ADRefs, $cible, $tempfile);  # recherche des infos du terrain, depuis le fichier genere a partir du pdf
-	#print Dumper($infos); exit;
+	#print Dumper($infos); print Dumper($$ADRefs{$code}); exit;
 	unlink $tempfile;
   }
 }
@@ -291,15 +291,18 @@ sub getInfosFromOneVACfile
 	  undef $frequence;
 	}
   }
-  
-  if ((!defined($frequence)) && (defined($$ADRef{frequence})) && ($$ADRef{frequence} ne ""))
-  {
-	$frequence = $$ADRef{frequence};
-	print "$code. Frequence |$frequence| recuperee du fichier de reference\n" if ($verbose);
-  }
-  else
-  {
-	print "$code. Frequence pas trouvee, ni dans le PDF, ni dans le fichier de reference\n" if ($verbose);
+
+  if (!defined($frequence))
+  {  
+    if ((defined($$ADRef{frequence})) && ($$ADRef{frequence} ne ""))
+    {
+	  $frequence = $$ADRef{frequence};
+	  print "$code. Frequence |$frequence| recuperee du fichier de reference\n" if ($verbose);
+    }
+    else
+    {
+	  print "$code. Frequence pas trouvee, ni dans le PDF, ni dans le fichier de reference\n" if ($verbose);
+	}
   }
   if (defined($frequence))
   {
@@ -309,7 +312,7 @@ sub getInfosFromOneVACfile
   my $mess = "";
   foreach my $info ("qfu", "dimension", "nature")
   {
-    if ((! defined($$infos{$info})) && (defined($$ADRef{$info})))    # on recupere du fuchier de reference
+    if ((! defined($$infos{$info})) && (defined($$ADRef{$info})))    # on recupere du fichier de reference
 	{
 	  if ($info eq "nature")
 	  {

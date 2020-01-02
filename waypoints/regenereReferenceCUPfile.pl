@@ -89,11 +89,10 @@ sub traiteInfosADs
     next if (($onlyAD ne "") && ($code ne $onlyAD));
 	next if (defined($noADs) && defined($$noADs{$code}));  # on ne veut pas certains terrains. Voir VAC.pm
 	
-	
+	my $REF = $$REFs{$code};	
     my $AD = $$ADs{$code};
 	my $cible = $$AD{cible};
-	my $name = $$AD{name};
-	
+	my $name = $$AD{name};	
 		
 	my $lat = &convertGPStoCUP($$AD{lat});   $$AD{lat} = $lat;
 	my $long = &convertGPStoCUP($$AD{long}); $$AD{long} = $long;
@@ -107,17 +106,28 @@ sub traiteInfosADs
 	$$AD{nature} = $nature;
 	
 	my $elevation = $$AD{elevation};
-    die "$code;$cible;$name; Altitude pas trouvee" if ($elevation eq "");
-	$elevation = sprintf("%.0f", $$AD{elevation} * 0.3048);
-	$$AD{elevation} = $elevation;
+	if ($elevation eq "")
+	{
+	  if (defined($REF) && defined($$REF{elevation}))
+	  {
+	    $elevation = $$REF{elevation};
+		print "WARNING. $code;$cible;$name. Altitude non trouvee ; recuperee dans fichier de ref : $elevation\n";
+	  }
+	  else
+	  {
+	    print "ERRROR. $code;$cible;$name. Altitude non trouvee ; il faudra rectifier manuellement dans fichier genere\n";
+	  }
+	}
+	if ($elevation ne "")
+	{
+	  $elevation = sprintf("%.0f", $$AD{elevation} * 0.3048);
+	  $$AD{elevation} = $elevation;
+	}
 	
     my $qfu = $$AD{qfu};
 	$qfu =~s /^0*//;
 	$$AD{qfu} = $qfu;
-		
-	my $REF = $$REFs{$code};
-	# if ($code eq "LF1255") { print Dumper($REF); print Dumper($AD); exit;}
-		  
+				  
 	unless(defined($REF))
 	{
 	  print "WARNING. $code;$cible;$name; est dans le fichier '$cible' mais n'est pas dans le fichier de référence.\n";

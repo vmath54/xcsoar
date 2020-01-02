@@ -3,6 +3,8 @@ package VAC;
 
 # Variables et procedures perl en lien avec la mise a disposition de cartes VAC et baseULM
 #
+# le format d'un fichier .cup : http://download.naviter.com/docs/cup_format.pdf
+#
 # site intéressant pour conversions données GPS :
 #     https://www.lecampingsauvage.fr/gps-convertisseur
 # et pour générer un fichier kmz : Airspace Converter (appli windows)
@@ -33,6 +35,7 @@ our $noADs =
   "LF3952" => { name => "Vauxy - Arbois",       comment => "doublon avec LF3956, Arbois-Ulm" },
   "LF5763" => { name => "Langatte paramoteur",  comment => "meme site que LF5762, Langatte ULM" },
   "LF8569" => { name => "Les Guifettes",        comment => "doublon avec LF8528, Lucon" },
+  "LF97102" => { name => "Le Gosier",           comment => "trop proche de LF97101, Grand Baie" },  
   "LFRJ"   => { name => "LANDIVISIAU",          comment => "Transit VFR" },
   "LFRL"   => { name => "LANVEOC POULMIC",      comment => "Transit VFR" },
   "LFTL"   => { name => "Cannes Quai du large", comment => "helistation" },
@@ -341,6 +344,7 @@ sub sendHttpRequest
   my $url = shift;
   my %args = (METHOD => "GET", CONTENT_TYPE => "text/html", SSL_NO_VERIFY => 0, COOKIES => {}, DIE => 1, @_);  
   
+  my $authorization = $args{AUTHORIZATION};
   my $content = $args{CONTENT};
   my $cookies = $args{COOKIES};
   my $contentType = $args{CONTENT_TYPE};
@@ -350,6 +354,7 @@ sub sendHttpRequest
   
   my $req = new HTTP::Request($method => $url);  
   $req->content_type($contentType);
+  $req->header('Authorization' => $authorization) if (defined($authorization));
   $req->content($content) if (defined($content));
   my $browser = new LWP::UserAgent(keep_alive => 0, timeout => 10, max_redirect => 5);
   $browser->ssl_opts( verify_hostname => 0 ,SSL_verify_mode => 0x00) if ($sslNoVerify);
