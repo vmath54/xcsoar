@@ -2,16 +2,17 @@
 #
 # recuperation des cartes VAC de france, depuis le site SIA
 #
-# sur la page d'accueil ( https://www.sia.aviation-civile.gouv.fr ), on récupere un lien comme celui-ci, qui correspond au menu "Atlas VAC FRANCE" :
-# <a href="https://www.sia.aviation-civile.gouv.fr/documents/htmlshow?f=dvd/eAIP_19_JUL_2018/Atlas-VAC/home.htm" title="">Atlas VAC FRANCE</a>
+# sur la page d'accueil ( https://www.sia.aviation-civile.gouv.fr ), on récupere un lien comme celui-ci, qui correspond au menu "eAIP FRANCE" :
+# <a href='https://www.sia.aviation-civile.gouv.fr/documents/htmlshow?f=dvd/eAIP_30_JAN_2020/FRANCE/home.html'  class=''>eAIP FRANCE</a>
+# On récupère la date eAIP ; ici, eAIP_30_JAN_2020
 #
-# On récupère la date eAIP ; ici, eAIP_19_JUL_2018
-#
-# Ceci permet de récupérer le script JS qui répertorie toutes les cartes VAC ; dans notre exemple :
-# https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_19_JUL_2018/Atlas-VAC/Javascript/AeroArraysVac.js
+# Ceci permet de construire l'URL de la page qui répertorie les cartes VAC ; dans l'exemple :
+# https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_30_JAN_2020/Atlas-VAC/FR/VACProduitPartie.htm
+# ET on peut récupérer le script JS qui répertorie toutes les cartes VAC ; dans notre exemple :
+# https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_30_JAN_2020/Atlas-VAC/Javascript/AeroArraysVac.js
 #
 # grace a ces infos, on reconstruit l'URL d'acces aux PDF des cartes VAC ; par exemple :
-# https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_19_JUL_2018/Atlas-VAC/PDF_AIPparSSection/VAC/AD/AD-2.LFEZ.pdf
+# https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_30_JAN_2020/Atlas-VAC/PDF_AIPparSSection/VAC/AD/AD-2.LFEZ.pdf
 #
 
 use VAC;
@@ -24,13 +25,11 @@ use strict;
 my $dirDownload = "vac";    # le répertoire qui va contenir les documents pdf charges
 my $siteURL = "https://www.sia.aviation-civile.gouv.fr";
 my $baseURL = "https://www.sia.aviation-civile.gouv.fr/dvd/__EAIP__/Atlas-VAC";
-#my $pageURL = "$baseURL/FR/VACProduitPartie.htm";  # url de la page de téléchargement des cartes VAC
 my $jsURL = "$baseURL/Javascript/AeroArraysVac.js";  # le code javascript qui contient la liste des terrains
 
 my $infos = {};    # va contenir les infos necessaires a la construction de l'url de chaque doc pdf
 
 {
-
   my $eAIP = &getEAIP($siteURL);    # recuperation de la date eAIP, de la forme "eAIP_19_JUL_2018"
   
   print "   eAIP = $eAIP\n";
@@ -41,6 +40,7 @@ my $infos = {};    # va contenir les infos necessaires a la construction de l'ur
   
   print "\n## recuperation des codes OACI des terrains repertories ##\n";
   print "   $jsURL\n";
+
   my ($code, $page, $cookies) = &sendHttpRequest($jsURL, SSL_NO_VERIFY => 1);
   die "Impossible de charger la page $jsURL" unless (defined($page));
   &writeBinFile("page.html", $page);
@@ -78,7 +78,8 @@ my $infos = {};    # va contenir les infos necessaires a la construction de l'ur
 }
 
 #    ------------ recuperation de la date eAIP a partir de la page principale --------------------
-# retourne une chaine du genre "eAIP_19_JUL_2018"
+# recherche dans <a href='https://www.sia.aviation-civile.gouv.fr/documents/htmlshow?f=dvd/eAIP_30_JAN_2020/FRANCE/home.html'  class=''>eAIP FRANCE</a>
+# retourne une chaine du genre "eAIP_30_JAN_2020"
 # ------------------------------------------------------------------------------------------------------------------
 sub getEAIP
 {
@@ -90,7 +91,7 @@ sub getEAIP
   die "Impossible de charger la page $siteURL" unless (defined($page));
 
   my $eAIP;
-  if ( $page =~ /SUP AIP.*\?f=dvd\/(eAIP.*?)\/Atlas\-VAC\/home\.htm\"/)    # "SUP AIP" est la rubrique juste avant  "Atlas VAC FRANCE"
+  if ( $page =~ /gouv.fr\/documents\/htmlshow\?f=dvd\/(eAIP.*?)\/FRANCE\/home\.html/)    # "SUP AIP" est la rubrique juste avant  "Atlas VAC FRANCE"
   {
     $eAIP = $1
   }
