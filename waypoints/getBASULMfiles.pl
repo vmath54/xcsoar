@@ -17,7 +17,7 @@
 #  . --help : facultatif. Affiche cette aide\n\n";  
 
 
-use LWP::Simple;
+use VAC;
 use Getopt::Long qw(:config no_ignore_case no_auto_abbrev);
 use Data::Dumper;
 
@@ -72,13 +72,15 @@ my $noSIA = 1;
 	#print "$urlPDF\n";
 	print "$ad\n";
 	
-	my $status = getstore($urlPDF, "$dirDownload/$ad" . ".pdf");   #download de la fiche pdf
-    unless ($status =~ /^2\d\d/)
+	my ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF);
+
+    unless ($code =~ /^2\d\d/)
     {
-	  print "code retour http $status lors du chargement du doc $urlPDF\n";
+	  print "code retour http $code lors du chargement du doc $urlPDF\n";
 	  print "Arret du traitement\n";
 	  exit 1;
 	}
+	&writeBinFile("$dirDownload/$ad.pdf", $pdf);
 	sleep 1;
   }
 }
