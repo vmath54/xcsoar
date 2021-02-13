@@ -48,13 +48,14 @@ my %ADs = 		# liste des ADs militaires
   foreach my $ad (sort keys %ADs)
   {
     #next if ($ad ne "lfso");
-		my $urlPDF = $baseURL . "/avue_" . $ADs{$ad} . "_" . $ad . ".pdf";
-	print "$ad.pdf\n";
+	my $urlPDF = $baseURL . "/avue_" . $ADs{$ad} . "_" . $ad . ".pdf";
+	my $ad2 = uc($ad);
+	print "$ad2.pdf\n";
 	#print "$urlPDF\n"; next;
 
 #    my ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF, COOKIES => $cookies);
     my ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF);
-	&writeBinFile("$dirDownload/$ad.pdf", $pdf);
+	&writeBinFile("$dirDownload/$ad2.pdf", $pdf);
 	
 	sleep 1;
   }
