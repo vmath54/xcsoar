@@ -131,12 +131,26 @@ sub traiteInfosADs
 	unless(defined($REF))
 	{
 	  print "WARNING. $code;$cible;$name; est dans le fichier '$cible' mais n'est pas dans le fichier de référence.\n";
-	  print "    Il faudra adapter manuellement les infos dans le fichier généré. Par exemple :\n";
+	  print "    Il faudra verifier et eventuellement adapter les infos dans le fichier généré.\n";
+	  
+	  if ($cible eq "basulm")
+	  {
+	    if ($$AD{code} =~ /^LF(\d\d)\d\d$/)
+		{
+		  $$AD{depart} = $1;
+		}
+		else
+		{
+		  $$AD{depart} = "";
+		}
+	  }
 
 	  my $line = &buildLineReferenceCupFile($AD);
       print "       $line\n";
 	  
-	  $$REFs{$code} = { found => "new", code => $code, cible => $cible, name => $name, shortName => $$AD{name}, lat => $lat, long => $long, elevation => $elevation, frequence => $frequence, dimension => $$AD{dimension}, nature => $nature, qfu => $$AD{qfu}, comment => $$AD{comment}  };
+	  $$REFs{$code} = { found => "new", code => $code, cible => $cible, name => $name, shortName => $$AD{name}, lat => $lat, long => $long, elevation => $elevation, frequence => $frequence, dimension => $$AD{dimension}, nature => $nature, qfu => $$AD{qfu}, depart => $$AD{depart}, comment => $$AD{comment}  };
+	  #print Dumper($AD);
+	  #exit;
 	  next;
 	}
 	
