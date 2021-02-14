@@ -556,9 +556,6 @@ file=vac/LFHX.pdf
 [LFHY Moulins Montbeugny]
 file=vac/LFHY.pdf
 
-[LFHZ Sallanches Mont Blanc]
-file=vac/LFHZ.pdf
-
 [LFIB Belves St Pardoux]
 file=vac/LFIB.pdf
 
@@ -1303,6 +1300,9 @@ file=basulm/LF0153.pdf
 [LF0154 Polliat]
 file=basulm/LF0154.pdf
 
+[LF0155 Ailes De Sergy]
+file=basulm/LF0155.pdf
+
 [LF0157 Mionnay]
 file=basulm/LF0157.pdf
 
@@ -1398,6 +1398,9 @@ file=basulm/LF0458.pdf
 
 [LF0459 Thorame-Basse]
 file=basulm/LF0459.pdf
+
+[LF0460 La Mure Argens]
+file=basulm/LF0460.pdf
 
 [LF0523 Glacier Lombard]
 file=basulm/LF0523.pdf
@@ -1531,6 +1534,9 @@ file=basulm/LF1254.pdf
 [LF1255 Barrage de Pareloup]
 file=basulm/LF1255.pdf
 
+[LF1256 CONQUES]
+file=basulm/LF1256.pdf
+
 [LF1301 Martigues-Henri Fabre]
 file=basulm/LF1301.pdf
 
@@ -1540,8 +1546,8 @@ file=basulm/LF1352.pdf
 [LF1353 La Ciotat]
 file=basulm/LF1353.pdf
 
-[LF1355 Marseille Hydro]
-file=basulm/LF1355.pdf
+[LF1356 Aix en Provence Paramoteur]
+file=basulm/LF1356.pdf
 
 [LF1422 Bonneville la Louvet]
 file=basulm/LF1422.pdf
@@ -1615,6 +1621,9 @@ file=basulm/LF1755.pdf
 [LF1756 Bourcefranc]
 file=basulm/LF1756.pdf
 
+[LF1757 Arvert]
+file=basulm/LF1757.pdf
+
 [LF1758 PPC Etaules]
 file=basulm/LF1758.pdf
 
@@ -1668,6 +1677,9 @@ file=basulm/LF1953.pdf
 
 [LF1954 Savignoux]
 file=basulm/LF1954.pdf
+
+[LF1955 Chassancet]
+file=basulm/LF1955.pdf
 
 [LF2022 Cargese]
 file=basulm/LF2022.pdf
@@ -1734,9 +1746,6 @@ file=basulm/LF2431.pdf
 
 [LF2432 Pressignac Vicq Rebeyrotte]
 file=basulm/LF2432.pdf
-
-[LF2433 La Rochebeaucourt Argentine]
-file=basulm/LF2433.pdf
 
 [LF2434 St Crepin Carlucet]
 file=basulm/LF2434.pdf
@@ -1813,6 +1822,9 @@ file=basulm/LF2555.pdf
 [LF2557 La Vrine Paramoteur]
 file=basulm/LF2557.pdf
 
+[LF2558 Liesle]
+file=basulm/LF2558.pdf
+
 [LF2621 Faucon]
 file=basulm/LF2621.pdf
 
@@ -1842,9 +1854,6 @@ file=basulm/LF2721.pdf
 
 [LF2722 Berville-sur-mer]
 file=basulm/LF2722.pdf
-
-[LF2723 Breuilpont]
-file=basulm/LF2723.pdf
 
 [LF2751 Les Noyers]
 file=basulm/LF2751.pdf
@@ -1929,9 +1938,6 @@ file=basulm/LF3023.pdf
 
 [LF3025 Remoulins]
 file=basulm/LF3025.pdf
-
-[LF3026 Montcalm]
-file=basulm/LF3026.pdf
 
 [LF3052 St Victor]
 file=basulm/LF3052.pdf
@@ -2092,6 +2098,9 @@ file=basulm/LF3270.pdf
 [LF3271 Le Tustet]
 file=basulm/LF3271.pdf
 
+[LF3272 Portalier]
+file=basulm/LF3272.pdf
+
 [LF3321 Bazas Cazats]
 file=basulm/LF3321.pdf
 
@@ -2190,6 +2199,9 @@ file=basulm/LF3560.pdf
 
 [LF3561 Le Haut des Places]
 file=basulm/LF3561.pdf
+
+[LF3563 Plechatel Faroulais]
+file=basulm/LF3563.pdf
 
 [LF3623 Brandes La Perouille]
 file=basulm/LF3623.pdf
@@ -2356,9 +2368,6 @@ file=basulm/LF4052.pdf
 [LF4123 Souesmes]
 file=basulm/LF4123.pdf
 
-[LF4124 Souge]
-file=basulm/LF4124.pdf
-
 [LF4125 Montrichard]
 file=basulm/LF4125.pdf
 
@@ -2407,6 +2416,9 @@ file=basulm/LF4226.pdf
 [LF4229 Maubeu]
 file=basulm/LF4229.pdf
 
+[LF4230 La jalabertiere]
+file=basulm/LF4230.pdf
+
 [LF4321 Mazeyrat]
 file=basulm/LF4321.pdf
 
@@ -2437,11 +2449,17 @@ file=basulm/LF4456.pdf
 [LF4457 Campbon-La Berthelière]
 file=basulm/LF4457.pdf
 
+[LF4458 St Brevin les Pins]
+file=basulm/LF4458.pdf
+
 [LF4524 Ligny]
 file=basulm/LF4524.pdf
 
 [LF4525 La Selle en Hermoy]
 file=basulm/LF4525.pdf
+
+[LF4552 Saint Benoit sur Loire]
+file=basulm/LF4552.pdf
 
 [LF4553 Beaugency]
 file=basulm/LF4553.pdf
@@ -2487,9 +2505,6 @@ file=basulm/LF4621.pdf
 
 [LF4623 Lacave Le Frau]
 file=basulm/LF4623.pdf
-
-[LF4624 Loupiac]
-file=basulm/LF4624.pdf
 
 [LF4627 St Medard de Presque]
 file=basulm/LF4627.pdf
@@ -2560,9 +2575,6 @@ file=basulm/LF4755.pdf
 [LF4756 Bouglon]
 file=basulm/LF4756.pdf
 
-[LF4757 La Houeyte]
-file=basulm/LF4757.pdf
-
 [LF4825 Fenestres]
 file=basulm/LF4825.pdf
 
@@ -2593,6 +2605,9 @@ file=basulm/LF4957.pdf
 [LF4958 Chesnaie ULM]
 file=basulm/LF4958.pdf
 
+[LF4959 Solib Ailes]
+file=basulm/LF4959.pdf
+
 [LF5021 Dragey]
 file=basulm/LF5021.pdf
 
@@ -2616,9 +2631,6 @@ file=basulm/LF5154.pdf
 
 [LF5155 Champagne Vol Libre]
 file=basulm/LF5155.pdf
-
-[LF5156 Epoye ULM Reims Concept ULM]
-file=basulm/LF5156.pdf
 
 [LF5157 Base ULM de BERRU]
 file=basulm/LF5157.pdf
@@ -2647,8 +2659,8 @@ file=basulm/LF5324.pdf
 [LF5325 Courcite]
 file=basulm/LF5325.pdf
 
-[LF5351 Aron-Les Ecottays]
-file=basulm/LF5351.pdf
+[LF5353 Ambrieres les Vallées]
+file=basulm/LF5353.pdf
 
 [LF5421 Mont sur Meurthe]
 file=basulm/LF5421.pdf
@@ -2700,6 +2712,9 @@ file=basulm/LF5654.pdf
 
 [LF5657 Courant d'ailes]
 file=basulm/LF5657.pdf
+
+[LF5658 Plouharnel]
+file=basulm/LF5658.pdf
 
 [LF5710 Bambi Air Club]
 file=basulm/LF5710.pdf
@@ -2758,6 +2773,9 @@ file=basulm/LF5765.pdf
 [LF5766 Langatte Aero Passion]
 file=basulm/LF5766.pdf
 
+[LF5767 Alzing]
+file=basulm/LF5767.pdf
+
 [LF5825 Ville Langy]
 file=basulm/LF5825.pdf
 
@@ -2781,6 +2799,9 @@ file=basulm/LF5930.pdf
 
 [LF5953 Ferme de Bonavis]
 file=basulm/LF5953.pdf
+
+[LF5954 Pont toussaint]
+file=basulm/LF5954.pdf
 
 [LF6021 Bonneuil en Valois]
 file=basulm/LF6021.pdf
@@ -2844,6 +2865,9 @@ file=basulm/LF6356.pdf
 
 [LF6357 Bort l'Etang]
 file=basulm/LF6357.pdf
+
+[LF6358 Sailles - Saint-Nectaire]
+file=basulm/LF6358.pdf
 
 [LF6422 Boeil Bezing]
 file=basulm/LF6422.pdf
@@ -2974,6 +2998,9 @@ file=basulm/LF6631.pdf
 [LF6632 St Genis]
 file=basulm/LF6632.pdf
 
+[LF6633 Mas Sarda]
+file=basulm/LF6633.pdf
+
 [LF6651 Torreilles]
 file=basulm/LF6651.pdf
 
@@ -2997,6 +3024,9 @@ file=basulm/LF6659.pdf
 
 [LF6660 Canterrane]
 file=basulm/LF6660.pdf
+
+[LF6661 ST LUC Passa]
+file=basulm/LF6661.pdf
 
 [LF6715 Club ULM Kogenheim]
 file=basulm/LF6715.pdf
@@ -3025,14 +3055,14 @@ file=basulm/LF6755.pdf
 [LF6757 Club ULM Les Cigognes d'Epfig]
 file=basulm/LF6757.pdf
 
+[LF6758 Adventure Paramoteur Alsace]
+file=basulm/LF6758.pdf
+
 [LF6821 Masevaux]
 file=basulm/LF6821.pdf
 
 [LF6822 Vieux Ferrette]
 file=basulm/LF6822.pdf
-
-[LF6851 Valdieu-Lutran]
-file=basulm/LF6851.pdf
 
 [LF6852 Soppe]
 file=basulm/LF6852.pdf
@@ -3093,9 +3123,6 @@ file=basulm/LF7124.pdf
 
 [LF7151 La Clayette]
 file=basulm/LF7151.pdf
-
-[LF7152 Peronne - Moulin Chevraut]
-file=basulm/LF7152.pdf
 
 [LF7153 Brancion]
 file=basulm/LF7153.pdf
@@ -3277,9 +3304,6 @@ file=basulm/LF8155.pdf
 [LF8156 Albi / Castelvert]
 file=basulm/LF8156.pdf
 
-[LF8157 Bouscatel]
-file=basulm/LF8157.pdf
-
 [LF8159 Roquemaure]
 file=basulm/LF8159.pdf
 
@@ -3427,6 +3451,9 @@ file=basulm/LF8567.pdf
 [LF8568 Les Fontenelles]
 file=basulm/LF8568.pdf
 
+[LF8570 Les Ailes de la Moriere]
+file=basulm/LF8570.pdf
+
 [LF8571 Saint Aubin la Plaine]
 file=basulm/LF8571.pdf
 
@@ -3460,9 +3487,6 @@ file=basulm/LF8653.pdf
 [LF8654 Brigueil le Chantre]
 file=basulm/LF8654.pdf
 
-[LF8655 Poue]
-file=basulm/LF8655.pdf
-
 [LF8726 BELLAC]
 file=basulm/LF8726.pdf
 
@@ -3474,6 +3498,9 @@ file=basulm/LF8753.pdf
 
 [LF8754 La Geneytouse]
 file=basulm/LF8754.pdf
+
+[LF8755 Azat le Ris]
+file=basulm/LF8755.pdf
 
 [LF8756 L'AGE]
 file=basulm/LF8756.pdf
@@ -3495,9 +3522,6 @@ file=basulm/LF8851.pdf
 
 [LF8852 Dropt]
 file=basulm/LF8852.pdf
-
-[LF8854 Chateau d'eau]
-file=basulm/LF8854.pdf
 
 [LF8855 Ville sur Illon]
 file=basulm/LF8855.pdf
@@ -3570,6 +3594,9 @@ file=basulm/LF9743.pdf
 
 [LF9744 Uca]
 file=basulm/LF9744.pdf
+
+[LF97445 Adventure Reunion Paramoteur]
+file=basulm/LF97445.pdf
 
 [LFKK Montmeilleur]
 file=basulm/LFKK.pdf
