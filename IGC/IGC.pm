@@ -3,8 +3,7 @@ package IGC;
 # traitments sur fichier IGC
 #
 # voir :
-#   . http://carrier.csi.cam.ac.uk/forsterlewis/soaring/igc_file_format/
-#   . http://carrier.csi.cam.ac.uk/forsterlewis/soaring/igc_file_format/igc_format_2008.html
+#   . https://www.fai.org/sites/default/files/civl/documents/sporting_code_s7_h_-_civl_flight_recorder_specification_2018_v0.9.0.pdf
 #   . https://github.com/twpayne/igc2kmz/blob/master/igc2kmz/igc.py
 #   . http://www.gpspassion.com/forumsen/topic.asp?TOPIC_ID=17661
 #
