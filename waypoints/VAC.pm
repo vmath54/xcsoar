@@ -20,8 +20,7 @@ use Data::Dumper;
 
 use strict;
 
-
-our $UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0";
+our $UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0";
 
 # des terrains nomenclatures dans les bases SIA ou BASULM, qu'on ne désire pas traiter
 # reponse de Michel Hirmke, BASULM, pour LF0221 et LF5763 :

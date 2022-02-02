@@ -24,7 +24,7 @@ use Data::Dumper;
 use strict;
 
 my $dirDownload = "basulm";    # le répertoire qui va contenir les documents pdf charges
-my $URL = "http://basulm.ffplum.info/PDF/";
+my $URL = "https://basulm.ffplum.fr/PDF/";
 my $ficULM = "listULMfromAPI.csv";
 
 my $dirVAC = "./vac";
@@ -72,7 +72,7 @@ my $noSIA = 1;
 	#print "$urlPDF\n";
 	print "$ad\n";
 	
-	my ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF);
+	my ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF, SSL_NO_VERIFY => 1);
 
     unless ($code =~ /^2\d\d/)
     {

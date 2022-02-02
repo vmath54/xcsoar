@@ -42,7 +42,9 @@ use Data::Dumper;
 use strict;
 
 my $baseURL = "https://basulm.ffplum.fr/getbasulm/get/basulm";  # url d'acces a l'API BASULM
-my $listURL = "$baseURL/listall";                               # la liste des terrains. infos detailles
+my $listURL = "$baseURL/listall";                              # la liste des terrains. infos detailles
+#my $listURL = "$baseURL/liste";                                # la liste des terrains. infos simplifiees. Pour essais
+#my $listURL = "$baseURL/detail?id=10850";                      # detail d'un terrai. Pour essai
 my $ficOUT = "listULMfromAPI.csv";                              # le fichier resultant
 
 
@@ -71,8 +73,9 @@ my $verbose = 0;                          # A 1 pour avoir les infos de MaJ d'al
   if ($api_key ne "")
   {
     my ($code, $cookies);
-    ($code, $page, $cookies) = &sendHttpRequest($listURL, AUTHORIZATION => "api_key $api_key");
+    ($code, $page, $cookies) = &sendHttpRequest($listURL, SSL_NO_VERIFY => 1, AUTHORIZATION => "api_key $api_key");
     die "Impossible de charger la page $listURL" unless (defined($page));
+	#print "$page\n"; exit;
     { local(*OUTPUT, $/); open (OUTPUT, ">", "basulm.json") || die "can't open basulm.json"; print OUTPUT $page; close OUTPUT }; # ecrire resultat dans fichier
   }
   
