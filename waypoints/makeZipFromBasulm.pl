@@ -5,10 +5,10 @@
 use VAC;
 use File::Basename;
 use Archive::Zip qw( :ERROR_CODES :CONSTANTS );
+use Time::Piece;
 use Data::Dumper;
 
 use strict;
-
 
 my $dirFics  = "./basulm";  # le repertoire des fichiers pdf BASULM a inclure dans les fichiers zip
 my $dirZip   = "basulm";    # le repertoire dans le .zip
@@ -36,6 +36,7 @@ my $regions =
 };
   
 {
+  my $date = localtime->ymd('');
   my $deps = getDepartements();   # les regions, pour chaque departement
   my %zips = ();  # les fichier zip (par région) a creer
   my %ficsToArchive = ();  # les fichiers a zipper. 
@@ -77,9 +78,9 @@ my $regions =
     foreach my $region (keys %ficsToArchive)
 	{
 	  #next if ($region ne "IDF");
+	  my $ficZip = "$date-basulm_$region.zip";
 	  my $zip = Archive::Zip->new();
 	  my $ficsRegion = $ficsToArchive{$region};
-	  my $ficZip = "basulm_$region.zip";
       my $nbre = scalar(keys %$ficsRegion);
 	  print "region = $region. $nbre terrains\n";
 
