@@ -88,7 +88,7 @@ sub readRefenceCupFile
 	next if (($onlyAD ne "") && ($code ne $onlyAD));
 	$code =~ s/\"//sg;   # on elimine les quotes du code terrain
     die "$line\n   ERREUR. Le code terrain n'est pas conforme" if (($code !~ /^LF\S\S$/) && ($code !~ /^LF\d\d\d\d$/) &&
-	               ($code !~ /^LF2[AB]\d\d$/) && ($code !~ /^LF97\d\d\d$/));
+	               ($code !~ /^LF2[AB]\d\d$/) && ($code !~ /^LF97\d\d\d$/) && ($code !~ /^LF98\d\d\d$/));
 	die "$line\n   ERREUR. Le premier champ doit commncer par le code terrain" unless ($shortName =~ s/^\"$code (.*)\"$/\1/);
 	die "$line\n   ERREUR. L'altitude doit se terminer par 'm'" if ($elevation !~ s/m$//);
 	die "$line\n   ERREUR. La dimension doit se terminer par 'm'" if (($dimension ne "") && ($dimension !~ s/m$//));
@@ -97,7 +97,7 @@ sub readRefenceCupFile
 	die "$line\n   ERREUR. Le dernier champ doit commencer par le code terrain" unless ($comment =~ s/^\"$code \- //);
 	die "$line\n   ERREUR. Le dernier champ doit contenir le nom, le departement et un commentaire" 
 	  if (($comment !~ s/(.*?) \((\d\d)\)\. (.*)\"$/\3/) && ($comment !~ s/(.*?) \((2[AB])\)\. (.*)\"$/\3/) &&
-	      ($comment !~ s/(.*?) \((97\d)\)\. (.*)\"$/\3/));
+	      ($comment !~ s/(.*?) \((97\d)\)\. (.*)\"$/\3/) && ($comment !~ s/(.*?) \((98\d)\)\. (.*)\"$/\3/));
 	my ($name, $depart) = ($1, $2);
 	$comment =~ /^(.*?) /;
 	my $comment1 = $1;
