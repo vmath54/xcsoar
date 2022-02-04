@@ -48,6 +48,7 @@ use VAC;
 use Getopt::Long qw(:config no_ignore_case no_auto_abbrev);
 use File::Basename;
 use Archive::Zip qw( :ERROR_CODES :CONSTANTS );
+use Time::Piece;
 use Data::Dumper;
 
 use strict;
@@ -426,6 +427,8 @@ sub computeFileNames
   my $cupFile = shift;
   my $noulm = shift;
   
+  my $date = localtime->ymd('');
+  
   my($filename, $dirs) = fileparse($cupFile);   # on recupere le chemin et le 'petit' nom du fichier
   $dirs =~ s/\\/\//g;
   $dirs =~ s/\/$//;
@@ -433,7 +436,7 @@ sub computeFileNames
   my $name = $1;    # le nom de fichier, sans extension
   my $comp = "";
   $comp = "_noulm" if ($noulm);
-  return ("$dirs/${name}${comp}_details.txt", "$dirs/${name}${comp}.zip");
+  return ("$dirs/${name}${comp}_details.txt", "$dirs/${date}-${name}${comp}.zip");
 }
  
 sub existFicsPDF
