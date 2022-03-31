@@ -2,9 +2,10 @@
 #
 # recuperation des cartes VAC de france, depuis le site SIA
 #
-# sur la page d'accueil ( https://www.sia.aviation-civile.gouv.fr ), on récupere un lien comme celui-ci, qui correspond au menu "eAIP FRANCE" :
-# <a href='https://www.sia.aviation-civile.gouv.fr/documents/htmlshow?f=dvd/eAIP_30_JAN_2020/FRANCE/home.html'  class=''>eAIP FRANCE</a>
-# On récupère la date eAIP ; ici, eAIP_30_JAN_2020
+# En prealable, il faut récupérer, manuellememnt, sur la page d'accueil du site SIA (https://www.sia.aviation-civile.gouv.fr ), la date eAIP ; par exemple, "eAIP_24_MAR_2022"
+# auparavant, cette date était récupérée automatiquement ; c'est très difficile maintenant.
+#
+# Cete date doit être maintenant passée en argument du programme.
 #
 # Ceci permet de construire l'URL de la page qui répertorie les cartes VAC ; dans l'exemple :
 # https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_30_JAN_2020/Atlas-VAC/FR/VACProduitPartie.htm
@@ -16,7 +17,6 @@
 #
 
 use VAC;
-#use LWP::Simple;
 use Data::Dumper;
 
 use strict;
@@ -30,10 +30,16 @@ my $jsURL = "$baseURL/Javascript/AeroArraysVac.js";  # le code javascript qui co
 my $infos = {};    # va contenir les infos necessaires a la construction de l'url de chaque doc pdf
 
 {
-  my $eAIP = &getEAIP($siteURL);    # recuperation de la date eAIP, de la forme "eAIP_19_JUL_2018"
+  #my $eAIP = "eAIP_24_MAR_2022";
+  my $eAIP = $ARGV[0];
+  if ($eAIP eq "")
+  {
+	print "Il faut passer en argument de ce programme la date eAIP, de la forme \"eAIP_24_MAR_2022\"";
+	exit();
+  }
   
   print "   eAIP = $eAIP\n";
-  die "eAIP ne semble pas conforme" if (length($eAIP) > 20);
+  die "eAIP ne semble pas conforme" if ($eAIP !~ /^eAIP_\d\d_..._20\d\d$/);
 
   $baseURL =~ s/__EAIP__/$eAIP/;
   $jsURL =~ s/__EAIP__/$eAIP/;
@@ -44,7 +50,7 @@ my $infos = {};    # va contenir les infos necessaires a la construction de l'ur
   my ($code, $page, $cookies) = &sendHttpRequest($jsURL, SSL_NO_VERIFY => 1);
   die "Impossible de charger la page $jsURL" unless (defined($page));
   &writeBinFile("page.html", $page);
-  #my $page; { local(*INPUT, $/); open (INPUT, "page.html") || die "can't open page.html"; $page = <INPUT>; close INPUT };  # debug, pour lire un fichier html local
+  # my $page; { local(*INPUT, $/); open (INPUT, "page.html") || die "can't open page.html"; $page = <INPUT>; close INPUT };  # debug, pour lire un fichier html local
 
   my $ads = &getOACIinfos($jsURL);
 #  print Dumper($ads); exit;
@@ -75,31 +81,6 @@ my $infos = {};    # va contenir les infos necessaires a la construction de l'ur
 	&writeBinFile("$dirDownload/$ad.pdf", $pdf);
 	sleep 1;
   }
-}
-
-#    ------------ recuperation de la date eAIP a partir de la page principale --------------------
-# recherche dans <a href='https://www.sia.aviation-civile.gouv.fr/documents/htmlshow?f=dvd/eAIP_30_JAN_2020/FRANCE/home.html'  class=''>eAIP FRANCE</a>
-# retourne une chaine du genre "eAIP_30_JAN_2020"
-# ------------------------------------------------------------------------------------------------------------------
-sub getEAIP
-{
-  my $page = shift;
-  
-  print "## recuperation et traitement de la page d'accueil ##\n";
-  print "   $page\n";
-  my ($code, $page, $cookies) = &sendHttpRequest($siteURL, SSL_NO_VERIFY => 1);
-  die "Impossible de charger la page $siteURL" unless (defined($page));
-
-  my $eAIP;
-  if ( $page =~ /gouv.fr\/documents\/htmlshow\?f=dvd\/(eAIP.*?)\/FRANCE\/home\.html/)    # "SUP AIP" est la rubrique juste avant  "Atlas VAC FRANCE"
-  {
-    $eAIP = $1
-  }
-  else
-  {
-    die "Pas trouvé eAIP dans la page d'accueil";
-  }
-  return $eAIP;
 }
 
 #    ------------ recuperation ddu code OACI et des noms de terrains a partir d'un script JS --------------------

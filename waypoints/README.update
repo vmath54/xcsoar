@@ -13,6 +13,10 @@ getInfosFromApiBasulm.pl -key xxxxxxxx
 A l'aide des scripts getVACfiles.pl, getMILfiles.pl et getBASULMfiles.pl
 getBASULMfiles.pl va utiliser le fichier listULMfromAPI.csv généré précédemment
 
+ATTENTION getVACfiles.pl : depuis avril 2022, il faut passer en argument à ce programme la date eAIP ; par exemple, "eAIP_24_MAR_2022"
+  Aupravant, cette date était récupérée automatiquement ; c'est maintenant très difficile.
+  Il faut charger dans un navigateur la page https://www.sia.aviation-civile.gouv.fr/ ; on récupère dans les liens du  sous-menu "AIP" cette date.
+
 3) génération d'un fichier intermédiaire pour les cartes VAC
 ------------------------------------------------------------
 Génère listVACfromPDF.csv à partir du script getInfosFromVACfiles.pl
