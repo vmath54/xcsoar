@@ -48,6 +48,13 @@ my $infos = {};    # va contenir les infos necessaires a la construction de l'ur
   print "   $jsURL\n";
 
   my ($code, $page, $cookies) = &sendHttpRequest($jsURL, SSL_NO_VERIFY => 1);
+  unless ($code =~ /^2\d\d/)
+  {
+	print "code retour http $code lors du chargement de $jsURL\n";
+	print "Arret du traitement\n";
+	exit 1;
+  }
+
   die "Impossible de charger la page $jsURL" unless (defined($page));
   &writeBinFile("page.html", $page);
   # my $page; { local(*INPUT, $/); open (INPUT, "page.html") || die "can't open page.html"; $page = <INPUT>; close INPUT };  # debug, pour lire un fichier html local
@@ -77,7 +84,7 @@ my $infos = {};    # va contenir les infos necessaires a la construction de l'ur
 	  sleep 10;
 	  ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF, SSL_NO_VERIFY => 1);
 	}
-    die "Impossible de charger le fichier $urlPDF" unless (defined($pdf));
+    die "Impossible de charger le fichier $urlPDF. Code = $code" unless (defined($pdf));
 	&writeBinFile("$dirDownload/$ad.pdf", $pdf);
 	sleep 1;
   }

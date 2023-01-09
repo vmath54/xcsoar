@@ -51,10 +51,14 @@ my %ADs = 		# liste des ADs militaires
 	my $urlPDF = $baseURL . "/avue_" . $ADs{$ad} . "_" . $ad . ".pdf";
 	my $ad2 = uc($ad);
 	print "$ad2.pdf\n";
-	#print "$urlPDF\n"; next;
 
-#    my ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF, COOKIES => $cookies);
     my ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF);
+	unless ($code =~ /^2\d\d/)
+    {
+	  print "code retour http $code lors du chargement de $urlPDF\n";
+	  print "Arret du traitement\n";
+	  exit 1;
+	}
 	&writeBinFile("$dirDownload/$ad2.pdf", $pdf);
 	
 	sleep 1;

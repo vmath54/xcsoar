@@ -336,12 +336,12 @@ sub convertGPStoDec
 #     . CONTENT_TYPE : par defaut, "text/html"
 #     . SSL_NO_VERIFY : a 0 par defaut. Si different de 0, pas de verifications SSL_NO_VERIFY
 #     . COOKIES : permet de passer des cookies a la requete
-#     . DIE : mettre a 0 pour ne pas arreter si erreur
+#     . DIE : mettre a 1 pour arreter si erreur
 #############################################################################################
 sub sendHttpRequest
 {
   my $url = shift;
-  my %args = (METHOD => "GET", CONTENT_TYPE => "text/html", SSL_NO_VERIFY => 0, COOKIES => {}, DIE => 1, @_);  
+  my %args = (METHOD => "GET", CONTENT_TYPE => "text/html", SSL_NO_VERIFY => 0, COOKIES => {}, DIE => 0, @_);  
   
   my $authorization = $args{AUTHORIZATION};
   my $content = $args{CONTENT};
@@ -372,7 +372,7 @@ sub sendHttpRequest
 	{
       print "$content\n\n";
       print "### Erreur http $codeHTTP lors de l'acces a $url ###\n";
-	  print Dumper($res);
+	  #print Dumper($res);
       exit 1;
 	}
 	return ($codeHTTP, $content, $browser->cookie_jar);

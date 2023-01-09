@@ -31,10 +31,14 @@ my $dirVAC = "./vac";
 my $dirMIL = "./mil";     
 my $noSIA = 1;
 
+my $maxErrors = 10;         # nombre maxi de fiches impossibles a charger
+my @adsInError = ();        # liste des fiches impossibles a charger
 
 {
   my $partial;              # pour une reprise, à un terrain donné
   my $help;
+  my $nbADs = 0;            # nb fiches chargees
+  my $nbADsInError = 0;     # nb fiches que l'on n'a pas pu charger
   
   my $ret = GetOptions
    ( 
@@ -73,15 +77,35 @@ my $noSIA = 1;
 	print "$ad\n";
 	
 	my ($code, $pdf, $cookies) = &sendHttpRequest($urlPDF, SSL_NO_VERIFY => 1);
-
-    unless ($code =~ /^2\d\d/)
-    {
+	
+	if ($code =~ /^2\d\d/)
+	{
+  	  &writeBinFile("$dirDownload/$ad.pdf", $pdf);
+	  $nbADs++;
+	} else
+	{
 	  print "code retour http $code lors du chargement du doc $urlPDF\n";
-	  print "Arret du traitement\n";
-	  exit 1;
+	  $adsInError[$nbADsInError] = {AD => $ad, code => $code};
+	  $nbADsInError++;
+	  if ($nbADsInError == $maxErrors)
+	  {
+	    print "\n#### Arret du traitement. Trop d'erreurs : $nbADsInError ####\n";
+		last;
+	    #exit 1;
+	  }
 	}
-	&writeBinFile("$dirDownload/$ad.pdf", $pdf);
 	sleep 1;
+  }
+  print "\n";
+  print "Nombre de fiches chargees  : $nbADs\n";
+  print "Nombre de fiches en erreur : $nbADsInError\n";
+  
+  if ($nbADsInError > 0)
+  {
+	for (my $i = 0; $i < $nbADsInError; $i++)
+	{
+	  print "    $adsInError[$i]{AD} : $adsInError[$i]{code}\n";
+	}
   }
 }
 
