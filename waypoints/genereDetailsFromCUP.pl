@@ -72,6 +72,8 @@ my $toleranceGeog = 1;
 my $verboseRewrite1 = 1;   # a 1 pour de l'info si modifications de coordonnées geographiques ou d'altitude si > 2m
 my $verboseRewrite2 = 1;   # a 1 pour de l'info si modification de fréquence
 
+my $enteteCUPfile = "";    # reprend l'entete eventuelle du fichier .cup. L'entete doit commencer par "name,code,country,lat,lon"
+
 my ($nofreq, $forcefreq, $nocode);
 
 {
@@ -181,7 +183,11 @@ sub traiteCUPfileByCoordsGeog
   {
     chomp($line);
 	next if ($line eq "");
-	next if ($line =~ /^name,code,country,lat,lon/);        # une entete provenant d'un fichier CSV
+	if (($nbADs == 0) && ($line =~ /^name,code,country,lat,lon/))        # le fichier cup contient une entete
+	{
+  	  $enteteCUPfile = $line;
+	  next;
+	}
     my ($name, $code1, $country, $lat, $long, $elevation, $nature, $qfu, $dimension, $frequence, $comment) = split(",", $line);
 	next if ($name eq "");
 	$name =~ s/^\"//;
@@ -196,7 +202,7 @@ sub traiteCUPfileByCoordsGeog
     
 	#next if ($name ne "Amberieu");
 	
-	$ADs{$name} = { name => $name, code => $code1, rang => $rang, lat => $lat, long => $long, elevation => $elevation, nature => $nature, qfu => $qfu, dimension => $dimension, frequence => $frequence, comment => $comment };
+	$ADs{$name} = { name => $name, code => $code1, country => $country, rang => $rang, lat => $lat, long => $long, elevation => $elevation, nature => $nature, qfu => $qfu, dimension => $dimension, frequence => $frequence, comment => $comment };
 
 	next if (($nature <1) || ($nature > 5));    # on ne prend que les waypoints de type terrain d'atterrissage
 	
@@ -342,7 +348,7 @@ sub computeCoords
 }
 
 # analyse du fichier CUP passe en parametre
-# analyse en recherchant le sode terrain dans un champ du fichier ($column)
+# analyse en recherchant le code terrain dans un champ du fichier ($column)
 # %cibles est passe en parametre afin d'indiquer le nombre de sites trouves pour chacune
 sub traiteCUPfileByCode
 {
@@ -361,7 +367,11 @@ sub traiteCUPfileByCode
   {
     chomp($line);
 	next if ($line eq "");
-	next if ($line =~ /^name,code,country,lat,lon/);        # une entete provenant d'un fichier CSV
+	if (($nbADs == 0) && ($line =~ /^name,code,country,lat,lon/))        # le fichier cup contient une entete
+	{
+  	  $enteteCUPfile = $line;
+	  next;
+	}
     my ($name, $code1, $country, $lat, $long, $elevation, $nature, $qfu, $dimension, $frequence, $comment) = split(",", $line);
 	next if ($name eq "");
 	$name =~ s/^\"//;
@@ -374,7 +384,7 @@ sub traiteCUPfileByCode
 	$nbADs++;
 	my $rang = $nbADs;
     
-	$ADs{$name} = { name => $name, code => $code1, rang => $rang, lat => $lat, long => $long, elevation => $elevation, nature => $nature, qfu => $qfu, dimension => $dimension, frequence => $frequence, comment => $comment };
+	$ADs{$name} = { name => $name, code => $code1, rang => $rang, country => $country, lat => $lat, long => $long, elevation => $elevation, nature => $nature, qfu => $qfu, dimension => $dimension, frequence => $frequence, comment => $comment };
 
 	next if (($nature <1) || ($nature > 5));    # on ne prend que les waypoints de type terrain d'atterrissage
 	
@@ -476,6 +486,7 @@ sub rewriteCUPfile
   print "\nEcriture du fichier $file\n";
 
   print FIC "name;code;country;lat;lon;elev;style;rwdir;rwlen;freq;desc\n" if ($type eq "csv");
+  print FIC "$enteteCUPfile\n" if (($type eq "cup") && ($enteteCUPfile ne ""));
   
   foreach my $ad (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))  # on lit dans le même ordre que fichier initial
   #my $ad = "CORNIEVILLE ULM";
@@ -525,10 +536,11 @@ sub rewriteCUPfile
 	  }
 	  	  
 	}
+	$$AD{country} = "FR" if ($$AD{country} eq "");
 	
-    print FIC "\"$$AD{name}\",$$AD{code},FR,$$AD{lat},$$AD{long},$$AD{elevation},$$AD{nature},$$AD{qfu},$$AD{dimension},$$AD{frequence},\"$$AD{comment}\"\n"
+    print FIC "\"$$AD{name}\",$$AD{code},$$AD{country},$$AD{lat},$$AD{long},$$AD{elevation},$$AD{nature},$$AD{qfu},$$AD{dimension},$$AD{frequence},\"$$AD{comment}\"\n"
 	    if ($type eq "cup");
-    print FIC "$$AD{name};$$AD{code};FR;$$AD{lat};$$AD{long};$$AD{elevation};$$AD{nature};$$AD{qfu};$$AD{dimension};$$AD{frequence};$$AD{comment}\n"
+    print FIC "$$AD{name};$$AD{code};$$AD{country};$$AD{lat};$$AD{long};$$AD{elevation};$$AD{nature};$$AD{qfu};$$AD{dimension};$$AD{frequence};$$AD{comment}\n"
 	    if ($type eq "csv");
   }
   close FIC;
