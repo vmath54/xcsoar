@@ -1,6 +1,6 @@
 Depot xcsoar de vmath54 - README.txt
 ------------------------------------
-Ce depot contient certains outils en lien avec xcsoar
+Ce depot contient certains outils en lien avec xcsoar 
 
 Dossier "waypoints"
 -------------------
