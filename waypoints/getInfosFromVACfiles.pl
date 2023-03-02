@@ -40,7 +40,6 @@ my $ficReference = "FranceVacEtUlm.cup";  # ce fichier va permettre d'ajouter le
 # des terrains nomenclatures dans les bases SIA ou BASULM, qu'on ne désire pas traiter
 my $noADs = $VAC::noADs;
 
-#my $bin = 'd:/soft/xpdfbin-win-3.04/bin64/pdftotext.exe';
 my $bin = 'd:/soft/xpdf-tools-win-4.04/bin64/pdftotext.exe';
 my $options_1 = '-q -layout -nodiag';      # options a passer au binaire. "-q" : quiet, "-layout" pout maintenir le mieux possible la mise en page
 my $options_2 = '-q -table -nodiag';       # options a passer au binaire. "-q" : quiet, "-table" pout maintenir le mieux possible la mise en page
@@ -51,7 +50,7 @@ my %cats = (  1 => "eau", 2 => "herbe", 3 => "neige", 5 => "dur" );
 my $tempfile_1 = "tmp1.txt";
 my $tempfile_2 = "tmp2.txt";
 
-my $debugADs = &readInfosADs("listVACfromPDF_init.csv") if (defined($debugFile));
+my $debugADs = &readInfosADs($debugFile) if (defined($debugFile));
 
 ########################### main #####################################
 {
@@ -60,7 +59,6 @@ my $debugADs = &readInfosADs("listVACfromPDF_init.csv") if (defined($debugFile))
   die "$bin not present" unless (-f $bin);
 
   my $ADRefs = &readRefenceCupFile($ficReference);  # infos de reference
-  my $ADComp = readInfosADs("listVACfromPDF_init.csv");
 
   print "Recuperation des infos depuis les cartes VAC\n";
   &getInfosFromVACfiles($dirVAC, $VACs, $ADRefs, "vac");
@@ -173,7 +171,7 @@ sub getInfosFromVACfiles
 	  }
 	}
 
-    &compareResultat($code, $infos, ["name", "elevation", "lat", "long", "frequence", "comment"]) if (defined($debugFile));
+    &compareResultat($code, $infos, ["name", "elevation", "lat", "long", "frequence", "qfu", "dimension", "comment"]) if (defined($debugFile));
 
     $$VACs{$code} = $infos;
   
@@ -185,6 +183,7 @@ sub getInfosFromVACfiles
 }
 
 
+#   recuperation des infos situees dans l'entete de la carte VAC : name", "elevation", "lat", "long", "frequence", "qfu", "dimension", "cat"
 sub getInfosFromOneVACfile_1
 {
   my $code = shift;
@@ -381,9 +380,7 @@ sub getInfosFromOneVACfile_1
   $$infos{comment} = "$$infos{cat} $$infos{comment}";
 }
 
-
-
-  
+#   recuperation des infos suivantes, sur la carte VAC :  "qfu", "dimension", "nature"  
 sub getInfosFromOneVACfile_2
 {
   my $code = shift;
