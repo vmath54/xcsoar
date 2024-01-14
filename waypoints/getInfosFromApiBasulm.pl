@@ -53,7 +53,9 @@ my $noADs = $VAC::noADs;
 
 my $ficReference = "FranceVacEtUlm.cup";  # ce fichier va permettre d'ajouter l'information d'altitude pour ceux qui n'en ont pas, que QFU pour LF1757
 
-my $verbose = 0;                          # A 1 pour avoir les infos de MaJ d'altitude qui ne peuvent pas etre recuperees du fichier basulm.csv										  
+my $verbose = 0;                          # A 1 pour avoir les infos de MaJ d'altitude qui ne peuvent pas etre recuperees du fichier basulm.csv	
+
+binmode(STDOUT, ":utf8");
 
 {
   my ($api_key, $replay, $help);
@@ -88,7 +90,7 @@ my $verbose = 0;                          # A 1 pour avoir les infos de MaJ d'al
   my $ULMs = &recoupeInfos($baseULMs, $ficReference);  # on recoupe les infos baseULM avec le fichier .CUP de reference
   #print Dumper($$ULMs{LF1522}); exit;
   
-   die "unable to write fic $ficOUT" unless (open (FICOUT, ">$ficOUT"));
+   die "unable to write fic $ficOUT" unless (open (FICOUT, ">:utf8", $ficOUT));
   foreach my $code (sort keys %$ULMs)
   {
     my $ULM = $$ULMs{$code};

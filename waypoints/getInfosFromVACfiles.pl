@@ -28,7 +28,7 @@ my $verbose = 1;    # a 0 pour mode silencieux
 										
 my $debugAD;
 my $debugFile;
-#$debugAD = "LFAB";                        # si décommenté, ne traite que le terrain spécifié. Ne supprime pas le fichier $tempfile, dump les infos
+#$debugAD = "LFIP";                        # si décommenté, ne traite que le terrain spécifié. Ne supprime pas le fichier $tempfile, dump les infos
 #$debugFile = "listVACfromPDF_debug.csv";   # si decommenté, permet de comparer des infos entre ce traitement et un fichier de reference									  
 
 my $dirVAC       = "vac";                 # le dossier qui contient les fichiers pdf VAC
@@ -68,7 +68,7 @@ my $debugADs = &readInfosADs($debugFile) if (defined($debugFile));
   my $nbre = scalar (keys %$VACs);
   print "$nbre fiches trouvées\n";
 
-  die "unable to write fic $ficOUT" unless (open (FICOUT, ">$ficOUT"));  
+  die "unable to write fic $ficOUT" unless (open (FICOUT, ">:utf8", $ficOUT));  
   foreach my $code (sort keys %$VACs)
   {
     my $VAC = $$VACs{$code};
@@ -215,7 +215,8 @@ sub getInfosFromOneVACfile_1
 	  my @worlds = split / {2,}/, $line;	  
 	  my $name = $worlds[-1];           # dernier element
 	  #print "$code. |$name|\n";
-      $name =~ s/Usage restreint //;     # cas particulier de LFIT
+      $name =~ s/Usage restreint //;              # cas particulier de LFIT
+	  $name =~ s/ALTIPORT \/ MOUNTAIN AIRFIELD //;  # cas particulier de LFIP
 	  #$name =~ s/^ *//;
 	  $$infos{name} = $name;
     }
@@ -226,7 +227,7 @@ sub getInfosFromOneVACfile_1
 	  if (!defined($$infos{cat}))
 	  {
 	    $$infos{cat} = "AD" if (($line =~ /ATTERRISSAGE A VUE/) ||($line =~ /APPROCHE A VUE/));
-	    $$infos{cat} = "AD-Hydro" if ($line =~ /AMERRISSAGE A VUE/);
+	    $$infos{cat} = "AD-Hydro" if ($line =~ /AM+?ERRISSAGE A VUE/);
 	  }
 	  $$infos{cat} = "AD-MIL" if ($cible eq "mil");
 	
@@ -251,7 +252,7 @@ sub getInfosFromOneVACfile_1
 	# Attention : altitude en pieds
 	  if ((! defined($$infos{elevation})) &&
 	      (($line =~ /ALT AD : (\-*?\d+?) \(\d+? ?hPa\)/) || ($line =~ /ALT AD: (\-*?\d+?) \(\d+? ?hPa\)/) || ($line =~ /ALT Water AD : (\-*?\d+?) \(\d+? ?hPa\)/) || 
-	       ($line =~ /ALT SUP : (\-*?\d+?) \(\d+? ?hPa\)/) || ($line =~ /ALT AD SUP : (\-*?\d+?) \(\d+? ?hPa\)/)))
+		  ($line =~ /ALT WATER AD : (\-*?\d+?) \(\d+? ?hPa\)/) || ($line =~ /ALT SUP : (\-*?\d+?) \(\d+? ?hPa\)/) || ($line =~ /ALT AD SUP : (\-*?\d+?) \(\d+? ?hPa\)/)))
 	  {
 	    $$infos{elevation} = $1;
 	  }

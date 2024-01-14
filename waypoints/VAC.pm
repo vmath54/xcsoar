@@ -28,16 +28,17 @@ our $UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100
 #    Pour Corbeny, il s'agit de deux terrains très proches, mais distincts. L'un est à l'usage exclusif de son propriétaire et de ses invités, l'autre a été créé récemment pour une école.
 our $noADs =
 {
-  "LF0221" => { name => "Azur Ulm",             comment => "doublon avec LF0256, Corbeny" },
-  "LF0926" => { name => "Cerizols",             comment => "piste reservee ballons" },
-  "LF3733" => { name => "Hippolytaine",			comment => "doublon avec LF3755, St Hippolyte" },
-  "LF3952" => { name => "Vauxy - Arbois",       comment => "doublon avec LF3956, Arbois-Ulm" },
-  "LF5763" => { name => "Langatte paramoteur",  comment => "meme site que LF5762, Langatte ULM" },
-  "LF8569" => { name => "Les Guifettes",        comment => "doublon avec LF8528, Lucon" },
-  "LF97102" => { name => "Le Gosier",           comment => "trop proche de LF97101, Grand Baie" },  
-  "LFRJ"   => { name => "LANDIVISIAU",          comment => "Transit VFR" },
-  "LFRL"   => { name => "LANVEOC POULMIC",      comment => "Transit VFR" },
-  "LFTL"   => { name => "Cannes Quai du large", comment => "helistation" },
+  "LF0221" => { name => "Azur Ulm",                comment => "doublon avec LF0256, Corbeny" },
+  "LF0926" => { name => "Cerizols",                comment => "piste reservee ballons" },
+  "LF3733" => { name => "Hippolytaine",			   comment => "doublon avec LF3755, St Hippolyte" },
+  "LF3952" => { name => "Vauxy - Arbois",          comment => "doublon avec LF3956, Arbois-Ulm" },
+  "LF5763" => { name => "Langatte paramoteur",     comment => "meme site que LF5762, Langatte ULM" },
+  "LF8569" => { name => "Les Guifettes",           comment => "doublon avec LF8528, Lucon" },
+  "LF97102" => { name => "Le Gosier",              comment => "trop proche de LF97101, Grand Baie" },  
+  "LFRJ"   => { name => "LANDIVISIAU",             comment => "Transit VFR" },
+  "LFRL"   => { name => "LANVEOC POULMIC",         comment => "Transit VFR" },
+  "LFTL"   => { name => "Cannes Quai du large",    comment => "helistation" },
+  "SOOM"   => { name => "Saint Laurent du Maroni", comment => "Guyane" },
 };
 
 ####################################################################################################
@@ -142,7 +143,7 @@ sub writeRefenceCupFile
   
   if (defined($fic))
   {
-    die "unable to write fic $fic" unless (open ($handle, ">$fic"));
+    die "unable to write fic $fic" unless (open ($handle, ">:utf8", $fic));
   }
   else
   {
