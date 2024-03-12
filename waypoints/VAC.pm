@@ -78,7 +78,7 @@ sub readRefenceCupFile
   }
   else
   {
-    die "unable to read fic $fic" unless (open ($handle, "<$fic"));
+    die "unable to read fic $fic" unless (open ($handle, "<:utf8", $fic));
   }
 
   while (my $line = <$handle>)
@@ -86,8 +86,8 @@ sub readRefenceCupFile
 	chomp ($line);
 	next if ($line eq "");
 	my ($shortName, $code, $country, $lat, $long, $elevation, $nature, $qfu, $dimension, $frequence, $comment) = split(",", $line);
-	next if (($onlyAD ne "") && ($code ne $onlyAD));
 	$code =~ s/\"//sg;   # on elimine les quotes du code terrain
+	next if (($onlyAD ne "") && ($code ne $onlyAD));
     die "$line\n   ERREUR. Le code terrain n'est pas conforme" if (($code !~ /^LF\S\S$/) && ($code !~ /^LF\d\d\d\d$/) &&
 	               ($code !~ /^LF2[AB]\d\d$/) && ($code !~ /^LF97\d\d\d$/) && ($code !~ /^LF98\d\d\d$/));
 	die "$line\n   ERREUR. Le premier champ doit commncer par le code terrain" unless ($shortName =~ s/^\"$code (.*)\"$/\1/);
