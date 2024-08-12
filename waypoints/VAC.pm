@@ -3,7 +3,14 @@ package VAC;
 
 # Variables et procedures perl en lien avec la mise a disposition de cartes VAC et baseULM
 #
+# les fichiers .cup lus doivent avoir une des deux entetes suivantes (l'ordre des champs n'importe pas) :
+#   name,code,country,lat,lon,elev,style,rwdir,rwlen,freq,desc
+#   name,code,country,lat,lon,elev,style,rwdir,rwlen,rwwidth,freq,desc,userdata,pics
+#
+# les fichiers .cup ecrits seront dans le second format
+#
 # le format d'un fichier .cup : http://download.naviter.com/docs/cup_format.pdf
+# le format d'un fichier .cup SeeYou : https://downloads.naviter.com/docs/SeeYou_CUP_file_format.pdf
 #
 # site intéressant pour conversions données GPS :
 #     https://www.lecampingsauvage.fr/gps-convertisseur
@@ -12,15 +19,26 @@ package VAC;
 
 use vars qw(@ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $VERSION);
 @ISA = ('Exporter');
-@EXPORT = qw( &getPDFsource &getDepartements &readRefenceCupFile &writeRefenceCupFile &buildLineReferenceCupFile &readInfosADs &compareNames &convertGPStoCUP &convertCUPtoDec &convertGPStoDec &sendHttpRequest &writeBinFile);
+@EXPORT = qw( &getPDFsource &getDepartements &readCupFile &writeRefenceCupFile &buildLineReferenceCupFile &readInfosADs &compareNames &convertGPStoCUP &convertCUPtoDec &convertGPStoDec &sendHttpRequest &writeBinFile $enteteCUPfile);
 
 use LWP::Simple;
+use Text::CSV qw( csv );
+#use Encode 'decode_utf8';
 use Text::Unaccent::PurePerl qw(unac_string);
 use Data::Dumper;
 
 use strict;
 
+our $enteteCUPfile = "name,code,country,lat,lon,elev,style,rwdir,rwlen,rwwidth,freq,desc,userdata,pics";
 our $UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0";
+
+my %natures =
+(
+  "eau"    => 1,
+  "herbe"  => 2,
+  "neige"  => 3,
+  "dur"    => 5,
+);
 
 # des terrains nomenclatures dans les bases SIA ou BASULM, qu'on ne désire pas traiter
 # reponse de Michel Hirmke, BASULM, pour LF0221 et LF5763 :
@@ -43,80 +61,95 @@ our $noADs =
 
 ####################################################################################################
 #  lecture du fichier .cup de reference
-# Ce fichier est formaté specifiquement comme suit :
+# Ce fichier est formaté comme suit :
 #
-# <code> <shortName>,<code>,FR,<latitude>,<longitude>,<elevation>,<categorie>,<qfu>,<dimension>,<frequence>,<comment>
+# name,code,country,lat,lon,elev,style,rwdir,rwlen,rwwidth,freq,desc,userdata,pics
 #
-#  . categorie : 1 pour eau. 2 pour herbe. 3 pour neige. 5 pour dur
-#  . elevation : en metres
-#  . qfu : direction du terrain
-#  . dimension : dimension du terrain
-#  . comment est formate :
-#        <code> <name> (<departement>). <infos complementaires>
-#               infos complementaires commence par "AD " pour un terrain issu du site SIA, "AD-MIL " pour un terrain militaire, "BASULM " pour un terrain basulm
+# <shortName>,<code>,FR,<latitude>,<longitude>,<elevation>,<categorie>,<qfu>,<dimension>,<rwwidth>,<frequence>,<comment>,<userdata>,<pics>
 #
-# Le 1er parametre peut être un handle de fichier (ex : \*STDIN), ou un nom de fichier 
+#  . style   : 1 pour eau. 2 pour herbe. 3 pour neige. 5 pour dur
+#  . elev    : altitude du terrain, en metres
+#  . rwdir   : orientation du terrain
+#  . rwlen   : longueur du terrain, en metres
+#  . rwwidth : largeur du terrain, en metres
+#  . desc : la description. Voir parametre optionnel 'ref' pour controle formatage
+#
+# Le parametre obligatoire de cette fonction est un nom de fichier 
 #
 #  parametres formels facultatifs :
 #     . onlyAD. Si valué, ne traite que ce terrain
+#     . ref. Si valué, suppose que c'est le fichier de reference, et que le champ desc est formate comme suit :
+#            <code> <name> (<departement>). <infos complementaires>
+#               infos complementaires commence par "AD " pour un terrain issu du site SIA, "AD-MIL " pour un terrain militaire, "BASULM " pour un terrain basulm
 #
 # retourne un hash indexe par code de terrain
 ####################################################################################################
 
-sub readRefenceCupFile
+sub readCupFile
 {
   my $fic = shift;
   my %args = (@_);
   
   my $onlyAD = $args{onlyAD};
+  my $reference = $args{ref};
   
   my %ADs;  
   my $handle;       # handle du fichier a lire
-  if (ref $fic)     #le parmaetre passe n'est pas le nom d'un fichier ; c'est donc un handle de fichier
-  {
-    $handle = $fic;
-  }
-  else
-  {
-    die "unable to read fic $fic" unless (open ($handle, "<:utf8", $fic));
-  }
+  my $csv = Text::CSV->new ();  
 
-  while (my $line = <$handle>)
-  {
-	chomp ($line);
-	next if ($line eq "");
-	my ($shortName, $code, $country, $lat, $long, $elevation, $nature, $qfu, $dimension, $frequence, $comment) = split(",", $line);
-	$code =~ s/\"//sg;   # on elimine les quotes du code terrain
+  die "unable to read fic $fic" unless (open ($handle, "<:utf8", $fic));
+  
+  my @headings = @{$csv->getline ($handle)};  
+  my $row = {};
+  $csv->bind_columns (\@{$row}{@headings});
+  my $nbADs = 0; 
+    
+  while ($csv->getline ($handle)) {                   #lecture des lignes
+    $nbADs++;
+    my $AD = {};
+	$$AD{rang} = $nbADs;
+    my $code = $$row{code};
+	$code =~ s/\"//sg;
 	next if (($onlyAD ne "") && ($code ne $onlyAD));
-    die "$line\n   ERREUR. Le code terrain n'est pas conforme" if (($code !~ /^LF\S\S$/) && ($code !~ /^LF\d\d\d\d$/) &&
-	               ($code !~ /^LF2[AB]\d\d$/) && ($code !~ /^LF97\d\d\d$/) && ($code !~ /^LF98\d\d\d$/));
-	die "$line\n   ERREUR. Le premier champ doit commncer par le code terrain" unless ($shortName =~ s/^\"$code (.*)\"$/\1/);
-	die "$line\n   ERREUR. L'altitude doit se terminer par 'm'" if ($elevation !~ s/m$//);
-	die "$line\n   ERREUR. La dimension doit se terminer par 'm'" if (($dimension ne "") && ($dimension !~ s/m$//));
-	die "$line\n   ERREUR. Le champ 'nature' doit avoir une des valeurs : 1, 2, 3 ou 5" 
-	          if (($nature != 1) && ($nature != 2) && ($nature != 3) && ($nature != 5)); 
-	die "$line\n   ERREUR. Le dernier champ doit commencer par le code terrain" unless ($comment =~ s/^\"$code \- //);
-	die "$line\n   ERREUR. Le dernier champ doit contenir le nom, le departement et un commentaire" 
-	  if (($comment !~ s/(.*?) \((\d\d)\)\. (.*)\"$/\3/) && ($comment !~ s/(.*?) \((2[AB])\)\. (.*)\"$/\3/) &&
-	      ($comment !~ s/(.*?) \((97\d)\)\. (.*)\"$/\3/) && ($comment !~ s/(.*?) \((98\d)\)\. (.*)\"$/\3/));
-	my ($name, $depart) = ($1, $2);
-	$comment =~ /^(.*?) /;
-	my $comment1 = $1;
-	my $cible = "";
-	$cible = "vac" if (($comment1 eq "AD") || ($comment1 eq "AD-Hydro"));
-	$cible = "mil" if ($comment1 eq "AD-MIL");
-	$cible = "basulm" if ($comment1 eq "BASULM") ;
-    die "$line\n   ERREUR. Le dernier champ doit contenit la source d'info : 'AD', AD-Hydro, 'AD-MIL' ou 'BASULM'" if ($cible eq "");
 	
-	my $dim = $dimension eq "" ? "" : $dimension . "m";
-   
-    #on reconstitue la ligne, et on compare
-    my $newLine = "\"$code $shortName\",\"$code\",FR,$lat,$long,${elevation}m,$nature,$qfu,$dim,$frequence,\"$code - $name \($depart\). $comment\"";
-	die "$line\n$newLine\n    ERREUR. La ligne reconstituée n'est pas identique a a ligne initiale" if ($line ne $newLine);
-    #print "$newLine\n";
-	
-	$ADs{$code} = { code => $code, cible => $cible, shortName => $shortName, name => $name, lat => $lat, long => $long, elevation => $elevation, nature => $nature, qfu => $qfu, dimension => $dimension,
-	               frequence => $frequence, depart => $depart, comment => $comment };
+    foreach my $field (keys %$row) {                  #lecture des champs
+      $$AD{$field} = $row->{$field};
+	}
+
+    $$AD{elev} =~ s/m$//;
+    $$AD{elev} =~ s/\.\d?$//;
+    $$AD{rwlen} =~ s/m$//;
+    $$AD{rwlen} =~ s/\.\d?$//;
+    $$AD{rwwidth} =~ s/m$//;
+    $$AD{rwwidth} =~ s/\.\d?$//;	
+
+    if ($reference) {   # on fait des controles specifiques au fichier de reference
+	#print Dumper($AD);
+
+      die "$code\n   ERREUR. Le code terrain n'est pas conforme" if (($code !~ /^LF\S\S$/) && ($code !~ /^LF\d\d\d\d$/) &&
+               ($code !~ /^LF2[AB]\d\d$/) && ($code !~ /^LF97\d\d\d$/) && ($code !~ /^LF98\d\d\d$/));
+      die "$code : $$AD{style}\n   ERREUR. Le champ 'style' doit avoir une des valeurs : 1, 2, 3 ou 5" 
+	          if (($$AD{style} != 1) && ($$AD{style} != 2) && ($$AD{style} != 3) && ($$AD{style} != 5)); 
+	  my $desc = $$AD{desc};
+      die "$code : $$AD{desc}\n   ERREUR. Le champ desc doit commencer par le code terrain" unless ($desc =~ s/^$code \- //);
+      die "$code : $$AD{desc}\n   ERREUR. Le champ desc doit contenir le nom, le departement et un commentaire" 
+      if (($desc !~ s/(.*?) \((\d\d)\)\. (.*)$/\3/) && ($desc !~ s/(.*?) \((2[AB])\)\. (.*)$/\3/) &&
+          ($desc !~ s/(.*?) \((97\d)\)\. (.*)$/\3/) && ($desc !~ s/(.*?) \((98\d)\)\. (.*)$/\3/));
+      my ($realname, $depart, $cat) = ($1, $2, $3);
+	  #print "realname = $realname, depart = $depart, cat = $cat\n";
+      my $cible = "";
+      $cible = "vac" if (($cat =~ /^AD/) || ($cat =~ /^AD-Hydro/));
+      $cible = "mil" if ($cat =~ /^AD-MIL/);
+      $cible = "basulm" if ($cat =~ /^BASULM/) ;
+      die "$code : $$AD{desc}\n   ERREUR. Le champ desc du fichier de ref doit contenit la source d'info : 'AD', AD-Hydro, 'AD-MIL' ou 'BASULM'" if ($cible eq "");
+	  $$AD{cible} = $cible;
+	  $$AD{depart} = $depart;
+	  $$AD{comment} = $$AD{desc};
+	  $$AD{desc} = $realname;
+	  $$AD{name} =~ s/^$code //;
+	  $$AD{cat} = $cat;
+	}
+    $ADs{$code} = $AD;
   }
   close $handle;
   
@@ -126,7 +159,7 @@ sub readRefenceCupFile
 ####################################################################################################
 #           ecriture du fichier .cup de reference a partir d'un hash
 #  
-# on proce en deux passes, pour avoir les terrains SIA en premier
+# on procede en deux passes, pour avoir les terrains SIA en premier
 #
 # si parametre "fic", ecrit dans le fichier. Sinon, ecrit et stdout
 #
@@ -149,6 +182,8 @@ sub writeRefenceCupFile
   {
     $handle = \*STDOUT;
   }
+
+  print $handle "$enteteCUPfile\n";
   
   # on reconstitue le fichier en deux passes, pour avoir les terrains SIA en premier  
   &_listADs($ADs, $handle, cibles => {"vac" => 1, "mil" => 1});
@@ -171,7 +206,7 @@ sub writeRefenceCupFile
 	  my $cible = $$AD{cible};
 	  next unless(defined($$cibles{$cible}));
 	  
-	  #if ($code eq "LF1255") { print Dumper($AD); exit;}
+	  #if ($code eq "LFAB") { print Dumper($AD); exit;}
 	  my $line = &buildLineReferenceCupFile($AD);
       print $handle "$line\n";
     }
@@ -181,33 +216,41 @@ sub writeRefenceCupFile
 sub buildLineReferenceCupFile
 {
   my $AD = shift;
-  
-  #print Dumper($AD); exit;
+    
   my $code = $$AD{code};
-  my $dimension = $$AD{dimension};
-  $dimension .= "m" if ($dimension ne "");
-  my $elevation = $$AD{elevation};
-  $elevation .= "m" if ($elevation ne "");
+  my $rwlen = $$AD{rwlen};
+  $rwlen .= "m" if ($rwlen ne "");
+  my $rwwidth = $$AD{rwwidth};
+  $rwwidth .= "m" if ($rwwidth ne "");
+  my $elev = $$AD{elev};
+  $elev .= "m" if ($elev ne "");
+  my $freq = $$AD{freq};
+  $freq = "\"$freq\"" if ($freq ne "");
+  my $country = $$AD{country} eq "" ? "FR" : $$AD{country};
+  my $desc = "$code - $$AD{desc} \($$AD{depart}\). $$AD{cat}";
 
-  my $line = "\"$code $$AD{shortName}\",\"$code\",FR,$$AD{lat},$$AD{long},$elevation,$$AD{nature},$$AD{qfu},$dimension,$$AD{frequence},\"$code - $$AD{name} \($$AD{depart}\). $$AD{comment}\"";
+  my $line = "\"$code $$AD{name}\",\"$code\",$country,$$AD{lat},$$AD{lon},$elev,$$AD{style},$$AD{rwdir},$rwlen,$rwwidth,$freq,\"$desc\",,";
   return $line;
 }
 
-# lecture du fichier listVACfromPDF.csv (provient du site SIA et des bases militaires) ou listULMfromCSV.csv (provient de basulm, genere depuis readBasulm.pl)
+# lecture du fichier listVACfromPDF.csv (provient du site SIA et des bases militaires) ou listULMfromCSV.csv (provient de basulm, genere depuis getInfosFromApiBasulm.pl)
 sub readInfosADs
 {
   my $fic = shift;
 
   my %ADs = ();
-  die "unable to read fic $fic" unless (open (FIC, "<$fic"));
+
+  die "unable to read fic $fic" unless (open (FIC, "<:utf8", $fic));
   
   while (my $line = <FIC>)
   {
     chomp ($line);
  	next if ($line eq "");
-	my ($code, $cible, $name, $lat, $long, $elevation, $nature, $qfu, $dimension, $frequence, $comment) = split(";", $line);
-	$ADs{$code} = { code => $code, cible => $cible, name => $name, frequence => $frequence, elevation => $elevation, lat => $lat, long => $long, comment => $comment, qfu => $qfu, dimension => $dimension, nature => $nature };
-	#if ($code eq "LFEZ") {print Dumper($ADs{$code}) ; exit;}
+	my ($code, $cible, $name, $lat, $lon, $elev, $nature, $rwdir, $rwlen, $rwwidth, $freq, $cat) = split(";", $line);
+	my $style = $natures{$nature};
+    $style = 1 if (! defined($style));
+	$ADs{$code} = { code => $code, cible => $cible, name => $name, freq => $freq, elev => $elev, lat => $lat, lon => $lon, cat => $cat, rwdir => $rwdir, rwlen => $rwlen, rwwidth => $rwwidth, style => $style };
+	#if ($code eq "LF4161") {print Dumper($ADs{$code}) ; exit;}
   }
   return \%ADs;
 }
@@ -221,24 +264,31 @@ sub compareNames
   my $newname1 = uc(unac_string($name1));
   my $newname2 = uc(unac_string($name2));
   
-  $newname1 =~ s/ \- /\-/g;
-  $newname2 =~ s/ \- /\-/g;
+  $newname1 =~ s/ ?\- ?/\-/g;
+  $newname2 =~ s/ ?\- ?/\-/g;
   
   $newname1 =~ s/\-/ /g;
   $newname2 =~ s/\-/ /g;
 
-  $newname1 =~ s/\'//g;
-  $newname2 =~ s/\'//g;
+  $newname1 =~ s/\'/ /g;
+  $newname2 =~ s/\'/ /g;
 
-  $newname1 =~ s/ ST / SAINT /;
-  $newname2 =~ s/ ST / SAINT /;
+#  $newname1 =~ s/([^ ])?ST(E?)(S?) /$1SAINT$2$3 /;
+#  $newname2 =~ s/([^ ])?ST(E?)(S?) /$1SAINT$2$3 /;
+
+  $newname1 =~ s/^ST(E?)(S?) /SAINT$1$2 /;
+  $newname2 =~ s/^ST(E?)(S?) /SAINT$1$2 /;
+
+  $newname1 =~ s/( )?ST(E?)(S?) /$1SAINT$2$3 /;
+  $newname2 =~ s/( )?ST(E?)(S?) /$1SAINT$2$3 /;
+
+  $newname1 =~ s/ +//g;
+  $newname2 =~ s/ +//g;
     
-  $newname1 =~ s/^ST /SAINT /;
-  $newname2 =~ s/^ST /SAINT /;
 
   if ($newname1 !~ /^$newname2$/)
   {
-    #print "|$newname1|;|$newname2|\n";
+    #print "#### |$newname1|;|$newname2| ####\n";
     return 0;
   }
   return 1;

@@ -42,7 +42,7 @@ my $regions =
   my %ficsToArchive = ();  # les fichiers a zipper. 
   
   #### on récupère les infos de référence. En particulier, le département lié à un terrain  
-  my $REFs = &readRefenceCupFile($ficREF);
+  my $REFs = &readCupFile($ficREF, ref => 1);
   
   ####  on verifie que tout fichier PDF de $dirFics, connu du fichier de reference, a un departement dans ce fichier #####
   #     on en profite pour valuer %ficsToArchive

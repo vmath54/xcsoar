@@ -2,7 +2,7 @@
 
 # regeneration du fichier CUP de reference (FranceVacEtUlm.cup) a partir des infos provenant de basulm.csv et des fichiers PDF du SIA et des bases militaires
 #
-# les infos provenant de basulm.csv sont recupérées depuis le fichier listULMfromCSV.csv, issu de readBasulm.pl
+# les infos provenant de basulm.csv sont recupérées depuis le fichier listULMfromCSV.csv, issu de getInfosFromApiBasulm.pl
 # les infos provenant du SIA et des bases militaires sont recupérées depuis le fichier listVACfromPDF.csv, issu de getInfosFromVACfiles.pl
 #
 # on utilise également en entrée le fichier FranceVacEtUlm.cup pour :
@@ -10,40 +10,51 @@
 #   - récupérer le nom "friendly" des terrains
 #   - récupérer le département
 
-# controle que la carte existe dans in repository local
+# controle que la carte existe dans le repository local (./mil, ./vac, ./basulm)
+#
+# parametres acceptés :
+#
+# . -v ou --verbose : facultatif. Affiche les infos de modifications
+# . -pn ou --printNameNotMatch : liste les noms de terrain qui ne matchent pas
+# . -h ou --help : l'aide en ligne
 
 use VAC;
+use Getopt::Long qw(:config no_ignore_case no_auto_abbrev);
 use Text::Unaccent::PurePerl qw(unac_string);
 use Data::Dumper;
 
 use strict;
 
-my $verbose = 0;           # a 1 pour avoir les infos de modifications
-my $printNameNotMatch = 0; # a 1 pour avoir les noms qui ne matchent pas
+my $verbose;           # si valide, permet d'avoir les infos de modifications
+my $printNameNotMatch; # si valide, liste les noms qui ne matchent pas
 
 my $ficREF      = "FranceVacEtUlm.cup";  # le fichier de reference. En lecture
 my $ficOUT      = "FranceVacEtUlm_new.cup";  # le fichier généré
 my $ficVAC      = "listVACfromPDF.csv";  # issu de getInfosFromVACfiles.pl
 my $ficULM      = "listULMfromAPI.csv";  # issu de basulm
 
-my %natures =
-(
-  "eau"    => 1,
-  "herbe"  => 2,
-  "neige"  => 3,
-  "dur"    => 5,
-);
-
 my $onlyAD = "";        # Vide normalement. Sinon, ne traite que ce terrain, et on dump la structure
-#my $onlyAD = "LF1457";
+#my $onlyAD = "LF6321";
 
 {
-  my $REFs = &readRefenceCupFile($ficREF, onlyAD => $onlyAD);  # on recupere les infos du fichier CUP de référence
+  my $help;
+  my $ret = GetOptions
+  ( 
+    "v|verbose"            => \$verbose,
+    "pn|printNameNotMatch" => \$printNameNotMatch,
+    "h|help"               => \$help,
+  );
+
+  die "parametre incorrect" unless($ret);
+  &syntaxe() if ($help);
+  
+  my $REFs = &readCupFile($ficREF, onlyAD => $onlyAD, ref => 1);  # on recupere les infos du fichier CUP de référence
+
   print "Lecture fic reference : ", Dumper($REFs) if ($onlyAD ne "");
 	
   &traiteInfosADs($ficVAC, $REFs, onlyAD => $onlyAD);          # prise en compte des infos provenant des terrains SIA ou militaire
   &traiteInfosADs($ficULM, $REFs, noADs => $VAC::noADs, onlyAD => $onlyAD); # prise en compte des infos provenant des terrains BASULM
-  print "Lecture fichiers terrains : ", Dumper($REFs) if ($onlyAD ne "");
+  print "Lecture infos generees : ", Dumper($REFs) if ($onlyAD ne "");
   
   &delOldADs($REFs);                                           # suppression des fiches qui n'ont pas été renouvelées
   
@@ -80,9 +91,10 @@ sub traiteInfosADs
   my $onlyAD = $args{onlyAD};
   my $noADs = $args{noADs};
   
-  my @attrs2compare = ("lat", "long", "elevation", "frequence", "dimension", "cat", "qfu", "comment");
+  my @attrs2compare = ("lat", "lon", "elev", "freq", "rwlen", "rwwidth", "style", "rwdir", "desc");
 
   my $ADs = &readInfosADs($fic);         # infos provenant des terrains SIA / militaires ou BASULM
+  print "Lecture infos en lecture : ", Dumper($$ADs{$onlyAD}) if ($onlyAD ne "");
   
   foreach my $code (sort keys %$ADs)
   {
@@ -95,44 +107,41 @@ sub traiteInfosADs
 	my $name = $$AD{name};	
 		
 	my $lat = &convertGPStoCUP($$AD{lat});   $$AD{lat} = $lat;
-	my $long = &convertGPStoCUP($$AD{long}); $$AD{long} = $long;
-	die "$code;$cible;$name;$$AD{lat};$$AD{long}; Probleme dans latitude ou longitude" if (($lat eq "") || ($long eq ""));
+	my $lon = &convertGPStoCUP($$AD{lon}); $$AD{lon} = $lon;
+	die "$code;$cible;$name;$$AD{lat};$$AD{lon}; Probleme dans latitude ou longitude" if (($lat eq "") || ($lon eq ""));
 	
-	my $frequence = $$AD{frequence} eq "" ? undef : sprintf("%.3f", $$AD{frequence});
-	$$AD{frequence} = $frequence;
+	my $freq = $$AD{freq} eq "" ? undef : sprintf("%.3f", $$AD{freq});
+	$$AD{freq} = $freq;
 	
-	my $nature = $natures{$$AD{nature}};
-    $nature = 1 if (! defined($nature));
-	$$AD{nature} = $nature;
-	
-	my $elevation = $$AD{elevation};
-	if ($elevation eq "")
+	my $elev = $$AD{elev};
+	if ($elev eq "")
 	{
-	  if (defined($REF) && defined($$REF{elevation}))
+	  if (defined($REF) && defined($$REF{elev}))
 	  {
-	    $elevation = $$REF{elevation};
-		print "WARNING. $code;$cible;$name. Altitude non trouvee ; recuperee dans fichier de ref : $elevation\n";
+	    $elev = $$REF{elev};
+		print "WARNING. $code;$cible;$name. Altitude non trouvee ; recuperee dans fichier de ref : $elev\n";
 	  }
 	  else
 	  {
 	    print "ERRROR. $code;$cible;$name. Altitude non trouvee ; il faudra rectifier manuellement dans fichier genere\n";
 	  }
 	}
-	if ($elevation ne "")
+	if ($elev ne "")
 	{
-	  $elevation = sprintf("%.0f", $$AD{elevation} * 0.3048);
-	  $$AD{elevation} = $elevation;
+	  $elev = sprintf("%.0f", $$AD{elev} * 0.3048);
+	  $$AD{elev} = $elev;
 	}
 	
-    my $qfu = $$AD{qfu};
-	$qfu =~s /^0*//;
-	$$AD{qfu} = $qfu;
-				  
+    my $rwdir = $$AD{rwdir};
+	$rwdir =~s /^0*//;
+	$$AD{rwdir} = $rwdir;
+	
+	################ Dans cette section, on cree un nouveau terrain #####################
 	unless(defined($REF))
 	{
 	  print "WARNING. $code;$cible;$name; est dans le fichier '$cible' mais n'est pas dans le fichier de référence.\n";
 	  print "    Il faudra verifier et eventuellement adapter les infos dans le fichier généré.\n";
-	  
+	  	  
 	  if ($cible eq "basulm")
 	  {
 	    if ($$AD{code} =~ /^LF(\d\d)\d\d$/)
@@ -144,15 +153,16 @@ sub traiteInfosADs
 		  $$AD{depart} = "";
 		}
 	  }
-
+	 	  
+	  $$AD{desc} = $name;
 	  my $line = &buildLineReferenceCupFile($AD);
       print "       $line\n";
 	  
-	  $$REFs{$code} = { found => "new", code => $code, cible => $cible, name => $name, shortName => $$AD{name}, lat => $lat, long => $long, elevation => $elevation, frequence => $frequence, dimension => $$AD{dimension}, nature => $nature, qfu => $$AD{qfu}, depart => $$AD{depart}, comment => $$AD{comment}  };
-	  #print Dumper($AD);
-	  #exit;
+	  $$REFs{$code} = { found => "new", code => $code, cible => $cible, name => $name, lat => $lat, lon => $lon, elev => $elev, freq => $freq, rwlen => $$AD{rwlen}, rwwidth => $$AD{rwwidth}, style =>$$AD{style}, rwdir => $$AD{rwdir}, desc => $$AD{desc}, depart => $$AD{depart}, cat => $$AD{cat} };
+	  #print Dumper($AD); exit;
 	  next;
 	}
+	################ Fin de section de creation d'un nouveau terrain #####################
 	
 	if ($cible ne $$REF{cible})
 	{
@@ -163,12 +173,15 @@ sub traiteInfosADs
 	
 	if (($printNameNotMatch) && (! &compareNames($name, $$REF{name})))
 	{
-	  printf ("%-6s;%-6s;NAME_NOT_MATCH : |%-30s| <- |%s|\n", $code, $cible, $$REF{name}, $name);
+	  printf ("%-6s;%-6s;NAME_NOT_MATCH : |%-30s <- |%s|\n", $code, $cible, $$REF{name} . "|", $name);
 	}
+	
+	$$AD{desc} = $$REF{desc};
 	
 	my $mess;
     foreach my $attr (@attrs2compare)
     {
+	  #print "$attr : |$$REF{$attr}| <- |$$AD{$attr}|\n";
 	  if ($$REF{$attr} ne ($$AD{$attr}))
 	  {
 	    my $attrUC = uc($attr);
@@ -186,4 +199,15 @@ sub traiteInfosADs
 	  $$REF{found} = "OK";
 	}
   }
+}
+
+sub syntaxe
+{
+  print "regenereReferenceCUPfile.pl\n";
+  print "Ce script permet de generer le fichier FranceVacEtUlm_new.cup à partir des fichiers FranceVacEtUlm.cup, listULMfromCSV.csv et listVACfromPDF.csv\n\n";
+  print "les parametres sont :\n";
+  print " . -v ou --verbose : facultatif. Affiche les infos de modifications\n";
+  print " . -pn ou --printNameNotMatch : liste les noms de terrain qui ne matchent pas\n";
+  print " . -h ou --help : l'aide en ligne\n";
+  exit;
 }

@@ -5,6 +5,8 @@
 # recuperation des infos BASULM, a partir de l'API specifique
 # genere le fichier listULMfromAPI.csv, qui sera utilise par d'autres moulinettes
 #
+# ATTENTION : l'altitude est exprimee en pieds
+#
 # Il faut au préalable demander une cle d'authentification a admin.basulm@orange.fr
 #   Elle est ensuite accessible sur le site ffplum (https://basulm.ffplum.fr). cliquer sur MYBASULM
 #
@@ -22,7 +24,7 @@
 # parametres acceptés :
 #  . -key <api-key>. facultatif. C'est la clé API d'interrogation BASULM
 #  . --replay : facultatif. Si present, permet de rejouer ce programme à partir du fichier basulm.json, sans interroger directement BASULM via l'API
-#  . --verbose : facultatif. Si present, ne traite pas les terrains de basULM
+#  . --verbose : facultatif. Si present, genere un message lors de MaJ de l'altitude
 #  . --help : facultatif. Affiche une  aide
 #
 # Un des deux paramètres '-key' ou '--replay' doivent être présents
@@ -53,7 +55,7 @@ my $noADs = $VAC::noADs;
 
 my $ficReference = "FranceVacEtUlm.cup";  # ce fichier va permettre d'ajouter l'information d'altitude pour ceux qui n'en ont pas, que QFU pour LF1757
 
-my $verbose = 0;                          # A 1 pour avoir les infos de MaJ d'altitude qui ne peuvent pas etre recuperees du fichier basulm.csv	
+my $verbose; 
 
 binmode(STDOUT, ":utf8");
 
@@ -64,6 +66,7 @@ binmode(STDOUT, ":utf8");
      ( 
        "key=s"          => \$api_key,
 	   "replay"         => \$replay,
+	   "v|verbose"      => \$verbose,
 	   "h|help"         => \$help,
 	 );
   
@@ -85,16 +88,16 @@ binmode(STDOUT, ":utf8");
     { local(*INPUT, $/); open (INPUT, "basulm.json") || die "can't open basulm.json"; $page = <INPUT>; close INPUT };  # pour lire le fichier basulm.json  
 
   my $baseULMs = &decodeInfosBASULM(\$page);  # decode les infos JSON recues de l'API BASULM
-  # print Dumper($$baseULMs{LF5453});
+  #print Dumper($$baseULMs{LF4161});
   
   my $ULMs = &recoupeInfos($baseULMs, $ficReference);  # on recoupe les infos baseULM avec le fichier .CUP de reference
-  #print Dumper($$ULMs{LF1522}); exit;
+  #print Dumper($$ULMs{LF4161}); exit;
   
    die "unable to write fic $ficOUT" unless (open (FICOUT, ">:utf8", $ficOUT));
   foreach my $code (sort keys %$ULMs)
   {
     my $ULM = $$ULMs{$code};
-    print FICOUT "$code;basulm;$$ULM{name};$$ULM{lat};$$ULM{long};$$ULM{elevation};$$ULM{nature};$$ULM{qfu};$$ULM{dimension};$$ULM{frequence};BASULM $$ULM{type}\n";
+    print FICOUT "$code;basulm;$$ULM{name};$$ULM{lat};$$ULM{lon};$$ULM{elev};$$ULM{nature};$$ULM{rwdir};$$ULM{rwlen};$$ULM{rwwidth};$$ULM{freq};BASULM $$ULM{type}\n";
   }
   close FICOUT;
 }
@@ -107,16 +110,16 @@ sub recoupeInfos
   
   my %natures = (  1 => "eau", 2 => "herbe", 3 => "neige", 5 => "dur" );  # codage dans fichier .CUP de ref
   
-  my $ADRefs = &readRefenceCupFile($ficReference);    # infos de reference
+  my $ADRefs = &readCupFile($ficRef, ref => 1);    # infos de reference
   
   my %ULMs = ();      # le hash résultant
   
   foreach my $code (sort keys %$baseULMs)
   {
-    #next if ($code ne "LF1522");
-	
+    #next if ($code ne "LF0158");
     my $AD = $$baseULMs{$code};    # C'est l'info brute, recuperee par l'API baseULM
 	my $ADRef = $$ADRefs{$code};
+	#print Dumper($ADRef), Dumper($AD); exit;
 	my $name = $$AD{name};		
 	my $type = $$AD{type};
 	$type = unac_string($type);
@@ -129,24 +132,24 @@ sub recoupeInfos
 	
 	if ((! defined($ADRef)) && (! defined($$noADs{$code})))
 	{
-	  if ($$AD{elevation} ne "")
+	  if ($$AD{elev} ne "")
 	  {
-	    print "WARNING. $code;$name;$$AD{lat};$$AD{long};$$AD{elevation} . Ne se trouve pas dans la base de reference\n";
+	    print "WARNING. $code;$name;$$AD{lat};$$AD{lon};$$AD{elev} . Ne se trouve pas dans la base de reference\n";
 	  }
 	  else
 	  {
-	    print "WARNING. $code;$name;$$AD{lat};$$AD{long}. Ne se trouve pas dans la base de reference. Pas d'altitude indiquee\n";
+	    print "WARNING. $code;$name;$$AD{lat};$$AD{lon}. Ne se trouve pas dans la base de reference. Pas d'altitude indiquee\n";
 	  }
 	}	
 	
-	my $infos = {name => $name, type => $type, code => $code, dimension => $$AD{dimension}};
+	my $infos = {name => $name, type => $type, code => $code, rwlen => $$AD{rwlen}, rwwidth => $$AD{rwwidth}};
 
 	my $lat = $$AD{lat};
-	my $long = $$AD{long};
+	my $long = $$AD{lon};
 	$lat =~ s/^N (.*)/\1 N/;
 	$long =~ s/^([EW]) (.*)/\2 \1/;
     $$infos{lat} = $lat;
-	$$infos{long} = $long;
+	$$infos{lon} = $long;
 
 	my $nature = $$AD{nature};
 	$nature = "herbe" if ($nature eq "terre");
@@ -166,19 +169,19 @@ sub recoupeInfos
     }
 	$$infos{nature} = $nature;
 	
-	my $elevation = $$AD{elevation};
-	if ($elevation =~ /(\d+) ft/)
+	my $elev = $$AD{elev};
+	if ($elev =~ /(\d+) ft/)
 	{
-	  $elevation = $1;
+	  $elev = $1;
 	}
 	else
 	{
-	  if ($elevation eq "")   # pas d'altitude dans basulm. On prend celle du ficheir de ref
+	  if ($elev eq "")   # pas d'altitude dans basulm. On prend celle du ficheir de ref
 	  {
-	    $elevation = $$ADRef{elevation};
-	    if (defined($elevation))   # il y en a plusieurs
+	    $elev = $$ADRef{elev};
+	    if (defined($elev))   # il y en a plusieurs
 	    {
-	      print "$code;$name. Altitude |${elevation}m| recuperee du fichier de reference\n" if ($verbose);
+	      print "$code;$name. Altitude |${elev}m| recuperee du fichier de reference\n" if ($verbose);
         }
 	    else
 	    {
@@ -186,29 +189,28 @@ sub recoupeInfos
 	    }
 	  }
 	}
-	$$infos{elevation} = $elevation if ($elevation ne "");
+	$$infos{elev} = $elev if ($elev ne "");
 	
-	my $qfu = $$AD{qfu};   # orientation preferee
-	$qfu =~ s/^\'//;       # il y a parfois une quote en debut. A priori, plus vrai maintenant
-	if ($qfu eq "")        # y a pas. On cherche dans oriention
-	{   
-	  if ($$AD{orientation} =~ /(\d\d)\-/)
+	my $rwdir = $$AD{rwdir};   # orientation preferee
+	if ($rwdir =~ /^\d\d?$/)  
+	{  
+      $$infos{rwdir} = $rwdir . "0"  # car qfu dans basulm, et degres dans .cup
+	}
+	else
+	{
+	  if (($$AD{rwdir} ne "omnidir") && ($$AD{rwdir} ne "Inconnue"))
 	  {
-	    $qfu = $1;
-	  }
-	  else
-	  {
-	    die "Impossible recuperer qfu : $name;$$AD{orientation}" if (($$AD{orientation} ne "omnidir") && ($$AD{orientation} ne "Inconnue"));
+	    #print Dumper($ADRef), Dumper($AD), Dumper($infos);
+	    die "Impossible recuperer rwdir : $name;$$AD{rwdir}";
 	  }
 	}
-	$$infos{qfu} = $qfu . "0" if ($qfu ne "");   # pour etre compatible avec le fichier .cup
 	
-	my $frequence = $$AD{frequence};
-	$frequence =~ s/,/\./g;
-	if (($frequence ne "") && ($frequence =~ /([\d\.]+)/))
+	my $freq = $$AD{freq};
+	$freq =~ s/,/\./g;
+	if (($freq ne "") && ($freq =~ /([\d\.]+)/))
 	{
-	  $frequence = $1;
-	  $$infos{frequence} = $frequence;
+	  $freq = $1;
+	  $$infos{freq} = $freq;
 	}
 	
 	$ULMs{$code} = $infos;
@@ -222,7 +224,7 @@ sub decodeInfosBASULM
   my $page = shift;
   
   my %baseULM = ();
-  my @infosRequired = ("name", "elevation", "lat", "long", "dimension", "nature", "type");
+  my @infosRequired = ("name", "elev", "lat", "lon", "rwlen", "rwwidth", "nature", "type");
       
   my $json = decode_json($$page);
   die "la réponse BASULM n'est pas en format JSON. Voir fichier basulm.json" unless (defined($json));
@@ -240,7 +242,8 @@ sub decodeInfosBASULM
   {
 	my $code = $$AD{code_terrain};
 	next if ($code eq "");
-	
+	#next if ($code ne "LF0121");
+
 	my $infos = {};
 	$$infos{code} = $code;
 	
@@ -250,13 +253,22 @@ sub decodeInfosBASULM
 	$$infos{name} = $name;
 	$$infos{type} = $$AD{type_terrain};
     $$infos{lat} = $$AD{latitude};
-	$$infos{long} = $$AD{longitude};
-	$$infos{elevation} = $$AD{altitude};
+	$$infos{lon} = $$AD{longitude};
+	$$infos{elev} = $$AD{altitude};
 	$$infos{nature} = $$AD{nature_piste_1};
-	$$infos{dimension} = $$AD{longueur_piste_1};
-	$$infos{orientation} = $$AD{orientation_piste_1};
-	$$infos{qfu} = $$AD{orientation_pref_1};
-	$$infos{frequence} = $$AD{radio};
+	$$infos{rwlen} = $$AD{longueur_piste_1};
+	$$infos{rwwidth} = $$AD{largeur_piste_1};
+	$$infos{freq} = $$AD{radio};
+
+    my $rwdir;
+    #$rwdir = $$AD{orientation_pref_1} unless ($$AD{orientation_pref_1} =~ /^\d\d\d?/);  # ex : LF6555 : "orientation_pref_1": "300"
+    $rwdir = $$AD{orientation_pref_1} unless ($$AD{orientation_pref_1} > 99);  # ex : LF6555 : "orientation_pref_1": "300"
+    $rwdir = $$AD{orientation_piste_1} if (($rwdir eq "") && ($$AD{orientation_piste_1} ne ""));
+    $rwdir =~ s/^0(\d\d)/$1/;      # ex : LF3765 : "orientation_pref_1" = "015"	
+	$rwdir = $1 if ($rwdir =~ /^(\d\d)-/);
+	$$infos{rwdir} = $rwdir;
+	#print "$code. pref : $$AD{orientation_pref_1} . piste : $$AD{orientation_piste_1} . rwdir : $rwdir\n";
+	#print Dumper($AD), Dumper($infos); exit;
 	
 	foreach my $infosRequired (@infosRequired)
     {
@@ -282,7 +294,7 @@ sub syntaxe
   print "les parametres sont :\n";
   print "  . -key <api-key>. facultatif. C'est la clé API d'interrogation BASULM\n";
   print "  . --replay : facultatif. Si present, permet de rejouer ce programme à partir du fichier basulm.json, sans interroger directement BASULM via l'API\n";
-  print "  . --verbose : facultatif. Si present, ne traite pas les terrains de basULM\n";
+  print "  . --verbose : facultatif. Si present, genere un message lors de MaJ de l'altitude\n";
   print "  . --help : facultatif. Affiche cette aide\n\n";
   print "Un des deux paramètres '-key' ou '--replay' doivent être présents\n";
   print "\n";

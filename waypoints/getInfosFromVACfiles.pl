@@ -3,6 +3,8 @@
 # recuperation des informations relatives aux terrains a partir des fichier VAC pdf telecharges sur le site SIA
 #sauvegarde dans listVACfromPDF.csv
 #
+# ATTENTION : l'altitude est exprimee en pieds
+#
 # utilise xpdf pour decoder les fichiers pdf : https://www.xpdfreader.com/
 #				https://www.xpdfreader.com/pdftotext-man.html
 #
@@ -28,7 +30,7 @@ my $verbose = 1;    # a 0 pour mode silencieux
 										
 my $debugAD;
 my $debugFile;
-#$debugAD = "LFIP";                        # si décommenté, ne traite que le terrain spécifié. Ne supprime pas le fichier $tempfile, dump les infos
+#$debugAD = "LFHM";                        # si décommenté, ne traite que le terrain spécifié. Ne supprime pas les fichiers $tempfile, dump les infos
 #$debugFile = "listVACfromPDF_debug.csv";   # si decommenté, permet de comparer des infos entre ce traitement et un fichier de reference									  
 
 my $dirVAC       = "vac";                 # le dossier qui contient les fichiers pdf VAC
@@ -58,7 +60,7 @@ my $debugADs = &readInfosADs($debugFile) if (defined($debugFile));
   
   die "$bin not present" unless (-f $bin);
 
-  my $ADRefs = &readRefenceCupFile($ficReference);  # infos de reference
+  my $ADRefs = &readCupFile($ficReference, ref => 1);  # infos de reference
 
   print "Recuperation des infos depuis les cartes VAC\n";
   &getInfosFromVACfiles($dirVAC, $VACs, $ADRefs, "vac");
@@ -72,7 +74,7 @@ my $debugADs = &readInfosADs($debugFile) if (defined($debugFile));
   foreach my $code (sort keys %$VACs)
   {
     my $VAC = $$VACs{$code};
-    print FICOUT "$$VAC{code};$$VAC{cible};$$VAC{name};$$VAC{lat};$$VAC{long};$$VAC{elevation};$$VAC{nature};$$VAC{qfu};$$VAC{dimension};$$VAC{frequence};$$VAC{comment}\n";  
+    print FICOUT "$$VAC{code};$$VAC{cible};$$VAC{name};$$VAC{lat};$$VAC{lon};$$VAC{elev};$$VAC{nature};$$VAC{rwdir};$$VAC{rwlen};$$VAC{rwwidth};$$VAC{freq};$$VAC{desc}\n";  
   }
 }
 
@@ -133,7 +135,8 @@ sub getInfosFromVACfiles
     if ($verbose)
 	{
       my $mess = "";       # message a envoyer si des infos doivent etre recuperees du fichier de reference
-      foreach my $info ("qfu", "dimension", "nature")
+	  $$ADRef{nature} = $$ADRef{style}; # on triche un peu
+      foreach my $info ("rwdir", "rwlen", "rwwidth", "nature")
       {
         if ((! defined($$infos{$info})) && (defined($$ADRef{$info})))    # on recupere du fichier de reference
 	    {
@@ -158,12 +161,13 @@ sub getInfosFromVACfiles
       print "$code. Informations recuperees du fichier de reference : $mess\n" if  ($mess ne "");
 	}
 
-    my @infosRequired = ("name", "frequence", "elevation", "lat", "long", "cat", "qfu", "dimension", "nature", "comment");
+    my @infosRequired = ("name", "freq", "elev", "lat", "lon", "cat", "rwdir", "rwlen", "rwwidth", "nature", "desc");
 	
 	foreach my $infosRequired (@infosRequired)
     {
 	  unless (defined($$infos{$infosRequired}))
 	  {
+		next if ((($infosRequired eq "rwdir") || ($infosRequired eq "rwlen") || ($infosRequired eq "rwwidth")) && $$infos{nature} eq "eau");
 	    print "$code. Impossible de recuperer l'info \"$infosRequired\" depuis le fichier $fic\n";
 	    print "Arret du programme\n";
 	    print Dumper($infos);
@@ -171,7 +175,7 @@ sub getInfosFromVACfiles
 	  }
 	}
 
-    &compareResultat($code, $infos, ["name", "elevation", "lat", "long", "frequence", "qfu", "dimension", "comment"]) if (defined($debugFile));
+    &compareResultat($code, $infos, ["name", "elev", "lat", "lon", "freq", "rwdir", "rwlen", "rwwidth", "desc"]) if (defined($debugFile));
 
     $$VACs{$code} = $infos;
   
@@ -183,7 +187,7 @@ sub getInfosFromVACfiles
 }
 
 
-#   recuperation des infos situees dans l'entete de la carte VAC : name", "elevation", "lat", "long", "frequence", "qfu", "dimension", "cat"
+#   recuperation des infos situees dans l'entete de la carte VAC : name", "elev", "lat", "lon", "freq"
 sub getInfosFromOneVACfile_1
 {
   my $code = shift;
@@ -231,11 +235,11 @@ sub getInfosFromOneVACfile_1
 	  }
 	  $$infos{cat} = "AD-MIL" if ($cible eq "mil");
 	
-	############## comment : "Usage restreint", "Ouvert à la CAP", "Réservé administration" "MIL fermé à la CAP"
-	  if ((! defined($$infos{comment})) &&
+	############## desc : "Usage restreint", "Ouvert à la CAP", "Réservé administration" "MIL fermé à la CAP"
+	  if ((! defined($$infos{desc})) &&
 	      (($line =~ /([Oo]uvert à la CAP)/) ||($line =~ /([uU]sage restreint)/) || ($line =~ /(Réservé administration)/)|| ($line =~ /(MIL fermé à la CAP)/) ))
 	  {
-	    $$infos{comment} = ucfirst(unac_string($1));
+	    $$infos{desc} = ucfirst(unac_string($1));
 	  }
 	}
 
@@ -250,11 +254,11 @@ sub getInfosFromOneVACfile_1
 	# ALT AD SUP : 5193 (185 hPa) ALT AD INF : 5039 (180 hPa)
 	# ALT Water AD : 0 (1 hPa) LFTB
 	# Attention : altitude en pieds
-	  if ((! defined($$infos{elevation})) &&
+	  if ((! defined($$infos{elev})) &&
 	      (($line =~ /ALT AD : (\-*?\d+?) \(\d+? ?hPa\)/) || ($line =~ /ALT AD: (\-*?\d+?) \(\d+? ?hPa\)/) || ($line =~ /ALT Water AD : (\-*?\d+?) \(\d+? ?hPa\)/) || 
 		  ($line =~ /ALT WATER AD : (\-*?\d+?) \(\d+? ?hPa\)/) || ($line =~ /ALT SUP : (\-*?\d+?) \(\d+? ?hPa\)/) || ($line =~ /ALT AD SUP : (\-*?\d+?) \(\d+? ?hPa\)/)))
 	  {
-	    $$infos{elevation} = $1;
+	    $$infos{elev} = $1;
 	  }
 	
 	###################### latitude et longitude ##############
@@ -267,16 +271,16 @@ sub getInfosFromOneVACfile_1
       {
 	    $$infos{lat} = $1 if ($line =~ /: (\d\d \d\d \d\d N)/);
 	  }
-	  unless (defined($$infos{long}))
+	  unless (defined($$infos{lon}))
 	  {
-	    $$infos{long} = $1 if ($line =~ /: (\d\d\d \d\d \d\d [WE])/);
+	    $$infos{lon} = $1 if ($line =~ /: (\d\d\d \d\d \d\d [WE])/);
 	  }	
-	  if ((! (defined($$infos{lat}))) && (! (defined($$infos{long}))))
+	  if ((! (defined($$infos{lat}))) && (! (defined($$infos{lon}))))
 	  {
 	    if ($line =~ /^(\d\d \d\d \d\d N) (\d\d\d \d\d \d\d [WE])$/)
 	    {
 	      $$infos{lat} = $1;
-	      $$infos{long} = $2;
+	      $$infos{lon} = $2;
 	    }
 	  }
 
@@ -326,62 +330,62 @@ sub getInfosFromOneVACfile_1
   }
   close FIC;
 
-  my $frequence;
+  my $freq;
   if ((defined($$infos{AA})) && ($$infos{AA} ne "NIL"))
   {
-	$frequence = $$infos{AA};
+	$freq = $$infos{AA};
   }
   elsif ((defined($$infos{TWR})) && ($$infos{TWR} ne "NIL"))
   {
-	$frequence = $$infos{TWR};
+	$freq = $$infos{TWR};
   }
   elsif ((defined($$infos{AFIS})) && ($$infos{AFIS} ne "NIL"))
   {
-    $frequence = $$infos{AFIS};
+    $freq = $$infos{AFIS};
   }
   elsif ((defined($$infos{APP})) && ($$infos{APP} ne "NIL"))
   {
-    $frequence = $$infos{APP};
+    $freq = $$infos{APP};
   }
   
-  if (defined($frequence))    # on formate la fréquence en XXX.XXX, et on controle la fourchette
+  if (defined($freq))    # on formate la fréquence en XXX.XXX, et on controle la fourchette
   {
-    $frequence =~ s/\.$//;    # il y a parfois un point final en trop
-	if (($frequence < 117) || ($frequence >= 138))
+    $freq =~ s/\.$//;    # il y a parfois un point final en trop
+	if (($freq < 117) || ($freq >= 138))
 	{
-	  print "$code. Frequence |$frequence| n'a pas une valeur correcte. On rejette\n" if ($verbose);
-	  undef $frequence;
+	  print "$code. Frequence |$freq| n'a pas une valeur correcte. On rejette\n" if ($verbose);
+	  undef $freq;
 	}
-	$frequence .= "00" if ($frequence =~ /^(\d{3}\.\d)$/);
-	$frequence .= "0" if ($frequence =~ /^(\d{3}\.\d\d)$/);
+	$freq .= "00" if ($freq =~ /^(\d{3}\.\d)$/);
+	$freq .= "0" if ($freq =~ /^(\d{3}\.\d\d)$/);
   }
 
-  if (!defined($frequence))
+  if (!defined($freq))
   {  
-    if ((defined($$ADRef{frequence})) && ($$ADRef{frequence} ne ""))
+    if ((defined($$ADRef{freq})) && ($$ADRef{freq} ne ""))
     {
-	  $frequence = $$ADRef{frequence};
-	  print "$code. Frequence |$frequence| recuperee du fichier de reference\n" if ($verbose);
+	  $freq = $$ADRef{freq};
+	  print "$code. Frequence |$freq| recuperee du fichier de reference\n" if ($verbose);
     }
     else
     {
 	  print "$code. Frequence pas trouvee, ni dans le PDF, ni dans le fichier de reference\n" if ($verbose);
 	}
   }
-  if (defined($frequence))
+  if (defined($freq))
   {
-    $$infos{frequence} = $frequence;
-	if ($frequence ne $$ADRef{frequence})
+    $$infos{freq} = $freq;
+	if ($freq ne $$ADRef{freq})
 	{
-	  print "$code. Frequence |$frequence| de carte VAC différente de fréquence |$$ADRef{frequence}| du fichier de reference\n" if ($verbose);
+	  print "$code. Frequence |$freq| de carte VAC différente de fréquence |$$ADRef{freq}| du fichier de reference\n" if ($verbose);
 
 	}
   }
 
-  $$infos{comment} = "$$infos{cat} $$infos{comment}";
+  $$infos{desc} = "$$infos{cat} $$infos{desc}";
 }
 
-#   recuperation des infos suivantes, sur la carte VAC :  "qfu", "dimension", "nature"  
+#   recuperation des infos suivantes, sur la carte VAC :  "rwdir", "rwlen", "rwwidth", "nature"  
 sub getInfosFromOneVACfile_2
 {
   my $code = shift;
@@ -393,7 +397,7 @@ sub getInfosFromOneVACfile_2
     
   die "unable to read fic $fic" unless (open (FIC, "<$fic"));
   
-  my $start_qfu = 0;   # permet de savoir si on a atteint le moment des infos de type qfu, nature de terrain, ...
+  my $start_qfu = 0;   # permet de savoir si on a atteint le moment des infos de type rwdir, nature de terrain, ...
   my $missing_dim = 0; # pour rechercher dimension de la piste, quand ce n'est pas sur la meme ligne que les autres infos
   my $missing_nat = 0; # pou rechercher nature de la piste, quand ce n'est pas sur la meme ligne que les autres infos
   
@@ -411,22 +415,23 @@ sub getInfosFromOneVACfile_2
 	
 	if (! $start_qfu)
 	{
-	  if ($line =~ /RWY +QFU? .*mension/)    #ligne de demarrage des infos qfu, dimension, nature
+	  if ($line =~ /RWY +QFU? .*mension/)    #ligne de demarrage des infos rwdir, dimension, nature
 	  {
 	    $start_qfu = $nblines;
 	  }
 	  next;                                  # pas la peine de chercher
 	}
 	
-	if (! defined($$infos{qfu}))
+	if (! defined($$infos{rwdir}))
 	{
 	  $line =~ s/\(1\) //;                   # ex : LFLP
 		
-	  if ($line =~ /^ *\d{1,2} ?[RLC]? +?(ACFT)? *?(\d{1,3})°? +?(\d{1,}) ?x ?\d{1,}(.*)/)
+	  if ($line =~ /^ *\d{1,2} ?[RLC]? +?(ACFT)? *?(\d{1,3})°? +?(\d{1,}) ?x ?(\d{1,})(.*)/)
 	  {
-	    $$infos{qfu} = $2;
-		$$infos{dimension} = $3;
-		my $reste = $4;
+	    $$infos{rwdir} = $2;
+		$$infos{rwlen} = $3;
+		$$infos{rwwidth} = $4;
+		my $reste = $5;
 		if ($reste =~ /(Revêtue|Non revêtue)/)
 		{
 		  $$infos{nature} = $1;
@@ -435,31 +440,33 @@ sub getInfosFromOneVACfile_2
 
 	  elsif ($line =~ /^ *\d{1,2} ?[RL]? +?(\d{1,3})°? +?-? *(Revêtue|Non revêtue)/)   #ex : LFEN - LFHM
 	  {
-	    $$infos{qfu} = $1;
+	    $$infos{rwdir} = $1;
 		$$infos{nature} = $2;
         $missing_dim = $nblines;		
 	  }
 	  
 	  elsif ($line =~ /^ *\d{1,2} +?(\d{1,3})°? +?RWY +?\d/)   #ex : LFMC
 	  {
-	    $$infos{qfu} = $1;
+	    $$infos{rwdir} = $1;
         $missing_dim = $nblines;	
         $missing_nat = $nblines;		
 	  }
 
 	  elsif ($line =~ /^Omnidirectionnel/)                #ex : LFTB
 	  {
-	    $$infos{qfu} = "";
-		$$infos{dimension} = "";
+	    $$infos{ewdir} = "";
+		$$infos{rwlen} = "";
+		$$infos{rwwidth} = "";
 		$$infos{nature} = "eau";
       }
 	  
 	  next;
 	}
 	
-	if ($missing_dim && ($line =~ /^ *\d{1,2} ?[RL]? *?(\d{1,3})°? +?(\d{1,})/))  # ex : LFEN - LFHM
+	if ($missing_dim && ($line =~ /^ *\d{1,2} ?[RL]? *?(\d{1,3})°? +?(\d{1,}) ?x ?(\d{1,})/))  # ex : LFEN
 	{
-	  $$infos{dimension} = $2;
+	  $$infos{rwlen} = $2;
+	  $$infos{rwwidth} = $3;
 	}
 	
 	if ($missing_nat && ($line =~ /(Revêtue|Non revêtue)/))
@@ -467,7 +474,7 @@ sub getInfosFromOneVACfile_2
 	  $$infos{nature} = $1;
 	}
 	
-	last if ((defined($$infos{qfu})) && (defined($$infos{dimension})) && (defined($$infos{nature})));
+	last if ((defined($$infos{rwdir})) && (defined($$infos{rwlen})) && (defined($$infos{rwwidth})) && (defined($$infos{nature})));
 	last if ($start_qfu && ($nblines > $start_qfu + 8));     # pas la peine d'aller plus loin
   }
   close FIC;
