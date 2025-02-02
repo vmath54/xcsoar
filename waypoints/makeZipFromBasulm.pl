@@ -2,6 +2,7 @@
 #
 # creation de fichiers zip par region, avec les fichiers pdf issus de BASULM
 
+use lib ".";       # necessaire avec strawberry, pour VAC.pm
 use VAC;
 use File::Basename;
 use Archive::Zip qw( :ERROR_CODES :CONSTANTS );

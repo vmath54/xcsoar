@@ -18,6 +18,7 @@
 #        Concerne qfu, dimension et nature pour qqs terrains : LFIP, LFMX, LFNZ
 #        mettre $verbose a 1 pour controler
 
+use lib ".";       # necessaire avec strawberry, pour VAC.pm
 use VAC;
 use Text::Unaccent::PurePerl qw(unac_string);
 use Data::Dumper;

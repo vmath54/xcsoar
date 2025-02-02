@@ -16,6 +16,7 @@
 # https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_30_JAN_2020/Atlas-VAC/PDF_AIPparSSection/VAC/AD/AD-2.LFEZ.pdf
 #
 
+use lib ".";       # necessaire avec strawberry, pour VAC.pm
 use VAC;
 use Data::Dumper;
 

@@ -33,7 +33,7 @@
 # getInfosFromApiBasulm.pl -key xxxxxxxx
 
 
-
+use lib ".";       # necessaire avec strawberry, pour VAC.pm
 use VAC;
 use JSON;
 use Getopt::Long qw(:config no_ignore_case no_auto_abbrev);
@@ -192,7 +192,7 @@ sub recoupeInfos
 	$$infos{elev} = $elev if ($elev ne "");
 	
 	my $rwdir = $$AD{rwdir};   # orientation preferee
-	if ($rwdir =~ /^\d\d?$/)  
+	if ($rwdir =~ /^ *\d\d?$/)  
 	{  
       $$infos{rwdir} = $rwdir . "0"  # car qfu dans basulm, et degres dans .cup
 	}
@@ -200,7 +200,7 @@ sub recoupeInfos
 	{
 	  if (($$AD{rwdir} ne "omnidir") && ($$AD{rwdir} ne "Inconnue"))
 	  {
-	    #print Dumper($ADRef), Dumper($AD), Dumper($infos);
+	    print Dumper($ADRef), Dumper($AD), Dumper($infos);
 	    die "Impossible recuperer rwdir : $name;$$AD{rwdir}";
 	  }
 	}

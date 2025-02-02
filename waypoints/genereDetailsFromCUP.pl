@@ -42,6 +42,7 @@
 # . -searchByColumn <column> : facultatif. Ne recherche pas la correspondance de terrain avec les coordonnées GPS, mais dans la colonne <column> du fichier .cup
 #        les valeurs possible de column sont : name, code, country, lat, lon, elev, style, rwdir, rwlen, rwwidth, freq, desc, userdata, pics
 
+use lib ".";       # necessaire avec strawberry, pour VAC.pm
 use VAC;
 use Getopt::Long qw(:config no_ignore_case no_auto_abbrev);
 use File::Basename;

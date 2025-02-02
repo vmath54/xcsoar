@@ -16,7 +16,7 @@
 #                        Utile si incident lors de l'opération, pour ne pas tout reprendre
 #  . --help : facultatif. Affiche cette aide\n\n";  
 
-
+use lib ".";       # necessaire avec strawberry, pour VAC.pm
 use VAC;
 use Getopt::Long qw(:config no_ignore_case no_auto_abbrev);
 use Data::Dumper;

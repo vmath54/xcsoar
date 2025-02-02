@@ -14,6 +14,7 @@
 # Ce script se charge de cela
 #
 
+use lib ".";       # necessaire avec strawberry, pour VAC.pm
 use VAC;
 use Text::Unaccent::PurePerl qw(unac_string);
 use Data::Dumper;
