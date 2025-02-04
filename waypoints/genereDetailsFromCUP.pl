@@ -2,9 +2,9 @@
 
 # Utilitaire XCSoar
 #
-# generation d'un fichier de details de waypoints a partir d'un fichier .cup passé en parametre
+# generation d'un fichier de details de waypoints a partir d'un fichier .cup passe en parametre
 # ce fichier de details permettra dans XCSoar de faire le lien avec le fichier pdf du waypoint s'il existe dans les bases SIA, MIL ou baseULM
-# Cet utilitaire utilise un fichier de référence (FranceVacEtUlm.cup) qui répertorie tous les terrains VAC (dispos sur site SIA), MIL (militaires) et basULM
+# Cet utilitaire utilise un fichier de reference (FranceVacEtUlm.cup) qui r?pertorie tous les terrains VAC (dispos sur site SIA), MIL (militaires) et basULM
 #
 # le fichier resultat est cree dans le meme repertoire que le .cup passe en parametre
 #
@@ -12,34 +12,32 @@
 #           dans ce cas, le fichier de details sera ../dossier1/myFichier_details.cup
 #                                                ou ../dossier1/myFichier_details_noulm.cup si option --noULM
 #
-# peut également créer un fichier archive (.zip) avec tous les terrains VAC et/ou MIL (militaires) et/ou baseULM référencés, s'ils sont bien sur 
-#       stockés dans un ou des dossiers (ou repositories) locaux
+# peut egalement creer un fichier archive (.zip) avec tous les terrains VAC et/ou MIL (militaires) et/ou baseULM references, s'ils sont bien sur 
+#       stockes dans un ou des dossiers (ou repositories) locaux
 #       ce fichier sera ../dossier1/myFichier.zip ou ..../myFichier_noulm.zip
 #
-# peut aussi créer un fichier similaire à celui d'origine, avec mise à jour des coordonnées, altitude, et fréquence
+# peut aussi creer un fichier similaire a celui d'origine, avec mise a jour des coordonnees, altitude, et frequence
 #       si --genereFileCUP, le fichier sera ../dossier1/myFichier_new.cup
 #
-# Cet utilitaire peut utiliser deux algos différents pour associer un terrain du fichier .cup avec ceux du fichier de référence :
-#  - par défaut, comparaison des coordonnées géographiques du terrain avec ceux du fcihier de référence
+# Cet utilitaire peut utiliser deux algos differents pour associer un terrain du fichier .cup avec ceux du fichier de reference :
+#  - par defaut, comparaison des coordonnees geographiques du terrain avec ceux du fichier de reference
 #       La variable $toleranceGeog permet d'indiquer la marge d'erreur acceptable
 #
-#  - si parametre "-searchByCode <x>", où <x> est une valeur numérique :
-#            recherche le code OACI ou FFPLUM du terrain dans un des champs du fichier .cup
-#            En général, <x> peut avoir la valeur 0, 1 ou 10
-#            Si 1, suppose que le champ ne contien que le code ; sinon, le code peut être inclus dans le champ
+#  - si parametre "-searchByColumn <xxxx>", ou <xxxx> est le nom d'une colonne ; en general, code, qui contient
+#            le code OACI ou FFPLUM du terrain dans un des champs du fichier .cup
 #
-# si exécuté sans parametre, donne de l'aide
+# si execute sans parametre, donne de l'aide
 #
-# parametres acceptés :
+# parametres accept?s :
 #
-# . -file <fichier> : obligatoire. C'est le fichier .cup à analyser
-# . --oldCUPformat : facultatif. Si présent, suppose que le fichier .CUP est en ancien format, sans les champs rwwidth,userdata,pics
-# . --zip : facultatif. Si présent, génère un fichier zip contenant les PDF des terrains concernés
-# . --noulm : facultatif. Si présent, ne traite pas les terrains de BASULM
+# . -file <fichier> : obligatoire. C'est le fichier .cup ? analyser
+# . --oldCUPformat : facultatif. Si pr?sent, suppose que le fichier .CUP est en ancien format, sans les champs rwwidth,userdata,pics
+# . --zip : facultatif. Si pr?sent, g?n?re un fichier zip contenant les PDF des terrains concern?s
+# . --noulm : facultatif. Si pr?sent, ne traite pas les terrains de BASULM
 # . --nofreq : facultatif. Si present, ne modifie pas la frequence des terrains\n";
 # . --nocode : facultatif. Si present, ne modifie pas le code terrain\n";
-# . --genereFileCUP : facultatif. Si présent, regénère un fichier .cup similaire à celui d'origine, avec mise a jour des infos de coordonnées, d'altitude, de fréquence
-# . -searchByColumn <column> : facultatif. Ne recherche pas la correspondance de terrain avec les coordonnées GPS, mais dans la colonne <column> du fichier .cup
+# . --genereFileCUP : facultatif. Si pr?sent, reg?n?re un fichier .cup similaire ? celui d'origine, avec mise a jour des infos de coordonn?es, d'altitude, de fr?quence
+# . -searchByColumn <column> : facultatif. Ne recherche pas la correspondance de terrain avec les coordonnees GPS, mais dans la colonne <column> du fichier .cup
 #        les valeurs possible de column sont : name, code, country, lat, lon, elev, style, rwdir, rwlen, rwwidth, freq, desc, userdata, pics
 
 use lib ".";       # necessaire avec strawberry, pour VAC.pm
@@ -64,14 +62,14 @@ my %cibles =      # dirPDF donne le repertoire qui contient les PDF, pour la cib
 my @columns = ( "name", "code", "country", "lat", "lon", "elev", "style", "rwdir", "rwlen", "rwwidth", "freq", "desc", "userdata", "pics" );
 
 
-# $toleranceGeog est la tolérance en centième de degrés lors de comparaisons de 2 points géographiques
+# $toleranceGeog est la tol?rance en centi?me de degr?s lors de comparaisons de 2 points g?ographiques
 #     1 mn de latitude  =~ 1km300 ; 1 mn de longitude =~ 1km900
-#     $toleranceGeog = 1 donne 0.01 degré de latitude =~ 800m, 0.01 degré de longitude =~ 1km100
+#     $toleranceGeog = 1 donne 0.01 degr? de latitude =~ 800m, 0.01 degr? de longitude =~ 1km100
 #   ne pas monter trop haut, sinon beaucoup de faux-positifs. Une valeur de 1 ou 2 semble raisonnable
 my $toleranceGeog = 1;
 
-my $verboseRewrite1 = 1;   # a 1 pour de l'info si modifications de coordonnées geographiques ou d'altitude si > 2m
-my $verboseRewrite2 = 1;   # a 1 pour de l'info si modification de fréquence
+my $verboseRewrite1 = 1;   # a 1 pour de l'info si modifications de coordonn?es geographiques ou d'altitude si > 2m
+my $verboseRewrite2 = 1;   # a 1 pour de l'info si modification de fr?quence
 
 my ($oldCUPformat, $nofreq, $nocode);
 
@@ -112,17 +110,17 @@ my ($oldCUPformat, $nofreq, $nocode);
 	  print "la valeur de searchByColumn n'est pas valide\n\n";
 	  &syntaxe();
 	}
-    print "searchByColumn = $searchByColumn, columnRank = $columnRank\n"; exit;
+    print "searchByColumn = $searchByColumn, columnRank = $columnRank\n";
   }
   
   die "fichier |$file| non trouve" unless (-f $file);
   my ($ficDetail, $ficZip) = &computeFileNames($file, $noulm, $withZip);     # on calcule le nom des fichiers detail et .zip a partir de celui du .cup
   
-  #### on récupère les infos du fichier de référence.
+  #### on r?cup?re les infos du fichier de r?f?rence.
   my $REFs = &readCupFile($ficREF, ref => 1);
   #print Dumper($$REFs{LF6721}); exit;
   
-  my $ADs = &readCupFile($file);        # lecture du fichier .cup en entrée
+  my $ADs = &readCupFile($file);        # lecture du fichier .cup en entr?e
   # print Dumper($$ADs{'ALBE ULM'}); exit;
   
   if (defined($searchByColumn))  # lecture et traitement du fichier, en recherchant le code terrain dans une colonne
@@ -147,12 +145,11 @@ my ($oldCUPformat, $nofreq, $nocode);
   
   if ($withZip)
   {
-    #die "Il manque des fichiers, on ne cree pas le fichier zip" unless (&existFicsPDF($details, \%cibles));   # on verifie que les fichiers PDF existent
     print "Fichier zip : $ficZip\n";	
-	#&createZip($ficZip, $details);
+	&createZip($ficZip, $ADs, $REFs, \%cibles, $noulm);
   }
   
-  &rewriteCUPfile($ADs, $REFs, $file)   if ($genereFileCUP);   # on ré écrit le fichier d'origine  
+  &rewriteCUPfile($ADs, $REFs, $file)   if ($genereFileCUP);   # on r? ?crit le fichier d'origine  
 }
 
 # analyse du fichier CUP passe en parametre
@@ -172,7 +169,6 @@ sub traiteCUPfileByCoordsGeog
   #print "$latdec, $longdec => $code (on cherche 4598 et 534)\n"; exit;
 
   foreach my $name (sort keys %$ADs)
-  #foreach my $name (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))  # on lit dans le même ordre que fichier initial
   #my $name = "ALBE ULM";
   {
 	my $AD = $$ADs{$name};
@@ -192,7 +188,7 @@ sub traiteCUPfileByCoordsGeog
 	$longdec = sprintf ("%.0f", $longdec * 100);
 	
 	my $code = &matchCoords($coords, $latdec, $longdec, $toleranceGeog);
-	if ($code ne "")    # on a trouve un terrain dans fichier de ref, avec les mêmes coordonnees geographiques
+	if ($code ne "")    # on a trouve un terrain dans fichier de ref, avec les m?mes coordonnees geographiques
 	{
 	  my $REF = $$REFs{$code};
 	  if (defined($$REF{ADmatch}))   # une autre ligne du fichier .cup matche avec le meme terrain de REF
@@ -215,7 +211,6 @@ sub traiteCUPfileByCoordsGeog
   }
   #print Dumper($$ADs{"ALBE ULM"}), , Dumper($$REFs{LF6721}); exit;
   #print Dumper($$ADs{"FERME BEAUCHAMP"}), Dumper($$REFs{LF5453}), Dumper($$coords{4877}); exit;
-  
 }
 
 # compare 2 terrains du fichier .cup qui matchent avec une terrain de REF
@@ -308,14 +303,13 @@ sub computeCoords
 # analyse du fichier CUP passe en parametre
 # analyse en recherchant le code terrain dans un champ du fichier ($column)
 # %cibles est passe en parametre afin d'indiquer le nombre de sites trouves pour chacune
-sub traiteCUPfileByCode
+sub traiteCUPfileByColumn
 {
   my $ADs = shift;
   my $REFs = shift;
   my $column = shift;
-
+  
   foreach my $name (sort keys %$ADs)
-  #foreach my $name (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))  # on lit dans le même ordre que fichier initial
   #my $name = "ALBE ULM";
   {
 	my $AD = $$ADs{$name};
@@ -323,17 +317,11 @@ sub traiteCUPfileByCode
 
 	next if (($style <1) || ($style > 5));    # on ne prend que les waypoints de type terrain d'atterrissage
 	
-	#my @columns = split(",", $line);
-	#my $val = $columns[$column];
-	my $val = "";
-	chomp($val);
-	next if ($val eq "");
-	$val =~ s/^\"//;
-	$val =~ s/\"$//;
+    my $code = $$AD{$column};     # la cle de recherche. En general, le code terrain
 
-	next unless (($val =~ /^(LF\S\S)$/) || ($val =~ /^(LF\S\S) /) || ($val =~ / (LF\S\S)$/) || ($val =~ / (LF\S\S) /) || ($val =~ / (LF\S\S)$/) ||
-	    ($val =~ /^(LF\d\d\d\d)$/) || ($val =~ /^(LF\d\d\d\d) /) || ($val =~ / (LF\d\d\d\d)$/) || ($val =~ / (LF\d\d\d\d) /) || ($val =~ / (LF\d\d\d\d)$/));
-	my $code = $1;
+#	next unless (($val =~ /^(LF\S\S)$/) || ($val =~ /^(LF\S\S) /) || ($val =~ / (LF\S\S)$/) || ($val =~ / (LF\S\S) /) || ($val =~ / (LF\S\S)$/) ||
+#	    ($val =~ /^(LF\d\d\d\d)$/) || ($val =~ /^(LF\d\d\d\d) /) || ($val =~ / (LF\d\d\d\d)$/) || ($val =~ / (LF\d\d\d\d) /) || ($val =~ / (LF\d\d\d\d)$/));
+#	my $code = $1;
 
     my $REF = $$REFs{$code};
 	unless (defined($REF))
@@ -343,24 +331,33 @@ sub traiteCUPfileByCode
 	}
 	$$REF{ADmatch} = $name;         #on memorise le terrain dans le hash de reference
 	$$ADs{$name}{codeREF} = $code;   # et le code de reference dans le hash des terrains
-	my $cible = $$REF{cible};
-	#die "$code;$name. Cible |$cible| inconnue" if (($cible eq "") || (! defined($$cibles{$cible})));
-	#next if (($noulm) && ($cible eq "basulm"));
-	#push(@details, { code => $code, name => $name, cible => $cible });
-	#$$cibles{$cible}{founds}++;
   }
-
 }
 
 sub createZip
 {
  my $ficZip = shift;
   my $ADs = shift;
-
+  my $REFs = shift;
+  my $cibles = shift;
+  my $noulm = shift;
+  
   my $zip = Archive::Zip->new();
-  foreach my $AD (@$ADs)
+  foreach my $name (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))   # on lit dans le meme ordre que fichier initial
   {
-	my $file_member = $zip->addFile($$AD{ficPDF}, "$$AD{cible}/$$AD{code}.pdf");
+	my $AD = $$ADs{$name};
+    next unless (defined($$AD{codeREF}));   # ce n'est pas un terrain reference
+	my $code = $$AD{codeREF};
+    my $REF = $$REFs{$$AD{codeREF}};
+	my $cible = $$REF{cible};	
+	my $dir = $$cibles{$cible}{dirPDF};
+	my $file = "$dir/$$AD{code}.pdf";
+	unless (-f $file)
+	{
+	  print "### ERREUR ### $file pas trouve\n";
+	  next;
+	}
+		my $file_member = $zip->addFile($file, "$cible/$code.pdf");
   }
   die "probleme ecriture du fichier $ficZip" unless ( $zip->writeToFileNamed($ficZip) == AZ_OK );
 }
@@ -383,27 +380,6 @@ sub computeFileNames
   return ("$dirs/${name}${comp}_details.txt", "$dirs/${date}-${name}${comp}.zip");
 }
  
-sub existFicsPDF
-{
-  my $ADs = shift;
-  my $cibles = shift;
-
-  my $retour = 1;
-  foreach my $AD (@$ADs)
-  {
-    my $dir = $$cibles{$$AD{cible}}{dirPDF};
-	my $fic = "$dir/$$AD{code}.pdf";
-    # print "$fic\n";
-	unless (-f $fic)
-	{
-	  print "### $fic pas trouve\n";
-	  $retour = 0;
-	}
-	$$AD{ficPDF} = $fic;
-  }
-  return $retour;
-}
-
 ############ optionnel. Re ecriture du fichier .cup en stdout
 # interet : pouvoir ecraser certains champs du fichier d'origine a partir de la base de reference
 sub rewriteCUPfile
@@ -420,13 +396,13 @@ sub rewriteCUPfile
 
   print FIC "$enteteCUPfile\n";
   
-  foreach my $ad (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))  # on lit dans le même ordre que fichier initial
+  foreach my $ad (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))  # on lit dans le m?me ordre que fichier initial
   #my $ad = "PIRMASENS";
   {
 	my $AD = $$ADs{$ad};
     #print Dumper($AD);
 
-    if (defined($$AD{codeREF}))   # lié avec un terrain referencé
+    if (defined($$AD{codeREF}))   # li? avec un terrain referenc?
 	{
 	  my $codeRef = $$AD{codeREF};
 	  my $REF = $$REFs{$codeRef};
@@ -497,7 +473,7 @@ sub genereFicDetails
 
   die "unable to write fic |$fic|" unless (open (FIC, ">:utf8", $fic));
 
-  foreach my $name (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))   # on lit dans le même ordre que fichier initial
+  foreach my $name (sort ({$$ADs{$a}{rang} <=> $$ADs{$b}{rang} } keys %$ADs))   # on lit dans le m?me ordre que fichier initial
   {
 	my $AD = $$ADs{$name};
     next unless (defined($$AD{codeREF}));   # ce n'est pas un terrain reference
@@ -523,12 +499,12 @@ sub syntaxe
   print "Ce script permet de generer un fichier de details de waypoints a partir d'un fichier waypoints '.cup'\n\n";
   print "les parametres sont :\n";
   print "  . -file <fichier>. obligatoire. C'est le fichier .cup a analyser\n";
-  print "  . --oldCUPformat : facultatif. Si présent, suppose que le fichier .CUP est en ancien format, sans les champs rwwidth,userdata,pics\n";
+  print "  . --oldCUPformat : facultatif. Si pr?sent, suppose que le fichier .CUP est en ancien format, sans les champs rwwidth,userdata,pics\n";
   print "  . --zip : facultatif. Si present, genere un fichier zip contenant les PDF des terrains concernes\n";
   print "  . --noulm : facultatif. Si present, ne traite pas les terrains de basULM\n";
   print "  . --nofreq : facultatif. Si present, ne modifie pas la frequence des terrains\n";
   print "  . --nocode : facultatif. Si present, ne modifie pas le code terrain\n";
-  print "  . --genereFileCUP : facultatif. Si present, regenere un fichier .cup similaire à celui d'origine, avec mise a jour des infos de coordonnees, d'altitude, de frequence\n"; 
+  print "  . --genereFileCUP : facultatif. Si present, regenere un fichier .cup similaire ? celui d'origine, avec mise a jour des infos de coordonnees, d'altitude, de frequence\n"; 
   print "  . -searchByColumn <column> : facultatif. Ne recherche pas la correspondance de terrain avec les coordonnees GPS, mais dans la colonne <column> du fichier .cup\n";
   print "                les valeurs possible de column sont : name, code, country, lat, lon, elev, style, rwdir, rwlen, rwwidth, freq, desc, userdata, pics\n",  
   exit;
