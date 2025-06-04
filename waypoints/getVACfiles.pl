@@ -8,12 +8,12 @@
 # Cete date doit être maintenant passée en argument du programme.
 #
 # Ceci permet de construire l'URL de la page qui répertorie les cartes VAC ; dans l'exemple :
-# https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_30_JAN_2020/Atlas-VAC/FR/VACProduitPartie.htm
+# https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_15_MAY_2025/Atlas-VAC/FR/VACProduitPartie.htm
 # ET on peut récupérer le script JS qui répertorie toutes les cartes VAC ; dans notre exemple :
-# https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_30_JAN_2020/Atlas-VAC/Javascript/AeroArraysVac.js
+# https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_15_MAY_2025/Atlas-VAC/Javascript/AeroArraysVac.js
 #
 # grace a ces infos, on reconstruit l'URL d'acces aux PDF des cartes VAC ; par exemple :
-# https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_30_JAN_2020/Atlas-VAC/PDF_AIPparSSection/VAC/AD/AD-2.LFEZ.pdf
+#  https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_15_MAY_2025/Atlas-VAC/PDF_AIPparSSection/VAC/AD/AD-2.LFEZ.pdf
 #
 
 use lib ".";       # necessaire avec strawberry, pour VAC.pm
@@ -25,20 +25,20 @@ use strict;
 
 my $dirDownload = "vac";    # le répertoire qui va contenir les documents pdf charges
 my $siteURL = "https://www.sia.aviation-civile.gouv.fr";
-my $baseURL = "https://www.sia.aviation-civile.gouv.fr/dvd/__EAIP__/Atlas-VAC";
+my $baseURL = "https://www.sia.aviation-civile.gouv.fr/media/dvd/__EAIP__/Atlas-VAC";
 my $jsURL = "$baseURL/Javascript/AeroArraysVac.js";  # le code javascript qui contient la liste des terrains
 
 my $infos = {};    # va contenir les infos necessaires a la construction de l'url de chaque doc pdf
 
 {
-  #my $eAIP = "eAIP_24_MAR_2022";
+  #my $eAIP = "eAIP_15_MAY_2025";
   my $eAIP = $ARGV[0];
   if ($eAIP eq "")
   {
-	print "Il faut passer en argument de ce programme la date eAIP, de la forme \"eAIP_24_MAR_2022\"";
+	print "Il faut passer en argument de ce programme la date eAIP, de la forme \"eAIP_15_MAY_2025\"";
 	exit();
   }
-  
+
   print "   eAIP = $eAIP\n";
   die "eAIP ne semble pas conforme" if ($eAIP !~ /^eAIP_\d\d_..._20\d\d$/);
 
