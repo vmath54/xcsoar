@@ -62,7 +62,7 @@ my @adsInError = ();        # liste des fiches impossibles a charger
   
   foreach my $ad (@$ads)
   {
-  
+    next if ($ad !~ /^LF\d\d\d\d$/ && $ad !~ /^LF\w\w$/);
     next if (($partial ne "") && ($ad lt $partial));
 	# exit if (-ad eq "LF3023"); pour arreter le chargement sur un site donné
   
