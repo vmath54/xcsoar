@@ -21,6 +21,8 @@
 #
 # si exécuté sans parametre, donne de l'aide
 #
+# ne traite que les terrains de la métropole : n'accepte que des terrais en format LFxxxx ou LFww
+#
 # parametres acceptés :
 #  . -key <api-key>. facultatif. C'est la clé API d'interrogation BASULM
 #  . --replay : facultatif. Si present, permet de rejouer ce programme à partir du fichier basulm.json, sans interroger directement BASULM via l'API
@@ -242,6 +244,7 @@ sub decodeInfosBASULM
   {
 	my $code = $$AD{code_terrain};
 	next if ($code eq "");
+	next if ($code !~ /^LF\d\d\d\d$/ && $code !~ /^LF\w\w$/);
 	#next if ($code ne "LF0121");
 
 	my $infos = {};
