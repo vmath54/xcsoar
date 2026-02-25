@@ -49,14 +49,11 @@ our $noADs =
   "LF0221" => { name => "Azur Ulm",                comment => "doublon avec LF0256, Corbeny" },
   "LF0926" => { name => "Cerizols",                comment => "piste reservee ballons" },
   "LF3733" => { name => "Hippolytaine",			   comment => "doublon avec LF3755, St Hippolyte" },
-  "LF3952" => { name => "Vauxy - Arbois",          comment => "doublon avec LF3956, Arbois-Ulm" },
-  "LF5763" => { name => "Langatte paramoteur",     comment => "meme site que LF5762, Langatte ULM" },
+  "LF3870" => { name => "Grand champ",             comment => "doublon avec LF3875, piste privée avion Grand Champ" },
   "LF8569" => { name => "Les Guifettes",           comment => "doublon avec LF8528, Lucon" },
-  "LF97102" => { name => "Le Gosier",              comment => "trop proche de LF97101, Grand Baie" },  
   "LFRJ"   => { name => "LANDIVISIAU",             comment => "Transit VFR" },
   "LFRL"   => { name => "LANVEOC POULMIC",         comment => "Transit VFR" },
   "LFTL"   => { name => "Cannes Quai du large",    comment => "helistation" },
-  "SOOM"   => { name => "Saint Laurent du Maroni", comment => "Guyane" },
 };
 
 ####################################################################################################
